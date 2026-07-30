@@ -122,6 +122,9 @@
     <!-- Scroll Progress Bar -->
     <div id="scroll-progress"></div>
 
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-24 left-1/2 transform -translate-x-1/2 z-[10000] flex flex-col gap-3 pointer-events-none"></div>
+
     <!-- 1. HEADER & NAVIGASI -->
     <nav class="fixed w-full z-50 bg-white/90 dark:bg-[#110a1f]/95 backdrop-blur-md border-b border-gold-300 dark:border-gold-500/20 transition-all duration-300 shadow-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -546,67 +549,49 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 Muat Turun Dokumen
                             </h3>
-                            <div class="space-y-3 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar">
-                                <button type="button" onclick="bukaModalKategori('Syarat Pertandingan')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                            <div class="space-y-3 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+                                <button type="button" onclick="muatTurunBorang('Borang Kebenaran Waris')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all shadow-sm hover:shadow-md group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
                                         <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
-                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Syarat Pertandingan</span>
+                                        <span class="font-medium text-[15px] text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Kebenaran Waris</span>
                                     </div>
                                     <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </button>
-                                <button type="button" onclick="bukaModalKategori('Templat Peserta')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                <button type="button" onclick="muatTurunBorang('Borang Deklarasi Kesihatan')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all shadow-sm hover:shadow-md group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
                                         <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
-                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Templat Peserta</span>
+                                        <span class="font-medium text-[15px] text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Deklarasi Kesihatan</span>
                                     </div>
                                     <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </button>
-                                <button type="button" onclick="muatTurunBorang('Borang Kebenaran Waris')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                <button type="button" onclick="muatTurunBorang('Borang Maklumat Penerbangan SSL')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all shadow-sm hover:shadow-md group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
                                         <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
-                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Kebenaran Waris</span>
+                                        <span class="font-medium text-[15px] text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Maklumat Penerbangan SSL</span>
                                     </div>
                                     <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </button>
-                                <button type="button" onclick="muatTurunBorang('Borang Deklarasi Kesihatan')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                <button type="button" onclick="muatTurunBorang('Borang Kebenaran Rakaman Gambar')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all shadow-sm hover:shadow-md group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
                                         <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
-                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Deklarasi Kesihatan</span>
+                                        <span class="font-medium text-[15px] text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Kebenaran Rakaman Gambar</span>
                                     </div>
                                     <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </button>
-                                <button type="button" onclick="muatTurunBorang('Borang Maklumat Penerbangan SSL')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                <button type="button" onclick="muatTurunBorang('Borang Pengesahan Murid Pertandingan Debat')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all shadow-sm hover:shadow-md group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
                                         <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
-                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Maklumat Penerbangan SSL</span>
-                                    </div>
-                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                </button>
-                                <button type="button" onclick="muatTurunBorang('Borang Kebenaran Rakaman Gambar')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
-                                    <div class="flex items-center gap-4">
-                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                        </div>
-                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Kebenaran Rakaman Gambar</span>
-                                    </div>
-                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                </button>
-                                <button type="button" onclick="muatTurunBorang('Borang Pengesahan Murid Pertandingan Debat')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
-                                    <div class="flex items-center gap-4">
-                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
-                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                        </div>
-                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Pengesahan Murid Pertandingan Debat</span>
+                                        <span class="font-medium text-[15px] text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Pengesahan Murid Pertandingan Debat</span>
                                     </div>
                                     <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </button>
@@ -643,26 +628,32 @@
                     <button onclick="filterGallery('pantun-wm-sr', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Gema Pantun Warisan Madani SR</button>
                     <button onclick="filterGallery('pantun-wm-sm', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Gema Pantun Warisan Madani SM</button>
                     <button onclick="filterGallery('storytelling', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Storytelling</button>
-                    <button onclick="filterGallery('spell-sr', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Dare To Spell SR</button>
-                    <button onclick="filterGallery('spell-sm', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Dare To Spell SM</button>
-                    <button onclick="filterGallery('scrabble-sr', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Scrabble SR</button>
-                    <button onclick="filterGallery('scrabble-sm', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Scrabble SM</button>
-                    <button onclick="filterGallery('poetry-recitation', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Poetry Recitation</button>
-                    <button onclick="filterGallery('poetry', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">Poetry</button>
                 </div>
-                <div id="gallery-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 reveal"></div>
+                
+                <!-- Kotak Gambar Galeri -->
+                <div id="gallery-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full mb-12 reveal"></div>
             </div>
         </section>
     </div>
 
-    <!-- WRAPPER TAB HUBUNGI KAMI (Dipulihkan) -->
+    <!-- WRAPPER TAB HUBUNGI -->
     <div id="tab-hubungi" class="tab-content hidden flex-grow">
         <section class="pt-32 pb-24 bg-transparent relative min-h-screen">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
-                <div class="text-center max-w-3xl mx-auto mb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <div class="h-px bg-gold-500 w-16 opacity-50"></div>
+                        <span class="font-cinzel text-gold-600 dark:text-gold-500 font-bold tracking-widest uppercase">Bantuan</span>
+                        <div class="h-px bg-gold-500 w-16 opacity-50"></div>
+                    </div>
                     <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white mb-6">Hubungi Kami</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Sebarang pertanyaan atau bantuan teknikal, sila hubungi barisan Urus Setia Pendaftaran kami.
+                    </p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white dark:bg-dark-card p-8 rounded-xl border border-gold-300 dark:border-gold-500/30 shadow-xl">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white dark:bg-dark-card p-8 rounded-xl border border-gold-300 dark:border-gold-500/30 shadow-xl reveal delay-100">
                     <div class="space-y-6">
                         <h3 class="text-xl font-cinzel font-bold text-gold-600 dark:text-gold-400">Urus Setia Pendaftaran</h3>
                         <p class="text-gray-700 dark:text-gray-300">Untuk sebarang pertanyaan, sila hubungi talian di bawah:</p>
@@ -677,6 +668,24 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- Modal Pop-up Galeri -->
+    <div id="gallery-modal" class="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center transition-all duration-300 opacity-0" onclick="closeModal(event)">
+        <div class="relative w-11/12 max-w-4xl mx-auto flex flex-col items-center justify-center transform scale-95 transition-transform duration-300" id="gallery-modal-content">
+            <!-- Butang Tutup -->
+            <button onclick="closeModal(event)" class="absolute -top-12 right-0 text-gray-400 hover:text-gold-500 focus:outline-none transition-colors" aria-label="Tutup Paparan">
+                <svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <!-- Kandungan Modal (Gambar akan dipaparkan di sini) -->
+            <div id="modal-inner-box" class="w-full aspect-video bg-[#1e1233] border-2 border-gold-500/50 rounded-xl flex flex-col items-center justify-center shadow-[0_0_40px_rgba(212,175,55,0.4)] relative overflow-hidden bg-songket-pattern cursor-default">
+                <div class="absolute inset-0 bg-black/40 mix-blend-overlay"></div>
+                <span class="font-cinzel text-gold-400 font-bold text-2xl md:text-5xl tracking-widest z-10 text-center px-4 drop-shadow-lg" id="modal-title">SUASANA</span>
+                <span class="font-sans text-white text-lg md:text-2xl mt-3 z-10 uppercase tracking-widest font-light drop-shadow-md" id="modal-subtitle">Karnival</span>
+                <span class="text-gray-300 text-xs md:text-sm mt-8 z-10 font-bold bg-black/70 px-6 py-2 rounded-full border border-gold-500/30 tracking-wider shadow-inner" id="modal-badge">FOTO X</span>
+            </div>
+        </div>
     </div>
 
     <!-- SCRIPT JS (DIKEMAS KINI DAN DISUSUN SEMULA) -->
@@ -703,6 +712,15 @@
 
         // --- INISIALISASI HALAMAN ---
         window.addEventListener('DOMContentLoaded', () => {
+            // Sembunyikan Preloader
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => { preloader.style.display = 'none'; }, 500);
+                }, 500);
+            }
+
             // Render Pautan Negeri di Pendaftaran
             const stateContainer = document.getElementById('pautan-pendaftaran-negeri');
             if (stateContainer) {
@@ -716,51 +734,51 @@
                 });
             }
 
-            // Penetapan Tema Biasa
-            const savedTheme = localStorage.getItem('theme');
-            const html = document.getElementById('html-root');
-            if (savedTheme === 'light') html.classList.remove('dark');
-        });
+            // Render Kotak Gambar Galeri
+            const galleryContainer = document.getElementById('gallery-container');
+            if (galleryContainer) {
+                const categories = ['cerita-sr', 'cerita-sjk', 'pantun-wm-sr', 'pantun-wm-sm', 'storytelling', 'spell-sr', 'spell-sm', 'scrabble-sr', 'scrabble-sm', 'poetry-recitation', 'poetry'];
+                let galleryHTML = '';
+                categories.forEach(cat => {
+                    // Jana 4 gambar placeholder untuk setiap kategori
+                    for(let i=1; i<=4; i++) {
+                        const catName = cat.replace(/-/g, ' ').toUpperCase();
+                        galleryHTML += `
+                            <div class="gallery-item ${cat} flex flex-col justify-center items-center bg-[#1e1233] border border-gold-500/20 rounded-xl h-40 md:h-48 shadow-[0_4px_15px_rgba(0,0,0,0.2)] overflow-hidden group cursor-pointer relative transition-transform transform hover:scale-105" onclick="openGalleryModal('${catName}', ${i})">
+                                <div class="absolute inset-0 bg-gold-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                                <span class="font-cinzel text-gold-400 font-bold text-sm md:text-base tracking-widest z-10 text-center px-2">SUASANA</span>
+                                <span class="font-sans text-gray-300 text-xs md:text-sm mt-1 z-10 uppercase tracking-widest">Karnival</span>
+                                <span class="text-gray-500 text-[10px] md:text-xs mt-4 z-10 font-medium">FOTO ${i}</span>
+                            </div>
+                        `;
+                    }
+                });
+                galleryContainer.innerHTML = galleryHTML;
+            }
 
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const preloader = document.getElementById('preloader');
-                if(preloader) {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => { preloader.style.display = 'none'; }, 500);
-                }
-            }, 800);
-            
-            initGallery(); 
-            
-            // Pasang pemerhati Reveal & Counter
-            setTimeout(() => {
-                document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-                document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
-                
-                // FORCE REVEAL PADA TAB UTAMA KETIKA MULA DIBUKA (Penyelesaian Skrin Kosong)
-                const activeTab = document.querySelector('.tab-content.block');
-                if (activeTab) {
-                    activeTab.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-                }
-            }, 500);
-        });
-
-        // --- TAB NAVIGATION ---
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => {
-                el.classList.remove('block', 'flex-grow');
-                el.classList.add('hidden');
+            // MULA: Pengaktifan Animasi Muncul (Reveal) & Kaunter Nombor
+            document.querySelectorAll('.reveal').forEach(el => {
+                revealObserver.observe(el);
             });
             
-            const selectedTab = document.getElementById('tab-' + tabName);
-            if (selectedTab) {
-                selectedTab.classList.remove('hidden');
-                selectedTab.classList.add('block', 'flex-grow');
-                
-                // PENYELESAIAN ISU BLANK SCREEN: Paksa class 'active' ditambah dengan serta-merta tanpa menunggu tatalan
+            document.querySelectorAll('.counter').forEach(el => {
+                counterObserver.observe(el);
+            });
+            // TAMAT: Pengaktifan Animasi
+        });
+
+        // --- FUNGSI TAB ---
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('block');
+            });
+            const selected = document.getElementById('tab-' + tabId);
+            if(selected) {
+                selected.classList.remove('hidden');
+                selected.classList.add('block');
                 setTimeout(() => {
-                    selectedTab.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+                    selected.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
                 }, 50);
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -768,91 +786,48 @@
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
+            if (menu) {
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('flex');
+            }
         }
 
-        // --- PENAPIS JADUAL HARI ---
+        // --- FUNGSI PENAPIS JADUAL HARI ---
         function filterJadualHari(day, btnElement) {
-            const buttons = document.querySelectorAll('.btn-jadual-hari');
-            buttons.forEach(b => {
-                if(b) {
-                    b.classList.remove('btn-filter-active', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
-                    b.classList.add('bg-white', 'dark:bg-dark-card', 'text-gray-700', 'dark:text-gray-300');
-                }
+            document.querySelectorAll('.btn-jadual-hari').forEach(btn => {
+                btn.classList.remove('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
+                btn.classList.add('bg-white', 'dark:bg-dark-card', 'text-gray-700', 'dark:text-gray-300');
             });
-
+            
             if (btnElement) {
-                btnElement.classList.add('btn-filter-active', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
+                btnElement.classList.add('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
                 btnElement.classList.remove('bg-white', 'dark:bg-dark-card', 'text-gray-700', 'dark:text-gray-300');
             }
 
             const posterContainer = document.getElementById('jadual-poster-container');
             const detailContainer = document.getElementById('jadual-detail-container');
-            
-            if(!posterContainer || !detailContainer) return;
+            const rabuBlock = document.getElementById('jadual-rabu');
+            const khamisBlock = document.getElementById('jadual-khamis');
+
+            if (!posterContainer || !detailContainer) return;
 
             if (day === 'semua') {
                 posterContainer.classList.remove('hidden');
+                posterContainer.classList.add('flex');
                 detailContainer.classList.add('hidden');
             } else {
                 posterContainer.classList.add('hidden');
+                posterContainer.classList.remove('flex');
                 detailContainer.classList.remove('hidden');
-
-                const blocks = document.querySelectorAll('.jadual-day-block');
-                blocks.forEach(block => {
-                    if(block) block.classList.add('hidden');
-                });
-
-                const targetBlock = document.getElementById('jadual-' + day);
-                if (targetBlock) {
-                    targetBlock.classList.remove('hidden');
-                }
+                
+                if (rabuBlock) rabuBlock.style.display = (day === 'rabu') ? 'block' : 'none';
+                if (khamisBlock) khamisBlock.style.display = (day === 'khamis') ? 'block' : 'none';
             }
         }
 
-        // --- GALERI ---
-        const categories = [
-            { id: 'cerita-sr', title: 'Bercerita', sub: 'SR' },
-            { id: 'cerita-sjk', title: 'Bercerita', sub: 'SJK' },
-            { id: 'pantun-wm-sr', title: 'Gema Pantun Warisan Madani', sub: 'SR' },
-            { id: 'pantun-wm-sm', title: 'Gema Pantun Warisan Madani', sub: 'SM' },
-            { id: 'storytelling', title: 'Storytelling', sub: 'Kategori' },
-            { id: 'spell-sr', title: 'Dare to Spell', sub: 'SR' },
-            { id: 'spell-sm', title: 'Dare to Spell', sub: 'SM' },
-            { id: 'scrabble-sr', title: 'Scrabble', sub: 'SR' },
-            { id: 'scrabble-sm', title: 'Scrabble', sub: 'SM' },
-            { id: 'poetry-recitation', title: 'Poetry Recitation', sub: 'Kategori' },
-            { id: 'poetry', title: 'Poetry', sub: 'Kategori' }
-        ];
-
-        function initGallery() {
-            const container = document.getElementById('gallery-container');
-            if (!container) return;
-            container.innerHTML = '';
-            
-            // Koleksi Gambar (Umum/Suasana) - 24 Slot
-            for(let i=1; i<=24; i++) {
-                const item = document.createElement('button');
-                item.className = `gallery-item semua aspect-video bg-gray-50 dark:bg-[#110a1f] hover:bg-purple-50 dark:hover:bg-[#2D1B4E] rounded-xl flex flex-col items-center justify-center font-cinzel shadow-md dark:shadow-lg border border-gold-300 dark:border-gold-500/20 cursor-pointer transition-all transform hover:-translate-y-1 focus:outline-none`;
-                item.innerHTML = `<span class="text-sm font-bold text-gold-600 dark:text-gold-400 text-center px-2 pointer-events-none">Suasana</span><span class="text-xs text-gray-500 dark:text-gray-400 pointer-events-none mt-1">Karnival</span><span class="text-[10px] text-gray-600 dark:text-gray-300 mt-3 pointer-events-none bg-black/10 dark:bg-black/40 px-2 py-0.5 rounded-full">Foto ${i}</span>`;
-                container.appendChild(item);
-            }
-
-            // Kategori Pertandingan
-            categories.forEach(cat => {
-                for(let i=1; i<=4; i++) {
-                    const item = document.createElement('button');
-                    item.className = `gallery-item ${cat.id} hidden aspect-video bg-gray-50 dark:bg-[#110a1f] hover:bg-purple-50 dark:hover:bg-[#2D1B4E] rounded-xl flex flex-col items-center justify-center font-cinzel shadow-md dark:shadow-lg border border-gold-300 dark:border-gold-500/20 cursor-pointer transition-all transform hover:-translate-y-1 focus:outline-none`;
-                    item.innerHTML = `<span class="text-sm font-bold text-gold-600 dark:text-gold-400 text-center px-2 pointer-events-none">${cat.title}</span><span class="text-xs text-gray-500 dark:text-gray-400 pointer-events-none mt-1">[${cat.sub}]</span><span class="text-[10px] text-gray-600 dark:text-gray-300 mt-3 pointer-events-none bg-black/10 dark:bg-black/40 px-2 py-0.5 rounded-full">Foto ${i}</span>`;
-                    container.appendChild(item);
-                }
-            });
-        }
-
+        // --- FUNGSI PENAPIS GALERI ---
         function filterGallery(category, buttonElement) {
-            const buttons = document.querySelectorAll('.btn-filter');
-            buttons.forEach(btn => {
+            document.querySelectorAll('.btn-filter').forEach(btn => {
                 btn.classList.remove('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
                 btn.classList.add('bg-white', 'dark:bg-dark-card', 'text-gray-600', 'dark:text-gray-300');
             });
@@ -864,13 +839,84 @@
 
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(item => {
-                if (item.classList.contains(category)) {
+                if (category === 'semua' || item.classList.contains(category)) {
                     item.style.display = 'flex';
                     item.animate([ { opacity: 0, transform: 'scale(0.95)' }, { opacity: 1, transform: 'scale(1)' } ], { duration: 300, fill: 'forwards' });
                 } else {
                     item.style.display = 'none';
                 }
             });
+        }
+
+        // --- FUNGSI MODAL GALERI ---
+        function openGalleryModal(categoryName, photoIndex) {
+            const modal = document.getElementById('gallery-modal');
+            const modalContent = document.getElementById('gallery-modal-content');
+            const badge = document.getElementById('modal-badge');
+            
+            if (!modal) return;
+            
+            // Kemaskini Lencana Kategori
+            badge.innerText = `FOTO ${photoIndex} : ${categoryName}`;
+            
+            // Animasi Buka
+            modal.classList.remove('hidden');
+            // Timeout sedikit untuk membenarkan DOM render paparan 'block' sebelum animasi opacity
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal(event) {
+            // Elakkan modal ditutup jika klik pada bahagian gambar (inner box)
+            if (event && event.target.closest('#modal-inner-box')) {
+                return;
+            }
+            
+            const modal = document.getElementById('gallery-modal');
+            const modalContent = document.getElementById('gallery-modal-content');
+            
+            if (!modal) return;
+            
+            // Animasi Tutup
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            // Sembunyikan sepenuhnya selepas animasi tamat
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // --- FUNGSI MUAT TURUN (NOTIFIKASI) ---
+        function muatTurunBorang(namaBorang) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = 'bg-gradient-to-r from-gold-500 to-gold-400 text-[#110a1f] px-6 py-3 rounded-full shadow-[0_10px_20px_rgba(212,175,55,0.3)] font-sans font-bold text-sm transform transition-all duration-500 translate-y-10 opacity-0 flex items-center gap-3';
+            toast.innerHTML = `
+                <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Memuat turun ${namaBorang}...
+            `;
+            
+            container.appendChild(toast);
+            
+            // Animasi masuk
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+            }, 10);
+            
+            // Animasi keluar dan buang dari DOM
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
         }
 
         // --- OBSERVER & SCROLL ---
