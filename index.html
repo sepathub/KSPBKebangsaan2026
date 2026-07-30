@@ -372,34 +372,7 @@
                     </p>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 reveal delay-100">
-                    <div class="bg-white dark:bg-dark-card rounded-xl shadow-xl dark:shadow-2xl border border-gold-300 dark:border-gold-500/20 p-8 border-t-4 border-t-gold-500 transition-colors">
-                        <h3 class="font-cinzel text-xl font-bold text-gold-600 dark:text-gold-400 mb-6 flex items-center gap-2">
-                            <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Kandungan Maklumat
-                        </h3>
-                        <ul class="space-y-6">
-                            <li class="flex items-start gap-4">
-                                <div class="bg-purple-50 dark:bg-[#2D1B4E] p-3 rounded-lg text-gold-600 dark:text-gold-400 mt-1 shrink-0 border border-gold-300 dark:border-gold-500/30">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-purple-900 dark:text-gray-200 text-lg">Siapa Boleh Menyertai</h4>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Terbuka kepada pelajar sekolah menengah, IPT, dan orang awam berwarganegara Malaysia.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-4">
-                                <div class="bg-purple-50 dark:bg-[#2D1B4E] p-3 rounded-lg text-gold-600 dark:text-gold-400 mt-1 shrink-0 border border-gold-300 dark:border-gold-500/30">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-purple-900 dark:text-gray-200 text-lg">Tarikh Pendaftaran</h4>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Dibuka: <span class="text-gold-600 dark:text-gold-400 font-semibold">1 Jun 2026</span> <br> Ditutup: <span class="text-gold-600 dark:text-gold-400 font-semibold">31 Julai 2026 (11:59 Malam)</span></p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
+                <div class="max-w-4xl mx-auto mb-16 reveal delay-100">
                     <div class="bg-purple-50 dark:bg-gradient-to-br dark:from-[#2D1B4E] dark:to-[#1A0F2E] rounded-xl shadow-xl dark:shadow-2xl border border-gold-300 dark:border-gold-500/30 p-8 relative overflow-hidden text-gray-800 dark:text-white bg-songket-dense transition-colors">
                         <div class="absolute inset-0 bg-white/60 dark:bg-[#110a1f]/60 mix-blend-overlay dark:mix-blend-multiply"></div>
                         <div class="relative z-10">
@@ -407,24 +380,69 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 Muat Turun Dokumen
                             </h3>
-                            <div class="space-y-4">
-                                <button type="button" onclick="bukaModalKategori('Syarat Pertandingan')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-4 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                            <div class="space-y-3 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar">
+                                <button type="button" onclick="bukaModalKategori('Syarat Pertandingan')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
-                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500">
+                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                                         </div>
                                         <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Syarat Pertandingan</span>
                                     </div>
-                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </button>
-                                <button type="button" onclick="bukaModalKategori('Templat Peserta')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-4 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                <button type="button" onclick="bukaModalKategori('Templat Peserta')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
-                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500">
+                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                         </div>
                                         <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Templat Peserta</span>
                                     </div>
-                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </button>
+                                <button type="button" onclick="muatTurunBorang('Borang Kebenaran Waris')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Kebenaran Waris</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </button>
+                                <button type="button" onclick="muatTurunBorang('Borang Deklarasi Kesihatan')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Deklarasi Kesihatan</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </button>
+                                <button type="button" onclick="muatTurunBorang('Borang Maklumat Penerbangan SSL')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Maklumat Penerbangan SSL</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </button>
+                                <button type="button" onclick="muatTurunBorang('Borang Kebenaran Rakaman Gambar')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Kebenaran Rakaman Gambar</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                </button>
+                                <button type="button" onclick="muatTurunBorang('Borang Pengesahan Murid Pertandingan Debat')" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 p-3 rounded-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                    <div class="flex items-center gap-4">
+                                        <div class="bg-purple-100 dark:bg-black/20 p-2 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-700 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">Borang Pengesahan Murid Pertandingan Debat</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 </button>
                             </div>
                         </div>
@@ -440,27 +458,27 @@
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6" id="pautan-pendaftaran-negeri">
                         <script>
                             const states = [
-                                { name: 'Johor', img: 'Flag_of_Johor.svg' },
-                                { name: 'Kedah', img: 'Flag_of_Kedah.svg' },
-                                { name: 'Kelantan', img: 'Flag_of_Kelantan.svg' },
-                                { name: 'Melaka', img: 'Flag_of_Malacca.svg' },
-                                { name: 'N. Sembilan', img: 'Flag_of_Negeri_Sembilan.svg' },
-                                { name: 'Pahang', img: 'Flag_of_Pahang.svg' },
-                                { name: 'Perak', img: 'Flag_of_Perak.svg' },
-                                { name: 'Perlis', img: 'Flag_of_Perlis.svg' },
-                                { name: 'Pulau Pinang', img: 'Flag_of_Penang_(Malaysia).svg' },
-                                { name: 'Sabah', img: 'Flag_of_Sabah.svg' },
-                                { name: 'Sarawak', img: 'Flag_of_Sarawak.svg' },
-                                { name: 'Selangor', img: 'Flag_of_Selangor.svg' },
-                                { name: 'Terengganu', img: 'Flag_of_Terengganu.svg' },
-                                { name: 'W.P. Kuala Lumpur', img: 'Flag_of_Kuala_Lumpur,_Malaysia.svg' },
-                                { name: 'W.P. Labuan', img: 'Flag_of_Labuan.svg' },
-                                { name: 'W.P. Putrajaya', img: 'Flag_of_Putrajaya.svg' }
+                                { name: 'Johor', img: 'Flag_of_Johor.svg', link: 'https://drive.google.com/drive/folders/1bjXluiWXDF2Z-YH7kElXkXVgQ7QlQj0I?usp=drive_link' },
+                                { name: 'Kedah', img: 'Flag_of_Kedah.svg', link: 'https://drive.google.com/drive/folders/15KwX5ORs5k2VY7TbzPSZFhGPVa8sMV7_?usp=drive_link' },
+                                { name: 'Kelantan', img: 'Flag_of_Kelantan.svg', link: 'https://drive.google.com/drive/folders/1hiajOX2fz-zjTGdGz6bEiCrdTxWeWXmf?usp=drive_link' },
+                                { name: 'Melaka', img: 'Flag_of_Malacca.svg', link: 'https://drive.google.com/drive/folders/1PCmUxV1WuC8BSZ7cmtXypQHjJ420jhIk?usp=drive_link' },
+                                { name: 'N. Sembilan', img: 'Flag_of_Negeri_Sembilan.svg', link: 'https://drive.google.com/drive/folders/10JVtsDEp4DwVTCIvmKQRhg2L4UHpfh1Z?usp=drive_link' },
+                                { name: 'Pahang', img: 'Flag_of_Pahang.svg', link: 'https://drive.google.com/drive/folders/1ak6qzOVgBjk4nIlwIZ5EC5i0WN7Q6uL0?usp=drive_link' },
+                                { name: 'Perak', img: 'Flag_of_Perak.svg', link: 'https://drive.google.com/drive/folders/1jeaXn05b-BblUmcryWjNqC4MVTtnDHOR?usp=drive_link' },
+                                { name: 'Perlis', img: 'Flag_of_Perlis.svg', link: 'https://drive.google.com/drive/folders/1x_haN5ydH1Fvo7siceTz8Xg90fStnUFu?usp=drive_link' },
+                                { name: 'Pulau Pinang', img: 'Flag_of_Penang_(Malaysia).svg', link: 'https://drive.google.com/drive/folders/1iEcKNeYNECMTaKWRaW0RXOBFUkEaXsYz?usp=drive_link' },
+                                { name: 'Sabah', img: 'Flag_of_Sabah.svg', link: 'https://drive.google.com/drive/folders/1hLQ_j_TejLXrjgMKoHI4HNB2z46o7yrK?usp=drive_link' },
+                                { name: 'Sarawak', img: 'Flag_of_Sarawak.svg', link: 'https://drive.google.com/drive/folders/10PqzoeYqz_p6dZ91CmKGE4ZPhuC9Ei7-?usp=drive_link' },
+                                { name: 'Selangor', img: 'Flag_of_Selangor.svg', link: 'https://drive.google.com/drive/folders/1b57r0BNo2hB0aO2Gi6qDrL16ghkfkh6B?usp=drive_link' },
+                                { name: 'Terengganu', img: 'Flag_of_Terengganu.svg', link: 'https://drive.google.com/drive/folders/1j9mIWYMarmfWZJGB5-lxy_mXIAZRprVN?usp=drive_link' },
+                                { name: 'W.P. Kuala Lumpur', img: 'Flag_of_Kuala_Lumpur,_Malaysia.svg', link: 'https://drive.google.com/drive/folders/1fZu_kZ9pazmKAKf4JY770BEPo_QEp1EL?usp=drive_link' },
+                                { name: 'W.P. Labuan', img: 'Flag_of_Labuan.svg', link: 'https://drive.google.com/drive/folders/1QfhEHR_MoyhmFD1aexBEUt2RyoYdOBkA?usp=drive_link' },
+                                { name: 'W.P. Putrajaya', img: 'Flag_of_Putrajaya.svg', link: 'https://drive.google.com/drive/folders/17ZaFbAA6wuMC2AmUfy8mSBuRJC5WZ3ik?usp=drive_link' }
                             ];
                             
                             states.forEach(state => {
                                 document.write(`
-                                    <button onclick="showCustomAlert('Pendaftaran ${state.name}', 'Sistem akan membawa anda ke borang pendaftaran rasmi untuk ${state.name}.', 'info')" class="group flex flex-col bg-white dark:bg-dark-card rounded-xl shadow-md dark:shadow-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all overflow-hidden transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-gold-500">
+                                    <a href="${state.link}" target="_blank" rel="noopener noreferrer" class="group flex flex-col bg-white dark:bg-dark-card rounded-xl shadow-md dark:shadow-lg border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all overflow-hidden transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-gold-500">
                                         <div class="w-full h-24 sm:h-28 bg-gray-50 dark:bg-[#110a1f] border-b border-gold-200 dark:border-gold-500/20 relative p-2 flex items-center justify-center transition-colors">
                                             <img src="https://en.wikipedia.org/wiki/Special:FilePath/${state.img}" alt="Bendera ${state.name}" class="w-full h-full object-contain drop-shadow-md">
                                         </div>
@@ -468,7 +486,7 @@
                                             <span class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">${state.name}</span>
                                             <span class="inline-block mx-auto px-4 py-1.5 bg-purple-50 dark:bg-[#2D1B4E] border border-gold-300 dark:border-gold-500/30 text-gold-600 dark:text-gold-400 text-xs font-semibold rounded-full group-hover:bg-gold-500 group-hover:text-[#110a1f] transition-colors w-max shadow-sm">Daftar Sini</span>
                                         </div>
-                                    </button>
+                                    </a>
                                 `);
                             });
                         </script>
@@ -914,6 +932,10 @@
             setTimeout(() => {
                 showCustomAlert('Muat Turun Dokumen', `Fail "${dokumen}" untuk kategori ${kategori} sedang dimuat turun.`, 'success');
             }, 350);
+        }
+
+        function muatTurunBorang(namaBorang) {
+            showCustomAlert('Muat Turun Dokumen', `Fail "${namaBorang}" sedang dimuat turun.`, 'success');
         }
 
         // --- DATA JADUAL PERTANDINGAN ---
