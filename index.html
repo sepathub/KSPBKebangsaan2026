@@ -56,7 +56,6 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #AA8529; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
-        /* Custom scrollbar for document box */
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(212, 175, 55, 0.1); border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
@@ -65,7 +64,7 @@
 <body class="font-sans bg-light-bg dark:bg-dark-bg text-gray-700 dark:text-gray-300 antialiased selection:bg-gold-500 selection:text-purple-900 flex flex-col min-h-screen bg-songket-pattern bg-fixed transition-colors duration-500">
 
     <!-- Preloader -->
-    <div id="preloader" class="fixed inset-0 z-[9999] bg-light-bg dark:bg-[#0d0817] flex items-center justify-center transition-opacity duration-500">
+    <div id="preloader" class="fixed inset-0 z-[999999] bg-light-bg dark:bg-[#0d0817] flex items-center justify-center transition-opacity duration-500">
         <div class="flex flex-col items-center">
             <div class="spinner mb-4"></div>
             <h2 class="font-cinzel text-gold-500 text-xl font-bold tracking-widest animate-pulse">Memuatkan...</h2>
@@ -97,6 +96,7 @@
                     <button onclick="showTab('jadual')" class="font-cinzel text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 transition-colors text-sm tracking-wider font-semibold focus:outline-none focus:ring-2 focus:ring-gold-500 rounded px-2 py-1">Jadual</button>
                     <button onclick="showTab('pendaftaran')" class="font-cinzel text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 transition-colors text-sm tracking-wider font-semibold focus:outline-none focus:ring-2 focus:ring-gold-500 rounded px-2 py-1">Pendaftaran</button>
                     <button onclick="showTab('galeri')" class="font-cinzel text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 transition-colors text-sm tracking-wider font-semibold focus:outline-none focus:ring-2 focus:ring-gold-500 rounded px-2 py-1">Galeri</button>
+                    <button onclick="showTab('liputan')" class="font-cinzel text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 transition-colors text-sm tracking-wider font-semibold focus:outline-none focus:ring-2 focus:ring-gold-500 rounded px-2 py-1">Liputan Media</button>
                     <button onclick="showTab('pendaftaran')" class="bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-[#110a1f] font-cinzel font-bold px-6 py-2.5 rounded transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)] focus:outline-none focus:ring-2 focus:ring-gold-400 ml-2">
                         Daftar
                     </button>
@@ -106,12 +106,20 @@
                         <svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         <svg id="theme-icon-moon" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                     </button>
+                    
+                    <!-- Butang Akses Admin (Gear Icon) -->
+                    <button onclick="openAdminLogin()" class="p-2 rounded-full border border-gold-400 dark:border-gold-500/50 text-purple-900 dark:text-gold-400 hover:bg-gold-100 dark:hover:bg-gold-500/10 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500" title="Urus Sistem (Admin)">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </button>
                 </div>
 
                 <div class="lg:hidden flex items-center gap-4">
                     <button onclick="toggleTheme()" class="p-2 rounded-full border border-gold-400 dark:border-gold-500/50 text-gold-600 dark:text-gold-400 hover:bg-gold-100 dark:hover:bg-gold-500/10 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500">
                         <svg id="theme-icon-sun-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         <svg id="theme-icon-moon-mobile" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                    <button onclick="openAdminLogin()" class="p-2 rounded-full border border-gold-400 dark:border-gold-500/50 text-purple-900 dark:text-gold-400 hover:bg-gold-100 dark:hover:bg-gold-500/10 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-500" title="Urus Sistem (Admin)">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </button>
                     <button onclick="toggleMobileMenu()" aria-label="Buka Menu" class="text-gold-600 dark:text-gold-500 hover:text-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500 rounded p-1">
                         <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -120,12 +128,12 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="hidden absolute top-24 left-0 w-full flex-col bg-white dark:bg-dark-bg border-t border-gold-300 dark:border-gold-500/20 px-6 py-6 space-y-4 shadow-2xl z-40 bg-songket-dense">
             <button onclick="showTab('homepage'); toggleMobileMenu();" class="text-left font-cinzel block text-lg font-semibold text-purple-900 dark:text-gray-200 hover:text-gold-600 dark:hover:text-gold-500 focus:outline-none">Utama</button>
             <button onclick="showTab('jadual'); toggleMobileMenu();" class="text-left font-cinzel block text-lg font-semibold text-purple-900 dark:text-gray-200 hover:text-gold-600 dark:hover:text-gold-500 focus:outline-none">Jadual Pertandingan</button>
             <button onclick="showTab('pendaftaran'); toggleMobileMenu();" class="text-left font-cinzel block text-lg font-semibold text-purple-900 dark:text-gray-200 hover:text-gold-600 dark:hover:text-gold-500 focus:outline-none">Pendaftaran</button>
             <button onclick="showTab('galeri'); toggleMobileMenu();" class="text-left font-cinzel block text-lg font-semibold text-purple-900 dark:text-gray-200 hover:text-gold-600 dark:hover:text-gold-500 focus:outline-none">Galeri</button>
+            <button onclick="showTab('liputan'); toggleMobileMenu();" class="text-left font-cinzel block text-lg font-semibold text-purple-900 dark:text-gray-200 hover:text-gold-600 dark:hover:text-gold-500 focus:outline-none">Liputan Media</button>
         </div>
     </nav>
 
@@ -168,7 +176,6 @@
                 </div>
             </div>
 
-            <!-- Wave divider -->
             <div class="absolute bottom-0 w-full leading-none z-10 text-light-bg dark:text-[#110a1f]">
                 <svg class="relative block w-full h-[50px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.93,123,194,111.4,238.45,103.35,280.24,80.7,321.39,56.44Z" fill="currentColor"></path>
@@ -213,7 +220,7 @@
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
                     <div class="lg:col-span-2 bg-white dark:bg-dark-card rounded-xl shadow-xl dark:shadow-2xl border border-gold-300 dark:border-gold-500/20 border-t-4 border-t-gold-500 p-8 md:p-12 reveal delay-100 relative overflow-hidden transition-colors">
                         <div class="absolute -top-24 -left-24 w-48 h-48 bg-gold-300/30 dark:bg-gold-500/10 blur-[50px] rounded-full"></div>
                         <h3 class="font-cinzel text-2xl font-bold text-gold-600 dark:text-gold-400 mb-6 relative z-10">Selamat Datang ke Karnival Semarak Perpaduan Bahasa 2026</h3>
@@ -245,6 +252,32 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="reveal delay-300 max-w-4xl mx-auto">
+                    <div class="bg-white dark:bg-dark-card rounded-xl shadow-xl dark:shadow-2xl border border-gold-300 dark:border-gold-500/30 overflow-hidden relative">
+                        <div class="bg-gradient-to-r from-gold-500 to-gold-400 p-4 flex items-center justify-between sticky top-0 z-10 border-b border-gold-600/20">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-[#110a1f] p-2 rounded-full relative shadow-inner">
+                                    <svg class="w-5 h-5 text-gold-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
+                                    <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[#110a1f] animate-ping"></span>
+                                    <span class="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-[#110a1f]"></span>
+                                </div>
+                                <h3 class="font-cinzel text-lg font-bold text-[#110a1f] tracking-wider">PENGUMUMAN RASMI</h3>
+                            </div>
+                            <span class="text-[#110a1f] text-xs font-bold bg-white/40 px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-sm shadow-sm">TERKINI</span>
+                        </div>
+                        
+                        <div class="max-h-[350px] overflow-y-auto custom-scrollbar p-6 space-y-4 bg-songket-dense relative" id="pengumuman-list">
+                             <div class="absolute inset-0 bg-white/80 dark:bg-[#110a1f]/80 mix-blend-overlay dark:mix-blend-multiply pointer-events-none"></div>
+                             <!-- Senarai akan dimasukkan secara automatik di sini oleh JS -->
+                        </div>
+                        
+                        <div class="bg-gray-100 dark:bg-gray-800/80 p-3 text-center border-t border-gray-200 dark:border-gray-700 relative z-10">
+                            <p class="text-xs text-gray-500 dark:text-gray-400 italic font-medium">Sebarang makluman penting atau jadual kecemasan akan dipaparkan di ruangan ini secara langsung.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </div>
@@ -266,7 +299,6 @@
                     </p>
                 </div>
 
-                <!-- Butang Penapis Hari -->
                 <div class="flex flex-wrap justify-center gap-3 mb-10 reveal delay-100">
                     <button onclick="filterJadualHari('semua', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 dark:border-gold-500/50 btn-filter-active shadow-[0_0_15px_rgba(212,175,55,0.4)] focus:outline-none focus:ring-2 focus:ring-gold-500">
                         Poster Ringkasan
@@ -279,27 +311,19 @@
                     </button>
                 </div>
 
-                <!-- Ruang Paparan Jadual -->
                 <div id="jadual-container" class="max-w-6xl mx-auto flex justify-center reveal delay-100">
-                    
-                    <!-- Poster Jadual Pukal (Default) -->
                     <div id="jadual-poster" class="relative group rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 block">
                         <img src="https://i.postimg.cc/cHkJfL7s/jadual-pertandingan.png" alt="Jadual Penuh Pertandingan" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.02]">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
-
-                    <!-- Gambar Jadual Rabu -->
                     <div id="jadual-rabu" class="relative group rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 hidden">
                         <img src="https://i.postimg.cc/2SCVpM57/pertandingan-rabu.png" alt="Jadual Pertandingan Rabu" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.02]">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
-
-                    <!-- Gambar Jadual Khamis -->
                     <div id="jadual-khamis" class="relative group rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 hidden">
                         <img src="https://i.postimg.cc/rpPmrpN4/pertandingan-khamis.png" alt="Jadual Pertandingan Khamis" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.02]">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -322,7 +346,6 @@
                     </p>
                 </div>
                 
-                <!-- Kotak Muat Turun Dokumen -->
                 <div class="max-w-4xl mx-auto mb-16 reveal delay-100">
                     <div class="bg-purple-50 dark:bg-gradient-to-br dark:from-[#2D1B4E] dark:to-[#1A0F2E] rounded-xl shadow-xl dark:shadow-2xl border border-gold-300 dark:border-gold-500/30 p-8 relative overflow-hidden text-gray-800 dark:text-white bg-songket-dense transition-colors">
                         <div class="absolute inset-0 bg-white/60 dark:bg-[#110a1f]/60 mix-blend-overlay dark:mix-blend-multiply"></div>
@@ -331,8 +354,7 @@
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 Muat Turun Dokumen
                             </h3>
-                            <!-- Senarai Dokumen Boleh Tatal -->
-                            <div class="space-y-3 overflow-y-auto pr-1 custom-scrollbar">
+                            <div class="space-y-3 pr-1 custom-scrollbar">
                                 <a href="https://docs.google.com/document/d/1eNBmn7We3J8ccJ531qdDqMNEoL0cVCB0/edit?usp=drive_link&ouid=107176344598669127372&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 dark:hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-300 dark:border-gold-500/20 hover:border-gold-500 transition-all shadow-sm hover:shadow-md group cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-gold-500">
                                     <div class="flex items-center gap-4">
                                         <div class="bg-purple-100 dark:bg-black/20 p-2.5 rounded-lg text-gold-600 dark:text-gold-500 shrink-0">
@@ -380,7 +402,7 @@
                         <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Sila klik pada paparan negeri masing-masing untuk mengisi maklumat dan menghantar borang penyertaan rasmi.</p>
                     </div>
                     <!-- Pautan 16 Negeri Dijana secara Dinamik oleh Javascript -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6" id="pautan-pendaftaran-negeri">
+                    <div id="pautan-pendaftaran-negeri">
                     </div>
                 </div>
             </div>
@@ -395,13 +417,12 @@
                     <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white mb-6">Galeri Karnival</h2>
                 </div>
                 
-                <!-- Butang Penapis 11 Kategori Pertandingan -->
                 <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 reveal delay-100">
-                    <button onclick="filterGallery('semua', this)" class="btn-filter btn-filter-active px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 dark:border-gold-500/50 shadow-[0_0_15px_rgba(212,175,55,0.4)] bg-[#D4AF37] text-[#110a1f]">Koleksi Gambar</button>
+                    <button onclick="filterGallery('semua', this)" class="btn-filter btn-filter-active px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 dark:border-gold-500/50 shadow-[0_0_15px_rgba(212,175,55,0.4)] bg-[#D4AF37] text-[#110a1f]">Suasana Pertandingan</button>
                     <button onclick="filterGallery('bercerita-sr', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">BERCERITA SR</button>
                     <button onclick="filterGallery('bercerita-sjk', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">BERCERITA SJK</button>
-                    <button onclick="filterGallery('pantun-wm-sr', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">GEMA PANTUN WARISAN MADANI SR</button>
-                    <button onclick="filterGallery('pantun-wm-sm', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">GEMA PANTUN WARISAN MADANI SM</button>
+                    <button onclick="filterGallery('pantun-wm-sr', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">PANTUN SR</button>
+                    <button onclick="filterGallery('pantun-wm-sm', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">PANTUN SM</button>
                     <button onclick="filterGallery('storytelling', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">STORYTELLING</button>
                     <button onclick="filterGallery('spell-sr', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">DARE TO SPELL SR</button>
                     <button onclick="filterGallery('spell-sm', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">DARE TO SPELL SM</button>
@@ -411,8 +432,69 @@
                     <button onclick="filterGallery('poetry', this)" class="btn-filter bg-white dark:bg-dark-card text-gray-600 dark:text-gray-300 px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 dark:border-gold-500/30 hover:border-gold-500 dark:hover:border-gold-400">POETRY</button>
                 </div>
                 
-                <!-- Kotak Gambar Galeri (Dijana Dinamik) -->
-                <div id="gallery-container" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full mb-12 reveal delay-200"></div>
+                <div class="relative w-full max-w-5xl mx-auto reveal delay-200" id="carousel-wrapper">
+                    <div class="overflow-hidden rounded-2xl shadow-[0_0_30px_rgba(212,175,55,0.2)] border border-gold-500/30 bg-[#1e1233] relative group aspect-video md:aspect-[21/9]">
+                        <div id="carousel-track" class="flex transition-transform duration-700 ease-in-out h-full w-full">
+                            <!-- JS akan isi gambar -->
+                        </div>
+                        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-gold-500 text-white hover:text-[#110a1f] p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 focus:outline-none z-20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+                        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-gold-500 text-white hover:text-[#110a1f] p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 focus:outline-none z-20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                        <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none z-10"></div>
+                    </div>
+                    <div id="carousel-dots" class="flex justify-center gap-2 mt-6">
+                        <!-- Dots JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- WRAPPER TAB LIPUTAN MEDIA -->
+    <div id="tab-liputan" class="tab-content hidden flex-grow">
+        <section class="pt-32 pb-24 bg-transparent relative min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <div class="h-px bg-gold-500 w-16 opacity-50"></div>
+                        <span class="font-cinzel text-gold-600 dark:text-gold-500 font-bold tracking-widest uppercase">Hebahan</span>
+                        <div class="h-px bg-gold-500 w-16 opacity-50"></div>
+                    </div>
+                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white mb-6">Liputan Media</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                        Saksikan lintas langsung, rakaman temubual, dan liputan khas sepanjang karnival berlangsung oleh rakan media kami.
+                    </p>
+                </div>
+
+                <div class="max-w-5xl mx-auto reveal delay-100">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <a href="https://www.youtube.com/@SKTAMANBUKITRAMBAI-CM8KPM-SK-C" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center bg-white dark:bg-dark-card border border-gold-300 dark:border-gold-500/30 rounded-xl p-8 hover:border-gold-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-2 text-center h-full">
+                            <div class="w-20 h-20 bg-purple-100 dark:bg-purple-900/40 rounded-full flex items-center justify-center mb-6 text-purple-900 dark:text-gold-400 group-hover:scale-110 transition-transform shadow-inner border border-purple-200 dark:border-gold-500/20">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <h3 class="font-cinzel font-bold text-lg text-purple-900 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">TVPSS STABURA</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Saluran Liputan Rasmi 1</p>
+                        </a>
+                        <a href="https://www.youtube.com/@SKBANDARHILIR-CM1KPM-SK-Laman" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center bg-white dark:bg-dark-card border border-gold-300 dark:border-gold-500/30 rounded-xl p-8 hover:border-gold-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-2 text-center h-full">
+                            <div class="w-20 h-20 bg-purple-100 dark:bg-purple-900/40 rounded-full flex items-center justify-center mb-6 text-purple-900 dark:text-gold-400 group-hover:scale-110 transition-transform shadow-inner border border-purple-200 dark:border-gold-500/20">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <h3 class="font-cinzel font-bold text-lg text-purple-900 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">TVPSS SK BANDAR HILIR</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Saluran Liputan Rasmi 2</p>
+                        </a>
+                        <a href="https://www.youtube.com/@lensafranciscanjunior" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center bg-white dark:bg-dark-card border border-gold-300 dark:border-gold-500/30 rounded-xl p-8 hover:border-gold-500 hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all transform hover:-translate-y-2 text-center h-full">
+                            <div class="w-20 h-20 bg-purple-100 dark:bg-purple-900/40 rounded-full flex items-center justify-center mb-6 text-purple-900 dark:text-gold-400 group-hover:scale-110 transition-transform shadow-inner border border-purple-200 dark:border-gold-500/20">
+                                <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <h3 class="font-cinzel font-bold text-lg text-purple-900 dark:text-gray-200 group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">TVPSS SK ST FRANCIS</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Saluran Liputan Rasmi 3</p>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
@@ -457,9 +539,119 @@
         </div>
     </div>
 
-    <!-- SCRIPT JS -->
+    <!-- Modal Pop-up Log Masuk Admin -->
+    <div id="admin-login-modal" class="fixed inset-0 z-[100000] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center transition-all duration-300 opacity-0" onclick="closeAdminLogin(event)">
+        <div id="admin-login-content" class="bg-white dark:bg-dark-card rounded-xl shadow-2xl border border-gold-300 dark:border-gold-500/50 p-6 sm:p-8 w-11/12 max-w-sm transform scale-95 transition-transform duration-300 relative text-center">
+            <button onclick="closeAdminLogin(event, true)" class="absolute top-4 right-4 text-gray-500 hover:text-gold-500 transition-colors focus:outline-none">
+                <svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="mb-6">
+                <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-purple-400">
+                    <svg class="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                </div>
+                <h3 class="font-cinzel text-xl font-bold text-purple-900 dark:text-gold-400 mb-2">Log Masuk Pengurusan</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Sila masukkan kata laluan urus setia pusat.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <input type="password" id="admin-password-input" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all text-center tracking-widest font-mono" placeholder="KATA LALUAN">
+                    <p id="admin-error-msg" class="text-red-500 text-xs mt-2 hidden font-semibold">Kata laluan tidak sah.</p>
+                </div>
+                <button onclick="verifyAdmin()" class="w-full bg-purple-900 hover:bg-purple-800 dark:bg-gold-600 dark:hover:bg-gold-500 text-white dark:text-[#110a1f] font-cinzel font-bold px-6 py-3 rounded-lg transition-all shadow-md transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    Akses Sistem
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pop-up Panel Pengurusan (Admin Dashboard) -->
+    <div id="admin-panel-modal" class="fixed inset-0 z-[100000] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center transition-all duration-300 opacity-0" onclick="closeAdminPanel(event)">
+        <div id="admin-panel-content" class="bg-white dark:bg-dark-card rounded-xl shadow-2xl border border-gold-300 dark:border-gold-500/50 p-6 w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300 relative custom-scrollbar">
+            <button onclick="closeAdminPanel(event, true)" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition-colors focus:outline-none z-10">
+                <svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </button>
+            
+            <h2 class="font-cinzel text-2xl font-bold text-purple-900 dark:text-gold-400 mb-6 border-b border-gray-200 dark:border-gray-700 pb-4 flex items-center gap-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Panel Pengurusan Utama
+            </h2>
+
+            <!-- Kawalan Status Pendaftaran -->
+            <div id="admin-reg-status" class="mb-6">
+                <!-- HTML dijana oleh Javascript (Buka/Tutup) -->
+            </div>
+            
+            <!-- Pengurusan Galeri -->
+            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 mb-8">
+                <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-sm uppercase tracking-wider">Pengurusan Galeri Gambar</h3>
+                <div class="mb-4">
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Pilih Kategori Galeri</label>
+                    <select id="admin-gallery-category" onchange="renderAdminGallerySlots()" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500">
+                    </select>
+                </div>
+                <div id="admin-gallery-slots" class="space-y-3 max-h-64 overflow-y-auto custom-scrollbar pr-2 mb-4">
+                </div>
+                <button onclick="saveGalleryData()" class="bg-gold-500 hover:bg-gold-400 text-[#110a1f] font-bold px-4 py-2 rounded transition-colors text-sm w-full sm:w-auto">Simpan Pautan Gambar</button>
+            </div>
+
+            <!-- Borang Tambah Pengumuman -->
+            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 mb-8">
+                <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-sm uppercase tracking-wider">Tambah Pengumuman Baharu</h3>
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Tajuk Penuh</label>
+                            <input type="text" id="add-title" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500" placeholder="Cth: Pertandingan Ditunda">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Label Tarikh</label>
+                            <input type="text" id="add-date" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500" placeholder="Cth: Hari ini / 10 Sept">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Status Keutamaan (Warna)</label>
+                        <select id="add-color" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500">
+                            <option value="gold-500">Penting (Tepi Emas Terang)</option>
+                            <option value="gold-400">Sederhana (Tepi Emas Pudar)</option>
+                            <option value="red-500">Kecemasan (Tepi Merah)</option>
+                            <option value="gray-400">Biasa (Tepi Kelabu Pudar)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1">Isi Kandungan Teks</label>
+                        <textarea id="add-content" rows="3" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 custom-scrollbar" placeholder="Sila tulis butiran makluman di sini..."></textarea>
+                    </div>
+                    <button onclick="addAnnouncement()" class="bg-gold-500 hover:bg-gold-400 text-[#110a1f] font-bold px-4 py-2 rounded transition-colors text-sm w-full sm:w-auto">Simpan Pengumuman</button>
+                </div>
+            </div>
+
+            <!-- Senarai Sedia Ada -->
+            <div>
+                <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-sm uppercase tracking-wider">Senarai Sedia Ada</h3>
+                <div id="admin-announcement-list" class="space-y-3">
+                    <!-- Senarai untuk dipadam dijana oleh Javascript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sistem Notifikasi Pintar (Toast Container) -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-[999999] flex flex-col gap-3 pointer-events-none"></div>
+
+    <button id="backToTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" class="fixed bottom-6 left-6 bg-gradient-to-r from-gold-500 to-gold-400 text-[#110a1f] p-3 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.4)] transform scale-0 opacity-0 transition-all duration-300 z-50 hover:from-gold-400 hover:to-gold-300 focus:outline-none focus:ring-4 focus:ring-gold-500/50" aria-label="Kembali ke atas">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
+
     <script>
-        // --- DATA NEGERI, PAUTAN & KATA LALUAN ---
+        // --- 1. DATA PUSAT ---
+        const defaultAnnouncements = [
+            { id: 1, title: 'Pendaftaran Kini Dibuka!', date: 'Hari ini', content: 'Pendaftaran untuk semua kategori Karnival Semarak Perpaduan Bahasa 2026 kini dibuka secara rasmi. Sila lengkapkan borang di tab Pendaftaran.', color: 'gold-500' },
+            { id: 2, title: 'Kemaskini Jadual Pertandingan', date: '2 Hari Lepas', content: 'Terdapat sedikit perubahan pada jadual sesi petang bagi hari Rabu (9 Sept). Sila rujuk tab Jadual untuk maklumat terkini.', color: 'gold-400' }
+        ];
+
+        let announcementsData = [];
+        let isRegistrationOpen = localStorage.getItem('kspb_reg_status') !== 'closed'; // Status buka/tutup dari memori pelayar
+        
         const states = [
             { name: 'Johor', img: 'Flag_of_Johor.svg', link: 'https://drive.google.com/drive/folders/1bjXluiWXDF2Z-YH7kElXkXVgQ7QlQj0I?usp=drive_link', pwd: 'kspb01' },
             { name: 'Kedah', img: 'Flag_of_Kedah.svg', link: 'https://drive.google.com/drive/folders/15KwX5ORs5k2VY7TbzPSZFhGPVa8sMV7_?usp=drive_link', pwd: 'kspb02' },
@@ -479,7 +671,26 @@
             { name: 'W.P. Putrajaya', img: 'Flag_of_Putrajaya.svg', link: 'https://drive.google.com/drive/folders/17ZaFbAA6wuMC2AmUfy8mSBuRJC5WZ3ik?usp=drive_link', pwd: 'kspb16' }
         ];
 
-        // --- INISIALISASI HALAMAN ---
+        const galleryCategories = [
+            { id: 'semua', name: 'SUASANA', slots: 10 },
+            { id: 'bercerita-sr', name: 'BERCERITA SR', slots: 5 },
+            { id: 'bercerita-sjk', name: 'BERCERITA SJK', slots: 5 },
+            { id: 'pantun-wm-sr', name: 'PANTUN SR', slots: 5 },
+            { id: 'pantun-wm-sm', name: 'PANTUN SM', slots: 5 },
+            { id: 'storytelling', name: 'STORYTELLING', slots: 5 },
+            { id: 'spell-sr', name: 'DARE TO SPELL SR', slots: 5 },
+            { id: 'spell-sm', name: 'DARE TO SPELL SM', slots: 5 },
+            { id: 'scrabble-sr', name: 'SCRABBLE SR', slots: 5 },
+            { id: 'scrabble-sm', name: 'SCRABBLE SM', slots: 5 },
+            { id: 'poetry-recitation', name: 'POETRY RECITATION', slots: 5 },
+            { id: 'poetry', name: 'POETRY', slots: 5 }
+        ];
+
+        let galleryData = JSON.parse(localStorage.getItem('kspb_gallery_data')) || {};
+        let currentCategoryFilter = 'semua';
+        let totalSlides = 0;
+
+        // --- STREAMING_CHUNK:Injecting DOMContentLoaded Logic... ---
         window.addEventListener('DOMContentLoaded', () => {
             const preloader = document.getElementById('preloader');
             if (preloader) {
@@ -488,228 +699,506 @@
                     setTimeout(() => { preloader.style.display = 'none'; }, 500);
                 }, 500);
             }
+            
+            initAnnouncements();
+            renderStateButtons(); // Render Butang Negeri ATAU Kotak Tutup Pendaftaran
+            renderCarousel('semua');
+            
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+        });
 
-            const stateContainer = document.getElementById('pautan-pendaftaran-negeri');
-            if (stateContainer) {
+        // --- STREAMING_CHUNK:Writing Toast Notification Logic... ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            if(!container) return;
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+            toast.className = `${bgColor} text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 translate-y-10 opacity-0 flex items-center gap-3`;
+            toast.innerHTML = type === 'success'
+                ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span>${message}</span>`
+                : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => { toast.remove(); }, 300);
+            }, 3000);
+        }
+
+        // --- STREAMING_CHUNK:Writing Announcement functions... ---
+        function initAnnouncements() {
+            const stored = localStorage.getItem('kspb_announcements');
+            if (stored) { announcementsData = JSON.parse(stored); } 
+            else { announcementsData = [...defaultAnnouncements]; saveAnnouncements(); }
+            renderAnnouncements();
+        }
+
+        function saveAnnouncements() { localStorage.setItem('kspb_announcements', JSON.stringify(announcementsData)); }
+
+        function renderAnnouncements() {
+            const listDiv = document.getElementById('pengumuman-list');
+            if (!listDiv) return;
+            listDiv.innerHTML = '<div class="absolute inset-0 bg-white/80 dark:bg-[#110a1f]/80 mix-blend-overlay dark:mix-blend-multiply pointer-events-none"></div>';
+            
+            if (announcementsData.length === 0) {
+                listDiv.innerHTML += `<div class="relative z-10 p-4 text-center text-gray-500 dark:text-gray-400 italic text-sm">Tiada pengumuman buat masa ini.</div>`;
+                return;
+            }
+
+            const sorted = [...announcementsData].sort((a, b) => b.id - a.id);
+            sorted.forEach(item => {
+                const titleColor = item.color === 'gray-400' ? 'text-gray-700 dark:text-gray-300' : 'text-purple-900 dark:text-gold-400';
+                const borderClasses = `border-${item.color}`;
+                const opacityClass = item.color === 'gray-400' ? 'opacity-80' : '';
+                
+                listDiv.innerHTML += `
+                    <div class="relative z-10 p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border-l-4 ${borderClasses} shadow-sm hover:shadow-md transition-shadow ${opacityClass}">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h4 class="font-bold ${titleColor}">${item.title}</h4>
+                            <span class="text-[10px] sm:text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded whitespace-nowrap">${item.date}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">${item.content}</p>
+                    </div>
+                `;
+            });
+        }
+
+        // --- STREAMING_CHUNK:Writing Registration logic... ---
+        function renderStateButtons() {
+            const container = document.getElementById('pautan-pendaftaran-negeri');
+            if(!container) return;
+
+            if (isRegistrationOpen) {
+                container.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6';
+                let html = '';
                 states.forEach((state, index) => {
-                    stateContainer.innerHTML += `
+                    html += `
                         <button onclick="openPasswordModal(${index})" class="w-full bg-white dark:bg-dark-card border border-gold-300 dark:border-gold-500/30 rounded-xl p-4 flex flex-col items-center justify-center gap-3 hover:border-gold-500 hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all group transform hover:-translate-y-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold-500">
                             <img src="https://en.wikipedia.org/wiki/Special:FilePath/${state.img}" alt="Bendera ${state.name}" class="w-16 h-8 object-cover rounded border border-gray-200 dark:border-gray-700 shadow-sm group-hover:scale-110 transition-transform">
                             <span class="font-cinzel font-bold text-sm text-gray-700 dark:text-gray-200 text-center group-hover:text-gold-600 dark:group-hover:text-gold-400">${state.name}</span>
                         </button>
                     `;
                 });
+                container.innerHTML = html;
+            } else {
+                container.className = 'flex justify-center w-full';
+                container.innerHTML = `
+                    <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-500/50 rounded-xl p-10 text-center max-w-2xl w-full shadow-lg">
+                        <svg class="w-16 h-16 text-red-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <h3 class="font-cinzel text-2xl font-bold text-red-600 dark:text-red-400 mb-2">Pendaftaran Telah Ditutup</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Harap maklum bahawa tempoh pendaftaran bagi semua kategori pertandingan telah tamat. Hubungi urus setia untuk sebarang pertanyaan lanjut.</p>
+                    </div>
+                `;
             }
+        }
 
-            const galleryBox = document.getElementById('gallery-container');
-            if (galleryBox) {
-                const categories = ['bercerita-sr', 'bercerita-sjk', 'pantun-wm-sr', 'pantun-wm-sm', 'storytelling', 'spell-sr', 'spell-sm', 'scrabble-sr', 'scrabble-sm', 'poetry-recitation', 'poetry'];
-                let galleryHTML = '';
-                categories.forEach(cat => {
-                    for(let i=1; i<=4; i++) {
-                        const catName = cat.replace(/-/g, ' ').toUpperCase();
-                        galleryHTML += `
-                            <div class="gallery-item ${cat} flex flex-col justify-center items-center bg-[#1e1233] border border-gold-500/20 rounded-xl h-40 md:h-48 shadow-[0_4px_15px_rgba(0,0,0,0.2)] overflow-hidden group cursor-pointer relative transition-transform transform hover:scale-105" onclick="openGalleryModal('${catName}', ${i})">
-                                <div class="absolute inset-0 bg-gold-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                                <span class="font-cinzel text-gold-400 font-bold text-sm md:text-base tracking-widest z-10 text-center px-2">SUASANA</span>
-                                <span class="font-sans text-gray-300 text-xs md:text-sm mt-1 z-10 uppercase tracking-widest">Karnival</span>
-                                <span class="text-gray-500 text-[10px] md:text-xs mt-4 z-10 font-medium">FOTO ${i}</span>
-                            </div>
-                        `;
-                    }
+        // --- STREAMING_CHUNK:Writing Admin controls... ---
+        function openAdminLogin() {
+            const modal = document.getElementById('admin-login-modal');
+            const content = document.getElementById('admin-login-content');
+            const input = document.getElementById('admin-password-input');
+            const error = document.getElementById('admin-error-msg');
+            if (!modal) return;
+            input.value = ''; error.classList.add('hidden'); input.classList.remove('border-red-500', 'ring-red-500');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); input.focus(); }, 10);
+            input.onkeypress = function(e) { if (e.key === 'Enter') verifyAdmin(); };
+        }
+
+        function closeAdminLogin(event, force = false) {
+            if (!force && event && event.target.closest('#admin-login-content')) return;
+            const modal = document.getElementById('admin-login-modal');
+            const content = document.getElementById('admin-login-content');
+            if (!modal) return;
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        function verifyAdmin() {
+            const input = document.getElementById('admin-password-input');
+            const error = document.getElementById('admin-error-msg');
+            if (input.value.trim() === 'admin2026') {
+                closeAdminLogin(null, true);
+                setTimeout(() => { openAdminPanel(); }, 300);
+            } else {
+                error.classList.remove('hidden'); input.classList.add('border-red-500', 'ring-red-500', 'translate-x-2');
+                setTimeout(() => input.classList.remove('translate-x-2'), 100); setTimeout(() => input.classList.add('-translate-x-2'), 200); setTimeout(() => input.classList.remove('-translate-x-2'), 300);
+            }
+        }
+
+        function openAdminPanel() {
+            const modal = document.getElementById('admin-panel-modal');
+            const content = document.getElementById('admin-panel-content');
+            if (!modal) return;
+            renderAdminRegStatus();
+            renderAdminList();
+            initAdminGallery();
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
+        }
+
+        function closeAdminPanel(event, force = false) {
+            if (!force && event && event.target.closest('#admin-panel-content')) return;
+            const modal = document.getElementById('admin-panel-modal');
+            const content = document.getElementById('admin-panel-content');
+            if (!modal) return;
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        function renderAdminRegStatus() {
+            const statusDiv = document.getElementById('admin-reg-status');
+            if(!statusDiv) return;
+            
+            if(isRegistrationOpen) {
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col sm:flex-row items-center justify-between p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg gap-4">
+                        <div class="text-center sm:text-left"><h4 class="font-bold text-green-800 dark:text-green-400">Status: Pendaftaran Sedang Dibuka</h4><p class="text-xs text-green-600 dark:text-green-500 mt-1">Peserta bebas mengakses pautan borang negeri.</p></div>
+                        <button onclick="toggleRegistrationStatus()" class="px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded font-bold shadow transition-colors whitespace-nowrap w-full sm:w-auto">Tutup Pendaftaran</button>
+                    </div>`;
+            } else {
+                statusDiv.innerHTML = `
+                    <div class="flex flex-col sm:flex-row items-center justify-between p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg gap-4">
+                        <div class="text-center sm:text-left"><h4 class="font-bold text-red-800 dark:text-red-400">Status: Pendaftaran Telah Ditutup</h4><p class="text-xs text-red-600 dark:text-red-500 mt-1">Semua pautan pendaftaran dikunci buat masa ini.</p></div>
+                        <button onclick="toggleRegistrationStatus()" class="px-5 py-2 bg-green-600 hover:bg-green-700 text-white rounded font-bold shadow transition-colors whitespace-nowrap w-full sm:w-auto">Buka Pendaftaran</button>
+                    </div>`;
+            }
+        }
+
+        function toggleRegistrationStatus() {
+            isRegistrationOpen = !isRegistrationOpen;
+            localStorage.setItem('kspb_reg_status', isRegistrationOpen ? 'open' : 'closed');
+            
+            renderAdminRegStatus();
+            renderStateButtons(); // Kemaskini skrin pendaftaran serentak
+            
+            if(!isRegistrationOpen) {
+                const newId = new Date().getTime();
+                announcementsData.push({
+                    id: newId, title: 'Pendaftaran Telah Ditutup', date: 'Terkini', color: 'red-500', 
+                    content: 'Harap maklum bahawa sistem pendaftaran bagi semua kategori Karnival Semarak Perpaduan Bahasa 2026 telah ditutup secara rasmi. Terima kasih atas sokongan padu dari semua negeri.'
                 });
-                galleryBox.innerHTML = galleryHTML;
+                saveAnnouncements();
+                renderAnnouncements();
+                renderAdminList();
+                showToast('Pendaftaran berjaya DITUTUP. Pengumuman auto dijana.', 'success');
+            } else {
+                showToast('Pendaftaran kembali DIBUKA.', 'success');
+            }
+        }
+
+        function renderAdminList() {
+            const listDiv = document.getElementById('admin-announcement-list');
+            if (!listDiv) return;
+            listDiv.innerHTML = '';
+            
+            if (announcementsData.length === 0) {
+                listDiv.innerHTML = '<p class="text-sm text-gray-500 italic">Tiada pengumuman dalam rekod sistem.</p>';
+                return;
             }
 
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-            document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
-        });
-
-        // --- FUNGSI TUKAR TAB ---
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.add('hidden');
-                tab.classList.remove('block');
+            const sorted = [...announcementsData].sort((a, b) => b.id - a.id);
+            sorted.forEach(item => {
+                listDiv.innerHTML += `
+                    <div class="flex justify-between items-center p-3 bg-white dark:bg-dark-bg border border-gray-200 dark:border-gray-700 rounded gap-4">
+                        <div class="flex-1 truncate">
+                            <div class="font-semibold text-sm text-gray-800 dark:text-gray-200 truncate">${item.title}</div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400">${item.date}</div>
+                        </div>
+                        <button onclick="deleteAnnouncement(${item.id})" class="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 p-2 rounded transition-colors focus:outline-none" title="Padam Pengumuman">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                `;
             });
+        }
+
+        function addAnnouncement() {
+            const title = document.getElementById('add-title').value.trim();
+            const date = document.getElementById('add-date').value.trim();
+            const color = document.getElementById('add-color').value;
+            const content = document.getElementById('add-content').value.trim();
+            
+            if (!title || !date || !content) { showToast('Sila lengkapkan semua ruangan untuk memuat naik pengumuman.', 'error'); return; }
+
+            const newId = new Date().getTime();
+            announcementsData.push({ id: newId, title: title, date: date, color: color, content: content });
+            
+            saveAnnouncements(); renderAnnouncements(); renderAdminList();
+            
+            document.getElementById('add-title').value = ''; document.getElementById('add-date').value = ''; document.getElementById('add-content').value = '';
+            showToast('Pengumuman berjaya disiarkan ke halaman utama!', 'success');
+
+            // --- TAMBAHAN KOD: Hantar data ke Google Sheets ---
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwC1qVfZZnh3KieSr2VtBgXYNh62jYGUWcunqGjZwOKkTTIyRAon_sDdQL-Z-LHErtwQw/exec';
+            if (scriptURL !== 'https://script.google.com/macros/s/AKfycbwC1qVfZZnh3KieSr2VtBgXYNh62jYGUWcunqGjZwOKkTTIyRAon_sDdQL-Z-LHErtwQw/exec') {
+                fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        type: 'pengumuman',
+                        tajuk: title,
+                        tarikh: date,
+                        kandungan: content,
+                        warna: color
+                    }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' } // Mengelakkan masalah ralat CORS
+                }).then(response => console.log('Data pengumuman berjaya dihantar ke Google Sheets'))
+                  .catch(error => console.error('Ralat menghantar ke Google Sheets:', error));
+            }
+        }
+
+        function deleteAnnouncement(id) {
+            announcementsData = announcementsData.filter(item => item.id !== id);
+            saveAnnouncements(); renderAnnouncements(); renderAdminList();
+            showToast('Pengumuman telah berjaya dipadam dari sistem.', 'success');
+        }
+
+        function initAdminGallery() {
+            const select = document.getElementById('admin-gallery-category');
+            if(!select) return;
+            select.innerHTML = galleryCategories.map(c => `<option value="${c.id}">${c.name} (${c.slots} Slot)</option>`).join('');
+            renderAdminGallerySlots();
+        }
+
+        function renderAdminGallerySlots() {
+            const categoryId = document.getElementById('admin-gallery-category').value;
+            const container = document.getElementById('admin-gallery-slots');
+            const config = galleryCategories.find(c => c.id === categoryId);
+            if (!config || !container) return;
+
+            let html = '';
+            for (let i = 1; i <= config.slots; i++) {
+                const key = `${categoryId}_${i}`;
+                const val = galleryData[key] ? `https://drive.google.com/file/d/${galleryData[key]}/view` : '';
+                html += `
+                    <div>
+                        <label class="block text-[10px] font-semibold text-gray-500 mb-1">FOTO ${i}</label>
+                        <input type="text" id="gallery-input-${key}" value="${val}" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-bg text-gray-900 dark:text-white text-xs focus:outline-none focus:ring-1 focus:ring-gold-500" placeholder="Tampal link Google Drive di sini...">
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function extractDriveId(link) {
+            if (!link) return '';
+            const match = link.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            return match ? match[1] : link;
+        }
+
+        function saveGalleryData() {
+            const categoryId = document.getElementById('admin-gallery-category').value;
+            const config = galleryCategories.find(c => c.id === categoryId);
+            if (!config) return;
+
+            for (let i = 1; i <= config.slots; i++) {
+                const key = `${categoryId}_${i}`;
+                const inputVal = document.getElementById(`gallery-input-${key}`).value.trim();
+                const id = extractDriveId(inputVal);
+                if (id) {
+                    galleryData[key] = id;
+                } else {
+                    delete galleryData[key];
+                }
+            }
+            localStorage.setItem('kspb_gallery_data', JSON.stringify(galleryData));
+            showToast('Maklumat galeri berjaya disimpan!', 'success');
+            renderCarousel(currentCategoryFilter);
+
+            // --- TAMBAHAN KOD: Hantar log ke Google Sheets ---
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwC1qVfZZnh3KieSr2VtBgXYNh62jYGUWcunqGjZwOKkTTIyRAon_sDdQL-Z-LHErtwQw/exec';
+            if (scriptURL !== 'https://script.google.com/macros/s/AKfycbwC1qVfZZnh3KieSr2VtBgXYNh62jYGUWcunqGjZwOKkTTIyRAon_sDdQL-Z-LHErtwQw/exec') {
+                fetch(scriptURL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        type: 'galeri',
+                        kategori: categoryId,
+                        data: JSON.stringify(galleryData)
+                    }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(response => console.log('Data galeri berjaya dihantar ke Google Sheets'))
+                  .catch(error => console.error('Ralat menghantar ke Google Sheets:', error));
+            }
+        }
+
+        // --- STREAMING_CHUNK:Writing Password validation logic... ---
+        let currentStateIndex = null;
+        function openPasswordModal(index) {
+            currentStateIndex = index;
+            const modal = document.getElementById('password-modal');
+            const content = document.getElementById('password-modal-content');
+            const nameSpan = document.getElementById('pwd-state-name');
+            const input = document.getElementById('state-password-input');
+            const error = document.getElementById('pwd-error-msg');
+            
+            if (!modal) return;
+            nameSpan.innerText = states[index].name.toUpperCase();
+            input.value = ''; error.classList.add('hidden'); input.classList.remove('border-red-500', 'ring-red-500');
+            modal.classList.remove('hidden');
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); input.focus(); }, 10);
+            input.onkeypress = function(e) { if (e.key === 'Enter') verifyPassword(); };
+        }
+
+        function closePasswordModal(event, force = false) {
+            if (!force && event && event.target.closest('#password-modal-content')) return;
+            const modal = document.getElementById('password-modal');
+            const content = document.getElementById('password-modal-content');
+            if (!modal) return;
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); currentStateIndex = null; }, 300);
+        }
+
+        function verifyPassword() {
+            const input = document.getElementById('state-password-input');
+            const error = document.getElementById('pwd-error-msg');
+            if (currentStateIndex === null) return;
+            
+            const state = states[currentStateIndex];
+            const enteredPwd = input.value.trim();
+            
+            if (enteredPwd === state.pwd) {
+                window.open(state.link, '_blank');
+                closePasswordModal(null, true);
+                showToast(`Pautan bagi ${state.name} dibuka.`);
+            } else {
+                error.classList.remove('hidden'); input.classList.add('border-red-500', 'ring-red-500', 'translate-x-2');
+                setTimeout(() => input.classList.remove('translate-x-2'), 100); setTimeout(() => input.classList.add('-translate-x-2'), 200); setTimeout(() => input.classList.remove('-translate-x-2'), 300);
+            }
+        }
+
+        // --- STREAMING_CHUNK:Writing Carousel and UI specific logic... ---
+        let currentSlide = 0;
+        let autoPlayInterval;
+
+        function renderCarousel(categoryFilter) {
+            currentCategoryFilter = categoryFilter;
+            const track = document.getElementById('carousel-track');
+            const dotsContainer = document.getElementById('carousel-dots');
+            if (!track || !dotsContainer) return;
+
+            const config = galleryCategories.find(c => c.id === categoryFilter);
+            if (!config) return;
+
+            totalSlides = config.slots;
+            currentSlide = 0; 
+            track.innerHTML = ''; 
+            dotsContainer.innerHTML = '';
+
+            for (let i = 1; i <= totalSlides; i++) {
+                const imageId = galleryData[`${config.id}_${i}`];
+                
+                // Guna Google Drive ID jika wujud, jika tidak guna Placeholder Tema
+                const imgSrc = imageId 
+                    ? `https://drive.google.com/uc?export=view&id=${imageId}` 
+                    : `https://placehold.co/1200x600/1e1233/D4AF37?text=${config.name.replace(/ /g, '+')}+|+FOTO+${i}`;
+                
+                track.innerHTML += `
+                    <div class="min-w-full h-full relative flex-shrink-0 cursor-pointer group/slide" onclick="openGalleryModal('${config.name}', ${i})">
+                        <img src="${imgSrc}" alt="${config.name} Foto ${i}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/10 group-hover/slide:bg-black/30 transition-colors duration-300 pointer-events-none"></div>
+                        <div class="absolute bottom-6 left-6 z-20 pointer-events-none">
+                            <span class="bg-gold-500 text-[#110a1f] text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block uppercase tracking-wider shadow-md">${config.name}</span>
+                            <h3 class="text-white font-cinzel font-bold text-xl md:text-3xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">FOTO ${i}</h3>
+                        </div>
+                    </div>`;
+                
+                dotsContainer.innerHTML += `<button onclick="goToSlide(${i-1})" class="w-3 h-3 rounded-full transition-all duration-300 focus:outline-none ${i === 1 ? 'bg-gold-500 w-8 shadow-[0_0_8px_rgba(212,175,55,0.8)]' : 'bg-gold-500/30 hover:bg-gold-500/60'}" aria-label="Slide ${i}"></button>`;
+            }
+            
+            updateCarouselView(); 
+            startAutoPlay();
+        }
+
+        function updateCarouselView() {
+            const track = document.getElementById('carousel-track');
+            const dots = document.getElementById('carousel-dots').children;
+            if (!track || totalSlides === 0) return;
+            
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            Array.from(dots).forEach((dot, index) => { 
+                dot.className = index === currentSlide 
+                    ? 'w-8 h-3 rounded-full transition-all duration-300 focus:outline-none bg-gold-500 shadow-[0_0_8px_rgba(212,175,55,0.8)]' 
+                    : 'w-3 h-3 rounded-full transition-all duration-300 focus:outline-none bg-gold-500/30 hover:bg-gold-500/60'; 
+            });
+        }
+
+        function nextSlide() { if (totalSlides <= 1) return; currentSlide = (currentSlide + 1) % totalSlides; updateCarouselView(); resetAutoPlay(); }
+        function prevSlide() { if (totalSlides <= 1) return; currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateCarouselView(); resetAutoPlay(); }
+        function goToSlide(index) { currentSlide = index; updateCarouselView(); resetAutoPlay(); }
+        function startAutoPlay() { stopAutoPlay(); if (totalSlides > 1) { autoPlayInterval = setInterval(nextSlide, 5000); } }
+        function stopAutoPlay() { if (autoPlayInterval) clearInterval(autoPlayInterval); }
+        function resetAutoPlay() { stopAutoPlay(); startAutoPlay(); }
+
+        const wrapper = document.getElementById('carousel-wrapper');
+        if(wrapper) { wrapper.addEventListener('mouseenter', stopAutoPlay); wrapper.addEventListener('mouseleave', startAutoPlay); }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => { tab.classList.add('hidden'); tab.classList.remove('block'); });
             const selected = document.getElementById('tab-' + tabId);
             if(selected) {
-                selected.classList.remove('hidden');
-                selected.classList.add('block');
-                setTimeout(() => {
-                    selected.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-                }, 50);
+                selected.classList.remove('hidden'); selected.classList.add('block');
+                setTimeout(() => { selected.querySelectorAll('.reveal').forEach(el => el.classList.add('active')); }, 50);
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (menu) {
-                menu.classList.toggle('hidden');
-                menu.classList.toggle('flex');
-            }
+            if (menu) { menu.classList.toggle('hidden'); menu.classList.toggle('flex'); }
         }
 
-        // --- FUNGSI JADUAL HARI ---
         function filterJadualHari(day, btnElement) {
-            document.querySelectorAll('.btn-jadual-hari').forEach(btn => {
-                btn.classList.remove('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
-                btn.classList.add('bg-white', 'dark:bg-dark-card', 'text-gray-700', 'dark:text-gray-300');
-            });
-            
-            if (btnElement) {
-                btnElement.classList.add('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
-                btnElement.classList.remove('bg-white', 'dark:bg-dark-card', 'text-gray-700', 'dark:text-gray-300');
-            }
+            document.querySelectorAll('.btn-jadual-hari').forEach(btn => { btn.classList.remove('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]'); btn.classList.add('bg-white', 'dark:bg-dark-card', 'text-gray-700', 'dark:text-gray-300'); });
+            if (btnElement) { btnElement.classList.add('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]'); btnElement.classList.remove('bg-white', 'dark:bg-dark-card', 'text-gray-700', 'dark:text-gray-300'); }
 
             const rabuBlock = document.getElementById('jadual-rabu');
             const khamisBlock = document.getElementById('jadual-khamis');
             const posterBlock = document.getElementById('jadual-poster');
 
-            if(posterBlock) posterBlock.classList.add('hidden');
-            if(rabuBlock) rabuBlock.classList.add('hidden');
-            if(khamisBlock) khamisBlock.classList.add('hidden');
-            
-            if(posterBlock) posterBlock.classList.remove('block');
-            if(rabuBlock) rabuBlock.classList.remove('block');
-            if(khamisBlock) khamisBlock.classList.remove('block');
+            if(posterBlock) { posterBlock.classList.add('hidden'); posterBlock.classList.remove('block'); }
+            if(rabuBlock) { rabuBlock.classList.add('hidden'); rabuBlock.classList.remove('block'); }
+            if(khamisBlock) { khamisBlock.classList.add('hidden'); khamisBlock.classList.remove('block'); }
 
             if (day === 'semua' && posterBlock) { posterBlock.classList.remove('hidden'); posterBlock.classList.add('block'); }
             if (day === 'rabu' && rabuBlock) { rabuBlock.classList.remove('hidden'); rabuBlock.classList.add('block'); }
             if (day === 'khamis' && khamisBlock) { khamisBlock.classList.remove('hidden'); khamisBlock.classList.add('block'); }
         }
 
-        // --- FUNGSI GALERI ---
         function filterGallery(category, buttonElement) {
-            document.querySelectorAll('.btn-filter').forEach(btn => {
-                btn.classList.remove('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
-                btn.classList.add('bg-white', 'dark:bg-dark-card', 'text-gray-600', 'dark:text-gray-300');
-            });
-            if(buttonElement) {
-                buttonElement.classList.add('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]');
-                buttonElement.classList.remove('bg-white', 'dark:bg-dark-card', 'text-gray-600', 'dark:text-gray-300');
-            }
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                if (category === 'semua' || item.classList.contains(category)) {
-                    item.style.display = 'flex';
-                    item.animate([ { opacity: 0, transform: 'scale(0.95)' }, { opacity: 1, transform: 'scale(1)' } ], { duration: 300, fill: 'forwards' });
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            document.querySelectorAll('.btn-filter').forEach(btn => { btn.classList.remove('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]'); btn.classList.add('bg-white', 'dark:bg-dark-card', 'text-gray-600', 'dark:text-gray-300'); });
+            if(buttonElement) { buttonElement.classList.add('btn-filter-active', 'bg-[#D4AF37]', 'text-[#110a1f]', 'shadow-[0_0_15px_rgba(212,175,55,0.4)]'); buttonElement.classList.remove('bg-white', 'dark:bg-dark-card', 'text-gray-600', 'dark:text-gray-300'); }
+            renderCarousel(category);
         }
 
         function openGalleryModal(categoryName, photoIndex) {
             const modal = document.getElementById('gallery-modal');
-            const modalContent = document.getElementById('gallery-modal-content');
+            const content = document.getElementById('gallery-modal-content');
             const badge = document.getElementById('modal-badge');
             if (!modal) return;
             badge.innerText = `FOTO ${photoIndex} : ${categoryName}`;
             modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalContent.classList.remove('scale-95');
-                modalContent.classList.add('scale-100');
-            }, 10);
+            setTimeout(() => { modal.classList.remove('opacity-0'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }, 10);
         }
 
         function closeModal(event) {
             if (event && event.target.closest('#modal-inner-box')) return;
             const modal = document.getElementById('gallery-modal');
-            const modalContent = document.getElementById('gallery-modal-content');
+            const content = document.getElementById('gallery-modal-content');
             if (!modal) return;
-            modal.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
+            modal.classList.add('opacity-0'); content.classList.remove('scale-100'); content.classList.add('scale-95');
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
-        // --- FUNGSI KATA LALUAN 16 NEGERI ---
-        let currentStateIndex = null;
-
-        function openPasswordModal(index) {
-            currentStateIndex = index;
-            const modal = document.getElementById('password-modal');
-            const modalContent = document.getElementById('password-modal-content');
-            const stateNameSpan = document.getElementById('pwd-state-name');
-            const inputField = document.getElementById('state-password-input');
-            const errorMsg = document.getElementById('pwd-error-msg');
-            
-            if (!modal) return;
-            stateNameSpan.innerText = states[index].name.toUpperCase();
-            inputField.value = ''; 
-            errorMsg.classList.add('hidden'); 
-            inputField.classList.remove('border-red-500', 'ring-red-500');
-            
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalContent.classList.remove('scale-95');
-                modalContent.classList.add('scale-100');
-                inputField.focus(); 
-            }, 10);
-            
-            inputField.onkeypress = function(e) { if (e.key === 'Enter') verifyPassword(); };
-        }
-
-        function closePasswordModal(event, force = false) {
-            if (!force && event && event.target.closest('#password-modal-content')) return;
-            const modal = document.getElementById('password-modal');
-            const modalContent = document.getElementById('password-modal-content');
-            if (!modal) return;
-            
-            modal.classList.add('opacity-0');
-            modalContent.classList.remove('scale-100');
-            modalContent.classList.add('scale-95');
-            setTimeout(() => { modal.classList.add('hidden'); currentStateIndex = null; }, 300);
-        }
-
-        function verifyPassword() {
-            const inputField = document.getElementById('state-password-input');
-            const errorMsg = document.getElementById('pwd-error-msg');
-            if (currentStateIndex === null) return;
-            
-            const state = states[currentStateIndex];
-            const enteredPwd = inputField.value.trim();
-            
-            if (enteredPwd === state.pwd) {
-                window.open(state.link, '_blank');
-                closePasswordModal(null, true);
-            } else {
-                errorMsg.classList.remove('hidden');
-                inputField.classList.add('border-red-500', 'ring-red-500');
-                inputField.classList.add('translate-x-2');
-                setTimeout(() => inputField.classList.remove('translate-x-2'), 100);
-                setTimeout(() => inputField.classList.add('-translate-x-2'), 200);
-                setTimeout(() => inputField.classList.remove('-translate-x-2'), 300);
-            }
-        }
-
-        // --- OBSERVER & SCROLL ---
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); }});
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
+        const revealObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); }}); }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         const counterObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = +counter.getAttribute('data-target');
-                    const duration = 2000;
-                    const increment = target / (duration / 16);
-                    let current = 0;
-                    const updateCounter = () => {
-                        current += increment;
-                        if (current < target) {
-                            counter.innerText = Math.ceil(current);
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    updateCounter();
-                    observer.unobserve(counter);
+                    const counter = entry.target; const target = +counter.getAttribute('data-target'); const increment = target / (2000 / 16); let current = 0;
+                    const updateCounter = () => { current += increment; if (current < target) { counter.innerText = Math.ceil(current); requestAnimationFrame(updateCounter); } else { counter.innerText = target; } };
+                    updateCounter(); observer.unobserve(counter);
                 }
             });
         }, { threshold: 0.5 });
@@ -720,42 +1209,17 @@
             const scrolled = (winScroll / height) * 100;
             const scrollProgress = document.getElementById("scroll-progress");
             if(scrollProgress) scrollProgress.style.width = scrolled + "%";
-
             const backBtn = document.getElementById('backToTopBtn');
-            if(backBtn) {
-                if (winScroll > 400) {
-                    backBtn.classList.remove('scale-0', 'opacity-0');
-                    backBtn.classList.add('scale-100', 'opacity-100');
-                } else {
-                    backBtn.classList.add('scale-0', 'opacity-0');
-                    backBtn.classList.remove('scale-100', 'opacity-100');
-                }
-            }
+            if(backBtn) { if (winScroll > 400) { backBtn.classList.remove('scale-0', 'opacity-0'); backBtn.classList.add('scale-100', 'opacity-100'); } else { backBtn.classList.add('scale-0', 'opacity-0'); backBtn.classList.remove('scale-100', 'opacity-100'); } }
         });
 
         function toggleTheme() {
-            const html = document.getElementById('html-root');
-            html.classList.toggle('dark');
-            const isDark = html.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            
-            const sunIcon = document.getElementById('theme-icon-sun');
-            const moonIcon = document.getElementById('theme-icon-moon');
-            const sunIconM = document.getElementById('theme-icon-sun-mobile');
-            const moonIconM = document.getElementById('theme-icon-moon-mobile');
-
-            if (isDark) {
-                sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden');
-                sunIconM.classList.add('hidden'); moonIconM.classList.remove('hidden');
-            } else {
-                sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden');
-                sunIconM.classList.remove('hidden'); moonIconM.classList.add('hidden');
-            }
+            const html = document.getElementById('html-root'); html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            const sunIcon = document.getElementById('theme-icon-sun'); const moonIcon = document.getElementById('theme-icon-moon');
+            const sunIconM = document.getElementById('theme-icon-sun-mobile'); const moonIconM = document.getElementById('theme-icon-moon-mobile');
+            if (isDark) { sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden'); sunIconM.classList.add('hidden'); moonIconM.classList.remove('hidden'); } else { sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden'); sunIconM.classList.remove('hidden'); moonIconM.classList.add('hidden'); }
         }
     </script>
-
-    <button id="backToTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" class="fixed bottom-6 right-6 bg-gradient-to-r from-gold-500 to-gold-400 text-[#110a1f] p-3 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.4)] transform scale-0 opacity-0 transition-all duration-300 z-50 hover:from-gold-400 hover:to-gold-300 focus:outline-none focus:ring-4 focus:ring-gold-500/50" aria-label="Kembali ke atas">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
-    </button>
 </body>
 </html>
