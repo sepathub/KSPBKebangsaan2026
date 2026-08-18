@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ms" class="scroll-smooth dark" id="html-root">
+<html lang="ms" class="scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +11,12 @@
     
     <script>
         tailwind.config = {
-            darkMode: 'class', 
             theme: {
                 extend: {
                     colors: {
                         'purple': { 900: '#1A0F2E', 800: '#2D1B4E', 700: '#4C2E86' },
                         'gold': { 600: '#AA8529', 500: '#D4AF37', 400: '#F3E5AB', 300: '#FBF5DF' },
-                        'dark': { bg: '#110a1f', card: '#1e1233', border: '#3d256a' },
-                        'light': { bg: '#FDFBF7' }
+                        'dark': { bg: '#110a1f', card: '#1e1233', border: '#3d256a' }
                     },
                     fontFamily: {
                         'cinzel': ['Cinzel', 'serif'],
@@ -28,7 +26,6 @@
                         'songket-pattern': "url(\"data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.05'%3E%3Cpath d='M40 0L80 40 40 80 0 40zM40 10L70 40 40 70 10 40zM40 20L60 40 40 60 20 40zM40 30L50 40 40 50 30 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
                         'songket-dense': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.08'%3E%3Cpath d='M20 0L40 20 20 40 0 20zM20 5L35 20 20 35 5 20zM20 10L30 20 20 30 10 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
                         'purple-gradient': 'linear-gradient(135deg, #0d0817 0%, #1A0F2E 50%, #2D1B4E 100%)',
-                        'light-gradient': 'linear-gradient(135deg, #FFFFFF 0%, #FDFBF7 50%, #F3E5AB 100%)',
                     }
                 }
             }
@@ -42,7 +39,31 @@
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .spinner { width: 50px; height: 50px; border: 4px solid rgba(212, 175, 55, 0.2); border-radius: 50%; border-top-color: #D4AF37; animation: spin 1s ease-in-out infinite; }
+        
         @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Animasi Baru Latar Belakang (Zarah Abjad & Debu Emas) */
+        @keyframes particleUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Animasi Terapung Untuk Poster */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        /* Kesan Denyutan Cahaya Butang */
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.7); }
+        }
+        .btn-glow { animation: glow-pulse 2.5s infinite; }
+
         #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #AA8529, #F3E5AB, #D4AF37); z-index: 10000; transition: width 0.1s ease-out; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -52,10 +73,13 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
     </style>
 </head>
-<body class="font-sans bg-light-bg dark:bg-dark-bg text-gray-700 dark:text-gray-300 antialiased selection:bg-gold-500 selection:text-purple-900 flex flex-col min-h-screen bg-songket-pattern bg-fixed transition-colors duration-500">
+<body class="font-sans bg-[#110a1f] text-gray-300 antialiased selection:bg-gold-500 selection:text-purple-900 flex flex-col min-h-screen bg-songket-pattern bg-fixed">
+
+    <!-- Zarah Abjad & Debu Emas Latar Belakang (Karnival/Bahasa Theme) -->
+    <div id="theme-particles" class="fixed inset-0 pointer-events-none z-0 overflow-hidden mix-blend-screen opacity-60"></div>
 
     <!-- Preloader & Scroll Progress -->
-    <div id="preloader" class="fixed inset-0 z-[999999] bg-light-bg dark:bg-[#0d0817] flex items-center justify-center transition-opacity duration-500">
+    <div id="preloader" class="fixed inset-0 z-[999999] bg-[#0d0817] flex items-center justify-center transition-opacity duration-500">
         <div class="flex flex-col items-center">
             <div class="spinner mb-4"></div>
             <h2 class="font-cinzel text-gold-500 text-xl font-bold animate-pulse">Memuatkan...</h2>
@@ -64,7 +88,7 @@
     <div id="scroll-progress"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/90 dark:bg-[#110a1f]/95 backdrop-blur-md border-b border-gold-300 dark:border-gold-500/20 shadow-xl transition-all">
+    <nav class="fixed w-full z-50 bg-[#110a1f]/95 backdrop-blur-md border-b border-gold-500/20 shadow-xl transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
                 <div class="flex items-center gap-4">
@@ -72,43 +96,36 @@
                         <img src="https://i.postimg.cc/9F4D30rk/photo-2026-07-20-11-58-07.jpg" alt="Logo KSPB 2026" class="w-full h-full object-cover">
                     </div>
                     <div class="hidden sm:block cursor-pointer" onclick="showTab('homepage')">
-                        <h1 class="font-cinzel text-purple-900 dark:text-gold-400 font-bold text-xl leading-tight">
+                        <h1 class="font-cinzel text-gold-400 font-bold text-xl leading-tight">
                             KARNIVAL SEMARAK <br> PERPADUAN BAHASA
                         </h1>
-                        <p class="font-cinzel text-gray-500 dark:text-gray-400 text-xs tracking-[0.2em] mt-1">EDISI 2026</p>
+                        <p class="font-cinzel text-gray-400 text-xs tracking-[0.2em] mt-1">EDISI 2026</p>
                     </div>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex space-x-4 items-center">
-                    <button onclick="showTab('homepage')" class="font-cinzel text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 px-2 py-1">Utama</button>
-                    <button onclick="showTab('jadual')" class="font-cinzel text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 px-2 py-1">Jadual</button>
-                    <button onclick="showTab('pendaftaran')" class="font-cinzel text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 px-2 py-1">Pendaftaran</button>
-                    <button onclick="showTab('galeri')" class="font-cinzel text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 px-2 py-1">Galeri</button>
-                    <button onclick="showTab('liputan')" class="font-cinzel text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gold-600 dark:hover:text-gold-500 px-2 py-1">Liputan Media</button>
+                    <button onclick="showTab('homepage')" class="font-cinzel text-sm font-semibold text-gray-300 hover:text-gold-500 px-2 py-1 transition-colors">Utama</button>
+                    <button onclick="showTab('jadual')" class="font-cinzel text-sm font-semibold text-gray-300 hover:text-gold-500 px-2 py-1 transition-colors">Jadual</button>
+                    <button onclick="showTab('pendaftaran')" class="font-cinzel text-sm font-semibold text-gray-300 hover:text-gold-500 px-2 py-1 transition-colors">Pendaftaran</button>
+                    <button onclick="showTab('galeri')" class="font-cinzel text-sm font-semibold text-gray-300 hover:text-gold-500 px-2 py-1 transition-colors">Galeri</button>
+                    <button onclick="showTab('liputan')" class="font-cinzel text-sm font-semibold text-gray-300 hover:text-gold-500 px-2 py-1 transition-colors">Liputan Media</button>
                     
-                    <button onclick="showTab('pendaftaran')" class="bg-gradient-to-r from-gold-500 to-gold-600 text-[#110a1f] font-cinzel font-bold px-6 py-2.5 rounded transform hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)] ml-2">Daftar</button>
+                    <button onclick="showTab('pendaftaran')" class="bg-gradient-to-r from-gold-500 to-gold-600 text-[#110a1f] font-cinzel font-bold px-6 py-2.5 rounded transform hover:scale-105 btn-glow ml-2 transition-all">Daftar</button>
                     
-                    <div class="h-6 w-px bg-gold-300 dark:bg-gold-500/30 mx-2"></div>
-                    <button onclick="toggleTheme()" class="p-2 rounded-full border border-gold-400 text-gold-600 dark:text-gold-400 hover:bg-gold-100 dark:hover:bg-gold-500/10 transition-colors">
-                        <svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <svg id="theme-icon-moon" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    </button>
-                    <button onclick="openAdminLogin()" class="p-2 rounded-full border border-gold-400 text-purple-900 dark:text-gold-400 hover:bg-gold-100 dark:hover:bg-gold-500/10 transition-colors" title="Urus Sistem (Admin)">
+                    <div class="h-6 w-px bg-gold-500/30 mx-2"></div>
+                    
+                    <button onclick="openAdminLogin()" class="p-2 rounded-full border border-gold-400 text-gold-400 hover:bg-gold-500/10 transition-colors" title="Urus Sistem (Admin)">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </button>
                 </div>
 
                 <!-- Mobile Menu Icons -->
                 <div class="lg:hidden flex items-center gap-4">
-                    <button onclick="toggleTheme()" class="p-2 rounded-full border border-gold-400 text-gold-600 dark:text-gold-400">
-                        <svg id="theme-icon-sun-mobile" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <svg id="theme-icon-moon-mobile" class="w-5 h-5 block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    </button>
-                    <button onclick="openAdminLogin()" class="p-2 rounded-full border border-gold-400 text-purple-900 dark:text-gold-400">
+                    <button onclick="openAdminLogin()" class="p-2 rounded-full border border-gold-400 text-gold-400">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </button>
-                    <button onclick="toggleMobileMenu()" class="text-gold-600 p-1">
+                    <button onclick="toggleMobileMenu()" class="text-gold-500 p-1">
                         <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
                 </div>
@@ -116,106 +133,106 @@
         </div>
 
         <!-- Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden absolute top-24 left-0 w-full flex-col bg-white dark:bg-dark-bg border-t border-gold-300 dark:border-gold-500/20 px-6 py-6 space-y-4 shadow-2xl z-40 bg-songket-dense">
-            <button onclick="showTab('homepage'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-purple-900 dark:text-gray-200">Utama</button>
-            <button onclick="showTab('jadual'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-purple-900 dark:text-gray-200">Jadual Pertandingan</button>
-            <button onclick="showTab('pendaftaran'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-purple-900 dark:text-gray-200">Pendaftaran</button>
-            <button onclick="showTab('galeri'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-purple-900 dark:text-gray-200">Galeri</button>
-            <button onclick="showTab('liputan'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-purple-900 dark:text-gray-200">Liputan Media</button>
+        <div id="mobile-menu" class="hidden absolute top-24 left-0 w-full flex-col bg-[#110a1f] border-t border-gold-500/20 px-6 py-6 space-y-4 shadow-2xl z-40 bg-songket-dense">
+            <button onclick="showTab('homepage'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-gray-200 hover:text-gold-400">Utama</button>
+            <button onclick="showTab('jadual'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-gray-200 hover:text-gold-400">Jadual Pertandingan</button>
+            <button onclick="showTab('pendaftaran'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-gray-200 hover:text-gold-400">Pendaftaran</button>
+            <button onclick="showTab('galeri'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-gray-200 hover:text-gold-400">Galeri</button>
+            <button onclick="showTab('liputan'); toggleMobileMenu();" class="text-left font-cinzel text-lg font-semibold text-gray-200 hover:text-gold-400">Liputan Media</button>
         </div>
     </nav>
 
     <!-- TAB: HOMEPAGE -->
     <div id="tab-homepage" class="tab-content block flex-grow">
         <!-- Hero Section -->
-        <section class="relative pt-24 min-h-screen flex items-center bg-light-gradient dark:bg-purple-gradient overflow-hidden">
-            <div class="absolute inset-0 bg-songket-dense opacity-30 dark:opacity-60"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-light-bg/70 dark:via-[#110a1f]/50 to-light-bg dark:to-[#110a1f]"></div>
+        <section class="relative pt-24 min-h-screen flex items-center bg-purple-gradient overflow-hidden">
+            <div class="absolute inset-0 bg-songket-dense opacity-60"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#110a1f]/50 to-[#110a1f]"></div>
             
-            <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full reveal">
+            <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full reveal z-10">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="order-2 lg:order-1 text-center lg:text-left space-y-8">
-                        <div class="inline-block border border-gold-400 bg-white/80 dark:bg-[#1e1233]/80 backdrop-blur-md px-6 py-2 rounded-full mb-4">
-                            <span class="font-cinzel text-purple-900 dark:text-gold-400 font-semibold tracking-[0.2em] text-sm uppercase">Peringkat Kebangsaan 2026</span>
+                        <div class="inline-block border border-gold-400 bg-[#1e1233]/80 backdrop-blur-md px-6 py-2 rounded-full mb-4 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                            <span class="font-cinzel text-gold-400 font-semibold tracking-[0.2em] text-sm uppercase">Peringkat Kebangsaan 2026</span>
                         </div>
-                        <div class="space-y-4 font-cinzel text-lg text-gray-700 dark:text-gray-300">
+                        <div class="space-y-4 font-cinzel text-lg text-gray-300">
                             <div class="flex items-center justify-center lg:justify-start gap-3">
-                                <svg class="w-6 h-6 text-gold-600 dark:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 <span>08 - 11 September 2026</span>
                             </div>
                             <div class="flex items-center justify-center lg:justify-start gap-3">
-                                <svg class="w-6 h-6 text-gold-600 dark:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                 <span>Hotel Noble & Hotel Asia, Melaka</span>
                             </div>
                         </div>
                         <div class="pt-6">
-                            <button onclick="showTab('pendaftaran')" class="inline-flex items-center px-8 py-4 text-lg font-cinzel font-bold text-[#110a1f] bg-gradient-to-r from-gold-500 to-gold-400 rounded hover:from-gold-400 hover:to-gold-300 transition-all shadow-[0_0_30px_rgba(212,175,55,0.4)] transform hover:-translate-y-1">
+                            <button onclick="showTab('pendaftaran')" class="inline-flex items-center px-8 py-4 text-lg font-cinzel font-bold text-[#110a1f] bg-gradient-to-r from-gold-500 to-gold-400 rounded hover:from-gold-400 hover:to-gold-300 transition-all btn-glow transform hover:-translate-y-1">
                                 DAFTAR SEKARANG
                                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </button>
                         </div>
                     </div>
                     <div class="order-1 lg:order-2 flex justify-center relative">
-                        <div class="absolute inset-0 bg-gold-400/20 blur-[50px] rounded-full w-3/4 h-3/4 m-auto"></div>
-                        <div class="relative w-full max-w-md aspect-[3/4] rounded-lg overflow-hidden border border-gold-300 shadow-[0_0_40px_rgba(212,175,55,0.2)] group z-10">
+                        <div class="absolute inset-0 bg-gold-400/20 blur-[60px] rounded-full w-3/4 h-3/4 m-auto"></div>
+                        <div class="relative w-full max-w-md aspect-[3/4] rounded-lg overflow-hidden border border-gold-300 shadow-[0_0_50px_rgba(212,175,55,0.3)] group z-10 animate-float">
                             <img src="https://i.postimg.cc/0NhtfbK1/photo-2026-07-20-11-58-07.jpg" alt="Poster Rasmi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Wavy Bottom -->
-            <div class="absolute bottom-0 w-full z-10 text-light-bg dark:text-[#110a1f]">
+            <div class="absolute bottom-0 w-full z-10 text-[#110a1f]">
                 <svg class="block w-full h-[50px] md:h-[100px]" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.93,123,194,111.4,238.45,103.35,280.24,80.7,321.39,56.44Z" fill="currentColor"></path></svg>
             </div>
         </section>
 
         <!-- Stats Section -->
-        <section class="py-12 bg-white/80 dark:bg-[#1e1233]/80 backdrop-blur-md border-y border-gold-300 dark:border-gold-500/20 relative z-20">
+        <section class="py-12 bg-[#1e1233]/80 backdrop-blur-md border-y border-gold-500/20 relative z-20">
             <div class="max-w-7xl mx-auto px-4 reveal">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gold-300 dark:divide-gold-500/20">
-                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-600 dark:text-gold-500"><span class="counter" data-target="650">0</span>+</div><div class="text-sm font-semibold text-gray-500 uppercase mt-2">Peserta</div></div>
-                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-600 dark:text-gold-500 counter" data-target="16">0</div><div class="text-sm font-semibold text-gray-500 uppercase mt-2">Negeri</div></div>
-                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-600 dark:text-gold-500 counter" data-target="11">0</div><div class="text-sm font-semibold text-gray-500 uppercase mt-2">Kategori</div></div>
-                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-600 dark:text-gold-500"><span class="counter" data-target="100">0</span>%</div><div class="text-sm font-semibold text-gray-500 uppercase mt-2">Semangat</div></div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gold-500/20">
+                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-500 drop-shadow-md"><span class="counter" data-target="650">0</span>+</div><div class="text-sm font-semibold text-gray-400 uppercase mt-2">Peserta</div></div>
+                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-500 drop-shadow-md counter" data-target="16">0</div><div class="text-sm font-semibold text-gray-400 uppercase mt-2">Negeri</div></div>
+                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-500 drop-shadow-md counter" data-target="11">0</div><div class="text-sm font-semibold text-gray-400 uppercase mt-2">Kategori</div></div>
+                    <div class="p-4"><div class="text-4xl font-cinzel font-bold text-gold-500 drop-shadow-md"><span class="counter" data-target="100">0</span>%</div><div class="text-sm font-semibold text-gray-400 uppercase mt-2">Semangat</div></div>
                 </div>
             </div>
         </section>
 
         <!-- Messages & Announcements Section -->
-        <section class="py-24 relative bg-transparent">
+        <section class="py-24 relative bg-transparent z-10">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <!-- Welcome Title -->
                 <div class="text-center max-w-3xl mx-auto mb-16 reveal">
                     <div class="flex items-center justify-center gap-4 mb-4">
                         <div class="h-px bg-gold-500 w-16 opacity-50"></div>
-                        <span class="font-cinzel text-gold-600 font-bold uppercase tracking-widest">Perutusan</span>
+                        <span class="font-cinzel text-gold-500 font-bold uppercase tracking-widest">Perutusan</span>
                         <div class="h-px bg-gold-500 w-16 opacity-50"></div>
                     </div>
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white mb-6">Ucapan Alu-Aluan</h2>
+                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">Ucapan Alu-Aluan</h2>
                 </div>
 
                 <!-- Info Grid -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
-                    <div class="lg:col-span-2 bg-white dark:bg-dark-card rounded-xl shadow-xl p-8 border border-gold-300 dark:border-gold-500/20 border-t-4 border-t-gold-500 reveal delay-100">
-                        <h3 class="font-cinzel text-2xl font-bold text-gold-600 mb-6">Selamat Datang ke KSPB 2026</h3>
-                        <div class="space-y-4 text-gray-700 dark:text-gray-300 text-justify">
+                    <div class="lg:col-span-2 bg-[#1e1233] rounded-xl shadow-xl p-8 border border-gold-500/20 border-t-4 border-t-gold-500 reveal delay-100 hover:border-gold-500/50 transition-colors">
+                        <h3 class="font-cinzel text-2xl font-bold text-gold-500 mb-6">Selamat Datang ke KSPB 2026</h3>
+                        <div class="space-y-4 text-gray-300 text-justify">
                             <p>Syukur ke hadrat Ilahi kerana dengan limpah kurnia-Nya, kita dapat berhimpun dalam acara gilang-gemilang, Karnival Semarak Perpaduan Bahasa Peringkat Kebangsaan 2026. Program ini merupakan manifestasi sokongan kita terhadap usaha berterusan untuk memartabatkan Bahasa Melayu di samping memperkukuh penguasaan Bahasa Inggeris (MBMMBI).</p>
                             <p>Penganjuran karnival pada tahun ini membawakan pelbagai pengisian padat yang dirangka khusus untuk menyemarakkan lagi penggunaan bahasa kebangsaan dan mempertingkat tahap bahasa antarabangsa dalam kalangan masyarakat, terutamanya generasi muda yang bakal mewarisi tampuk kepimpinan negara.</p>
                         </div>
                     </div>
-                    <div class="bg-purple-50 dark:bg-gradient-to-br dark:from-[#2D1B4E] dark:to-[#1A0F2E] rounded-xl shadow-xl p-8 border border-gold-300 dark:border-gold-500/30 reveal delay-200">
-                        <h4 class="font-cinzel text-xl font-bold text-gold-600 mb-4">Objektif Program</h4>
-                        <ul class="space-y-4 text-sm text-gray-700 dark:text-gray-200">
-                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Memperkasakan penggunaan BM dan BI standard.</li>
-                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Mencungkil bakat dan kelancaran berbahasa.</li>
-                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Memupuk keyakinan diri melalui medium bahasa.</li>
+                    <div class="bg-gradient-to-br from-[#2D1B4E] to-[#1A0F2E] rounded-xl shadow-xl p-8 border border-gold-500/30 reveal delay-200 hover:border-gold-500/50 transition-colors">
+                        <h4 class="font-cinzel text-xl font-bold text-gold-500 mb-4">Objektif Program</h4>
+                        <ul class="space-y-4 text-sm text-gray-200">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-gold-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Memperkasakan penggunaan BM dan BI standard.</li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-gold-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Mencungkil bakat dan kelancaran berbahasa.</li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 text-gold-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Memupuk keyakinan diri melalui medium bahasa.</li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Announcements Box -->
                 <div class="reveal delay-300 max-w-4xl mx-auto">
-                    <div class="bg-white dark:bg-dark-card rounded-xl shadow-xl border border-gold-300 dark:border-gold-500/30 overflow-hidden relative">
+                    <div class="bg-[#1e1233] rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-gold-500/30 overflow-hidden relative">
                         <div class="bg-gradient-to-r from-gold-500 to-gold-400 p-4 flex items-center justify-between sticky top-0 z-10 border-b border-gold-600/20">
                             <div class="flex items-center gap-3">
                                 <div class="bg-[#110a1f] p-2 rounded-full relative">
@@ -224,13 +241,13 @@
                                 </div>
                                 <h3 class="font-cinzel text-lg font-bold text-[#110a1f] tracking-wider">PENGUMUMAN RASMI</h3>
                             </div>
-                            <span class="text-[#110a1f] text-xs font-bold bg-white/40 px-3 py-1 rounded-full uppercase tracking-widest">TERKINI</span>
+                            <span class="text-[#110a1f] text-xs font-bold bg-white/40 px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">TERKINI</span>
                         </div>
                         <div class="max-h-[350px] overflow-y-auto custom-scrollbar p-6 space-y-4 bg-songket-dense relative" id="pengumuman-list">
                             <!-- Injected by JS -->
                         </div>
-                        <div class="bg-gray-100 dark:bg-gray-800/80 p-3 text-center border-t border-gray-200 dark:border-gray-700 relative z-10">
-                            <p class="text-xs text-gray-500 dark:text-gray-400 italic font-medium">Sebarang makluman penting atau jadual kecemasan akan dipaparkan di ruangan ini secara langsung.</p>
+                        <div class="bg-gray-800/80 p-3 text-center border-t border-gray-700 relative z-10">
+                            <p class="text-xs text-gray-400 italic font-medium">Sebarang makluman penting atau jadual kecemasan akan dipaparkan di ruangan ini secara langsung.</p>
                         </div>
                     </div>
                 </div>
@@ -239,27 +256,27 @@
     </div>
 
     <!-- TAB: JADUAL -->
-    <div id="tab-jadual" class="tab-content hidden flex-grow">
+    <div id="tab-jadual" class="tab-content hidden flex-grow relative z-10">
         <section class="pt-32 pb-24 relative min-h-screen">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-12 reveal">
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white mb-6">Jadual Pertandingan</h2>
+                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">Jadual Pertandingan</h2>
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-3 mb-10 reveal delay-100">
                     <button onclick="filterJadualHari('semua', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 btn-filter-active">Poster Ringkasan</button>
-                    <button onclick="filterJadualHari('rabu', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-white dark:bg-dark-card border border-gold-300">Rabu (9 Sept)</button>
-                    <button onclick="filterJadualHari('khamis', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-white dark:bg-dark-card border border-gold-300">Khamis (10 Sept)</button>
+                    <button onclick="filterJadualHari('rabu', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-[#1e1233] border border-gold-500/30 text-gray-200 hover:border-gold-400">Rabu (9 Sept)</button>
+                    <button onclick="filterJadualHari('khamis', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-[#1e1233] border border-gold-500/30 text-gray-200 hover:border-gold-400">Khamis (10 Sept)</button>
                 </div>
 
                 <div id="jadual-container" class="max-w-6xl mx-auto flex justify-center reveal delay-100">
-                    <div id="jadual-poster" class="relative rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 block">
+                    <div id="jadual-poster" class="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 block">
                         <img src="https://i.postimg.cc/cHkJfL7s/jadual-pertandingan.png" alt="Jadual Penuh" class="w-full h-auto object-cover">
                     </div>
-                    <div id="jadual-rabu" class="relative rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 hidden">
+                    <div id="jadual-rabu" class="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 hidden">
                         <img src="https://i.postimg.cc/2SCVpM57/pertandingan-rabu.png" alt="Jadual Rabu" class="w-full h-auto object-cover">
                     </div>
-                    <div id="jadual-khamis" class="relative rounded-xl overflow-hidden shadow-2xl border border-gray-700/50 hidden">
+                    <div id="jadual-khamis" class="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 hidden">
                         <img src="https://i.postimg.cc/rpPmrpN4/pertandingan-khamis.png" alt="Jadual Khamis" class="w-full h-auto object-cover">
                     </div>
                 </div>
@@ -268,57 +285,57 @@
     </div>
 
     <!-- TAB: PENDAFTARAN -->
-    <div id="tab-pendaftaran" class="tab-content hidden flex-grow">
+    <div id="tab-pendaftaran" class="tab-content hidden flex-grow relative z-10">
         <section class="pt-32 pb-24 relative min-h-screen">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white mb-6">Pendaftaran & Dokumen</h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">Lengkapkan maklumat dan hantar penyertaan anda mengikut negeri.</p>
+                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">Pendaftaran & Dokumen</h2>
+                    <p class="text-lg text-gray-400">Lengkapkan maklumat dan hantar penyertaan anda mengikut negeri.</p>
                 </div>
                 
                 <!-- Muat Turun Dokumen -->
                 <div class="max-w-4xl mx-auto mb-16 reveal delay-100">
-                    <div class="bg-purple-50 dark:bg-gradient-to-br dark:from-[#2D1B4E] dark:to-[#1A0F2E] rounded-xl shadow-xl p-8 border border-gold-300 dark:border-gold-500/30">
-                        <h3 class="font-cinzel text-xl font-bold text-gold-600 mb-6 flex items-center gap-2">
+                    <div class="bg-gradient-to-br from-[#2D1B4E] to-[#1A0F2E] rounded-xl shadow-xl p-8 border border-gold-500/30">
+                        <h3 class="font-cinzel text-xl font-bold text-gold-400 mb-6 flex items-center gap-2">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Muat Turun Dokumen
                         </h3>
                         <div class="space-y-3">
-                            <a href="https://docs.google.com/document/d/1eNBmn7We3J8ccJ531qdDqMNEoL0cVCB0/edit?usp=drive_link&ouid=107176344598669127372&rtpof=true&sd=true" target="_blank" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 px-5 py-3.5 rounded-xl border border-gold-300 transition-all shadow-sm group">
+                            <a href="https://docs.google.com/document/d/1eNBmn7We3J8ccJ531qdDqMNEoL0cVCB0/edit?usp=drive_link&ouid=107176344598669127372&rtpof=true&sd=true" target="_blank" class="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm group">
                                 <div class="flex items-center gap-4">
-                                    <div class="bg-purple-100 p-2.5 rounded-lg text-gold-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-gold-600">Borang Kebenaran Waris</span>
+                                    <div class="bg-purple-900/50 p-2.5 rounded-lg text-gold-500 group-hover:text-gold-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                                    <span class="font-medium text-gray-200 group-hover:text-gold-400">Borang Kebenaran Waris</span>
                                 </div>
-                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </a>
-                            <a href="https://docs.google.com/document/d/1kWj_PErjWoslzVLwNEpKdO-z9qAZvOhB/edit?usp=drive_link&ouid=107176344598669127372&rtpof=true&sd=true" target="_blank" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 px-5 py-3.5 rounded-xl border border-gold-300 transition-all shadow-sm group">
+                            <a href="https://docs.google.com/document/d/1kWj_PErjWoslzVLwNEpKdO-z9qAZvOhB/edit?usp=drive_link&ouid=107176344598669127372&rtpof=true&sd=true" target="_blank" class="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm group">
                                 <div class="flex items-center gap-4">
-                                    <div class="bg-purple-100 p-2.5 rounded-lg text-gold-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-gold-600">Borang Deklarasi Kesihatan</span>
+                                    <div class="bg-purple-900/50 p-2.5 rounded-lg text-gold-500 group-hover:text-gold-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                                    <span class="font-medium text-gray-200 group-hover:text-gold-400">Borang Deklarasi Kesihatan</span>
                                 </div>
-                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </a>
-                            <a href="https://docs.google.com/document/d/1paX_Bw1INJ6ZdtVsIfiM13MBoLdpO6WS/edit?usp=drive_link&ouid=107176344598669127372&rtpof=true&sd=true" target="_blank" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 px-5 py-3.5 rounded-xl border border-gold-300 transition-all shadow-sm group">
+                            <a href="https://docs.google.com/document/d/1paX_Bw1INJ6ZdtVsIfiM13MBoLdpO6WS/edit?usp=drive_link&ouid=107176344598669127372&rtpof=true&sd=true" target="_blank" class="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm group">
                                 <div class="flex items-center gap-4">
-                                    <div class="bg-purple-100 p-2.5 rounded-lg text-gold-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-gold-600">Borang Maklumat Penerbangan SSL</span>
+                                    <div class="bg-purple-900/50 p-2.5 rounded-lg text-gold-500 group-hover:text-gold-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                                    <span class="font-medium text-gray-200 group-hover:text-gold-400">Borang Maklumat Penerbangan SSL</span>
                                 </div>
-                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </a>
-                            <a href="https://drive.google.com/file/d/1AqrymZhghU865c5GPAK0Mcu9bE-a4lJl/view?usp=drive_link" target="_blank" class="w-full flex items-center justify-between bg-white dark:bg-white/5 hover:bg-gold-50 px-5 py-3.5 rounded-xl border border-gold-300 transition-all shadow-sm group">
+                            <a href="https://drive.google.com/file/d/1AqrymZhghU865c5GPAK0Mcu9bE-a4lJl/view?usp=drive_link" target="_blank" class="w-full flex items-center justify-between bg-white/5 hover:bg-white/10 px-5 py-3.5 rounded-xl border border-gold-500/30 hover:border-gold-400 transition-all shadow-sm group">
                                 <div class="flex items-center gap-4">
-                                    <div class="bg-purple-100 p-2.5 rounded-lg text-gold-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
-                                    <span class="font-medium text-gray-700 dark:text-gray-200 group-hover:text-gold-600">Borang Kebenaran Rakaman Gambar</span>
+                                    <div class="bg-purple-900/50 p-2.5 rounded-lg text-gold-500 group-hover:text-gold-400"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                                    <span class="font-medium text-gray-200 group-hover:text-gold-400">Borang Kebenaran Rakaman Gambar</span>
                                 </div>
-                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <svg class="w-5 h-5 text-gray-400 group-hover:text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="border-t border-gold-300 dark:border-gold-500/20 pt-16 reveal delay-200">
+                <div class="border-t border-gold-500/20 pt-16 reveal delay-200">
                     <div class="text-center mb-10">
-                        <h3 class="font-cinzel text-2xl font-bold text-gold-600 mb-3">Pautan Pendaftaran Mengikut Negeri</h3>
+                        <h3 class="font-cinzel text-2xl font-bold text-gold-400 mb-3 drop-shadow-md">Pautan Pendaftaran Mengikut Negeri</h3>
                     </div>
                     <!-- State buttons injected by JS -->
                     <div id="pautan-pendaftaran-negeri"></div>
@@ -328,48 +345,63 @@
     </div>
 
     <!-- TAB: GALERI -->
-    <div id="tab-galeri" class="tab-content hidden flex-grow">
+    <div id="tab-galeri" class="tab-content hidden flex-grow relative z-10">
         <section class="pt-32 pb-24 relative min-h-screen">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12 reveal"><h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white">Galeri Karnival</h2></div>
+                <div class="text-center mb-12 reveal"><h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white drop-shadow-lg">Galeri Karnival</h2></div>
                 
                 <div class="flex flex-wrap justify-center gap-2 mb-10 reveal delay-100" id="gallery-filters">
                     <!-- Filters configured by JS -->
                 </div>
                 
                 <div class="relative w-full max-w-5xl mx-auto reveal delay-200" id="carousel-wrapper">
-                    <div class="overflow-hidden rounded-2xl shadow-2xl border border-gold-500/30 bg-[#1e1233] relative group aspect-video md:aspect-[21/9]">
+                    <div class="overflow-hidden rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.6)] border border-gold-500/30 bg-[#1e1233] relative group aspect-video md:aspect-[21/9]">
                         <div id="carousel-track" class="flex transition-transform duration-700 ease-in-out h-full w-full"></div>
-                        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all z-20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg></button>
-                        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all z-20"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg></button>
+                        <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all z-20 hover:bg-gold-500 hover:text-[#110a1f]"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg></button>
+                        <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all z-20 hover:bg-gold-500 hover:text-[#110a1f]"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg></button>
                     </div>
+                    
                     <div id="carousel-dots" class="flex justify-center gap-2 mt-6"></div>
+
+                    <!-- Ruang Butang Pautan Google Photos Album -->
+                    <div id="album-link-container" class="mt-8 flex justify-center opacity-0 transition-opacity duration-500">
+                        <!-- Dijana oleh Javascript mengikut kategori -->
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
     <!-- TAB: LIPUTAN MEDIA -->
-    <div id="tab-liputan" class="tab-content hidden flex-grow">
+    <div id="tab-liputan" class="tab-content hidden flex-grow relative z-10">
         <section class="pt-32 pb-24 relative min-h-screen">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16 reveal">
-                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-purple-900 dark:text-white mb-6">Liputan Media</h2>
+                    <h2 class="font-cinzel text-3xl md:text-5xl font-bold text-white mb-6 drop-shadow-lg">Liputan Media</h2>
+                    <p class="text-lg text-gray-400">Saksikan siaran langsung dan liputan rasmi di saluran rakan TVPSS kami.</p>
                 </div>
 
                 <div class="max-w-5xl mx-auto reveal delay-100">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <a href="https://www.youtube.com/@SKTAMANBUKITRAMBAI-CM8KPM-SK-C" target="_blank" class="group flex flex-col items-center bg-white dark:bg-dark-card border border-gold-300 rounded-xl p-8 hover:border-gold-500 shadow-sm transition-all transform hover:-translate-y-2 text-center h-full">
-                            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-6 text-purple-900 group-hover:scale-110 transition-transform"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div>
-                            <h3 class="font-cinzel font-bold text-lg text-purple-900 dark:text-gray-200">TVPSS STABURA</h3>
+                        <a href="https://www.youtube.com/@SKTAMANBUKITRAMBAI-CM8KPM-SK-C" target="_blank" class="group flex flex-col items-center bg-[#1e1233] border border-gold-500/30 rounded-xl p-8 hover:border-gold-500 shadow-[0_10px_25px_rgba(0,0,0,0.5)] transition-all transform hover:-translate-y-2 text-center h-full">
+                            <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 text-purple-900 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all overflow-hidden p-2">
+                                <img src="https://i.postimg.cc/x19rvYLJ/stabura.png" alt="TVPSS STABURA" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="font-cinzel font-bold text-lg text-gray-200 group-hover:text-gold-400 transition-colors">TVPSS STABURA</h3>
                         </a>
-                        <a href="https://www.youtube.com/@SKBANDARHILIR-CM1KPM-SK-Laman" target="_blank" class="group flex flex-col items-center bg-white dark:bg-dark-card border border-gold-300 rounded-xl p-8 hover:border-gold-500 shadow-sm transition-all transform hover:-translate-y-2 text-center h-full">
-                            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-6 text-purple-900 group-hover:scale-110 transition-transform"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div>
-                            <h3 class="font-cinzel font-bold text-lg text-purple-900 dark:text-gray-200">TVPSS SK BANDAR HILIR</h3>
+                        
+                        <a href="https://www.youtube.com/@SKBANDARHILIR-CM1KPM-SK-Laman" target="_blank" class="group flex flex-col items-center bg-[#1e1233] border border-gold-500/30 rounded-xl p-8 hover:border-gold-500 shadow-[0_10px_25px_rgba(0,0,0,0.5)] transition-all transform hover:-translate-y-2 text-center h-full">
+                            <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 text-purple-900 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all overflow-hidden p-2">
+                                <img src="https://i.postimg.cc/3wwPqBS8/sk-bandar-hilir.png" alt="TVPSS SK BANDAR HILIR" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="font-cinzel font-bold text-lg text-gray-200 group-hover:text-gold-400 transition-colors">TVPSS SK BANDAR HILIR</h3>
                         </a>
-                        <a href="https://www.youtube.com/@lensafranciscanjunior" target="_blank" class="group flex flex-col items-center bg-white dark:bg-dark-card border border-gold-300 rounded-xl p-8 hover:border-gold-500 shadow-sm transition-all transform hover:-translate-y-2 text-center h-full">
-                            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-6 text-purple-900 group-hover:scale-110 transition-transform"><svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg></div>
-                            <h3 class="font-cinzel font-bold text-lg text-purple-900 dark:text-gray-200">TVPSS SK ST FRANCIS</h3>
+                        
+                        <a href="https://www.youtube.com/@lensafranciscanjunior" target="_blank" class="group flex flex-col items-center bg-[#1e1233] border border-gold-500/30 rounded-xl p-8 hover:border-gold-500 shadow-[0_10px_25px_rgba(0,0,0,0.5)] transition-all transform hover:-translate-y-2 text-center h-full">
+                            <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 text-purple-900 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all overflow-hidden p-2">
+                                <img src="https://i.postimg.cc/qRhWJ7dh/sk-st-francis.png" alt="TVPSS SK ST FRANCIS" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="font-cinzel font-bold text-lg text-gray-200 group-hover:text-gold-400 transition-colors">TVPSS SK ST FRANCIS</h3>
                         </a>
                     </div>
                 </div>
@@ -378,93 +410,106 @@
     </div>
 
     <!-- Modal: Gallery View -->
-    <div id="gallery-modal" class="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closeModal(event)">
+    <div id="gallery-modal" class="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closeModal(event)">
         <div class="relative w-11/12 max-w-5xl mx-auto flex flex-col items-center justify-center transform scale-95 transition-transform" id="gallery-modal-content">
             <button onclick="closeModal(event)" class="absolute -top-12 right-0 text-gray-400 hover:text-gold-500 z-20"><svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-            <div id="modal-inner-box" class="w-full aspect-video bg-[#1e1233] border-2 border-gold-500/50 rounded-xl flex flex-col items-center justify-center relative overflow-hidden bg-songket-pattern cursor-default">
+            <div id="modal-inner-box" class="w-full aspect-video bg-[#1e1233] border-2 border-gold-500/50 rounded-xl flex flex-col items-center justify-center relative overflow-hidden bg-songket-pattern cursor-default shadow-[0_0_50px_rgba(0,0,0,0.8)]">
                 <div class="absolute inset-0 bg-black/40 mix-blend-overlay z-0"></div>
-                <span class="font-cinzel text-gold-400 font-bold text-2xl md:text-5xl tracking-widest z-10" id="modal-title">SUASANA</span>
+                <span class="font-cinzel text-gold-400 font-bold text-2xl md:text-5xl tracking-widest z-10 text-center px-4" id="modal-title">SUASANA</span>
                 <span class="font-sans text-white text-lg md:text-2xl mt-3 z-10 uppercase tracking-widest font-light" id="modal-subtitle">Karnival</span>
-                <img id="modal-actual-image" src="" alt="Galeri" class="absolute inset-0 w-full h-full object-contain z-10 hidden bg-black/80 backdrop-blur-md">
-                <span class="text-gray-300 text-xs md:text-sm mt-8 z-20 font-bold bg-black/70 px-6 py-2 rounded-full border border-gold-500/30 tracking-wider absolute bottom-6" id="modal-badge">FOTO X</span>
+                <img id="modal-actual-image" src="" alt="Galeri" class="absolute inset-0 w-full h-full object-contain z-10 hidden bg-black/90 backdrop-blur-md">
+                <span class="text-gray-300 text-xs md:text-sm mt-8 z-20 font-bold bg-black/70 px-6 py-2 rounded-full border border-gold-500/30 tracking-wider absolute bottom-6 shadow-md" id="modal-badge">FOTO X</span>
             </div>
         </div>
     </div>
 
     <!-- Modal: Password State -->
-    <div id="password-modal" class="fixed inset-0 z-[100000] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closePasswordModal(event)">
-        <div id="password-modal-content" class="bg-white dark:bg-dark-card rounded-xl shadow-2xl border border-gold-300 p-8 w-11/12 max-w-md transform scale-95 transition-transform relative text-center">
-            <button onclick="closePasswordModal(event, true)" class="absolute top-4 right-4 text-gray-500 hover:text-gold-500"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+    <div id="password-modal" class="fixed inset-0 z-[100000] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closePasswordModal(event)">
+        <div id="password-modal-content" class="bg-[#1e1233] rounded-xl shadow-[0_0_30px_rgba(0,0,0,0.8)] border border-gold-500/30 p-8 w-11/12 max-w-md transform scale-95 transition-transform relative text-center">
+            <button onclick="closePasswordModal(event, true)" class="absolute top-4 right-4 text-gray-400 hover:text-gold-500"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             <div class="mb-6">
-                <h3 class="font-cinzel text-xl font-bold text-purple-900 dark:text-gold-400 mb-2">Semakan Keselamatan</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Sila masukkan kata laluan urus setia bagi negeri <br><span id="pwd-state-name" class="font-bold text-purple-700 dark:text-gold-300"></span>.</p>
+                <h3 class="font-cinzel text-xl font-bold text-gold-400 mb-2">Semakan Keselamatan</h3>
+                <p class="text-sm text-gray-400">Sila masukkan kata laluan urus setia bagi negeri <br><span id="pwd-state-name" class="font-bold text-gold-300"></span>.</p>
             </div>
             <div class="space-y-4">
-                <input type="password" id="state-password-input" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-center tracking-widest font-mono" placeholder="KATA LALUAN">
-                <p id="pwd-error-msg" class="text-red-500 text-xs hidden font-semibold">Kata laluan tidak sah.</p>
-                <button onclick="verifyPassword()" class="w-full bg-gradient-to-r from-gold-500 to-gold-400 text-[#110a1f] font-cinzel font-bold px-6 py-3 rounded-lg shadow-md">Sahkan & Buka Pautan</button>
+                <input type="password" id="state-password-input" class="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-center tracking-widest font-mono focus:outline-none focus:ring-2 focus:ring-gold-500" placeholder="KATA LALUAN">
+                <p id="pwd-error-msg" class="text-red-400 text-xs hidden font-semibold">Kata laluan tidak sah.</p>
+                <button onclick="verifyPassword()" class="w-full bg-gradient-to-r from-gold-500 to-gold-400 text-[#110a1f] font-cinzel font-bold px-6 py-3 rounded-lg shadow-md hover:from-gold-400 hover:to-gold-300 transition-colors">Sahkan & Buka Pautan</button>
             </div>
         </div>
     </div>
 
     <!-- Modal: Admin Login -->
-    <div id="admin-login-modal" class="fixed inset-0 z-[100000] bg-black/80 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closeAdminLogin(event)">
-        <div id="admin-login-content" class="bg-white dark:bg-dark-card rounded-xl shadow-2xl border border-gold-300 p-8 w-11/12 max-w-sm transform scale-95 transition-transform relative text-center">
-            <button onclick="closeAdminLogin(event, true)" class="absolute top-4 right-4 text-gray-500 hover:text-gold-500"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+    <div id="admin-login-modal" class="fixed inset-0 z-[100000] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closeAdminLogin(event)">
+        <div id="admin-login-content" class="bg-[#1e1233] rounded-xl shadow-[0_0_30px_rgba(0,0,0,0.8)] border border-gold-500/30 p-8 w-11/12 max-w-sm transform scale-95 transition-transform relative text-center">
+            <button onclick="closeAdminLogin(event, true)" class="absolute top-4 right-4 text-gray-400 hover:text-gold-500"><svg class="w-6 h-6 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
             <div class="mb-6">
-                <h3 class="font-cinzel text-xl font-bold text-purple-900 dark:text-gold-400 mb-2">Log Masuk Admin</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Masukkan kata laluan urus setia pusat.</p>
+                <h3 class="font-cinzel text-xl font-bold text-gold-400 mb-2">Log Masuk Admin</h3>
+                <p class="text-sm text-gray-400">Masukkan kata laluan urus setia pusat.</p>
             </div>
             <div class="space-y-4">
-                <input type="password" id="admin-password-input" class="w-full px-4 py-3 rounded-lg border border-gray-300 text-center tracking-widest font-mono" placeholder="KATA LALUAN">
-                <p id="admin-error-msg" class="text-red-500 text-xs hidden font-semibold">Kata laluan tidak sah.</p>
-                <button onclick="verifyAdmin()" class="w-full bg-purple-900 text-white font-cinzel font-bold px-6 py-3 rounded-lg shadow-md">Akses Sistem</button>
+                <input type="password" id="admin-password-input" class="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-800 text-white text-center tracking-widest font-mono focus:outline-none focus:ring-2 focus:ring-gold-500" placeholder="KATA LALUAN">
+                <p id="admin-error-msg" class="text-red-400 text-xs hidden font-semibold">Kata laluan tidak sah.</p>
+                <button onclick="verifyAdmin()" class="w-full bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-700 hover:to-purple-500 text-white font-cinzel font-bold px-6 py-3 rounded-lg shadow-md transition-all">Akses Sistem</button>
             </div>
         </div>
     </div>
 
     <!-- Modal: Admin Panel -->
-    <div id="admin-panel-modal" class="fixed inset-0 z-[100000] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closeAdminPanel(event)">
-        <div id="admin-panel-content" class="bg-white dark:bg-dark-card rounded-xl shadow-2xl border border-gold-300 p-6 w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform relative custom-scrollbar">
-            <button onclick="closeAdminPanel(event, true)" class="absolute top-4 right-4 text-gray-500 hover:text-red-500"><svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>
-            <h2 class="font-cinzel text-2xl font-bold text-purple-900 dark:text-gold-400 mb-6 border-b pb-4">Panel Pengurusan Utama</h2>
+    <div id="admin-panel-modal" class="fixed inset-0 z-[100000] bg-black/95 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closeAdminPanel(event)">
+        <div id="admin-panel-content" class="bg-[#1e1233] rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.9)] border border-gold-500/50 p-6 w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform relative custom-scrollbar">
+            <button onclick="closeAdminPanel(event, true)" class="absolute top-4 right-4 text-gray-400 hover:text-red-500"><svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></button>
+            <h2 class="font-cinzel text-2xl font-bold text-gold-400 mb-6 border-b border-gray-700 pb-4">Panel Pengurusan Utama</h2>
 
-            <!-- Registration Status -->
+            <!-- Kawalan Status Pendaftaran -->
             <div id="admin-reg-status" class="mb-6"></div>
             
-            <!-- Gallery Setup -->
-            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 mb-8">
-                <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-sm uppercase">Pengurusan Galeri Gambar</h3>
+            <!-- Pengurusan Galeri -->
+            <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700 mb-8 shadow-inner">
+                <h3 class="font-bold text-gray-200 mb-4 text-sm uppercase tracking-wider">Pengurusan Galeri Gambar</h3>
                 <div class="mb-4">
-                    <label class="block text-xs font-semibold text-gray-600 mb-1">Kategori</label>
-                    <select id="admin-gallery-category" onchange="renderAdminGallerySlots()" class="w-full px-3 py-2 rounded border bg-white text-sm"></select>
+                    <label class="block text-xs font-semibold text-gray-400 mb-1">Pilih Kategori Galeri</label>
+                    <select id="admin-gallery-category" onchange="renderAdminGallerySlots()" class="w-full px-3 py-2 rounded border border-gray-600 bg-[#110a1f] text-white text-sm focus:outline-none focus:ring-2 focus:ring-gold-500">
+                    </select>
                 </div>
-                <div id="admin-gallery-slots" class="space-y-3 max-h-64 overflow-y-auto pr-2 mb-4"></div>
-                <button onclick="saveGalleryData()" class="bg-gold-500 text-[#110a1f] font-bold px-4 py-2 rounded text-sm w-full">Simpan Pautan Gambar</button>
+                
+                <div class="mb-4 bg-[#110a1f] p-3 rounded border border-gray-600">
+                    <label class="block text-[11px] font-bold text-gold-400 mb-1 uppercase tracking-wider flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Pautan Album Penuh (Google Photos/Drive)
+                    </label>
+                    <input type="text" id="admin-album-link" class="w-full px-3 py-2 rounded border border-gray-600 bg-gray-800 text-white text-sm focus:outline-none focus:ring-1 focus:ring-gold-500" placeholder="Contoh: https://photos.app.goo.gl/...">
+                    <p class="text-[10px] text-gray-500 mt-1 italic">Tinggalkan kosong jika tiada album penuh untuk kategori ini.</p>
+                </div>
+
+                <h4 class="font-bold text-gray-200 mb-2 text-xs uppercase tracking-wider">Slot Gambar Utama (Carousel)</h4>
+                <div id="admin-gallery-slots" class="space-y-3 max-h-64 overflow-y-auto custom-scrollbar pr-2 mb-4 bg-[#110a1f] p-3 rounded border border-gray-600">
+                </div>
+                <button onclick="saveGalleryData()" class="bg-gold-500 hover:bg-gold-400 text-[#110a1f] font-bold px-4 py-2 rounded transition-colors text-sm w-full sm:w-auto mt-2">Simpan Kemas Kini Galeri</button>
             </div>
 
-            <!-- Add Announcement -->
-            <div class="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 mb-8">
-                <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-sm uppercase">Tambah Pengumuman</h3>
+            <!-- Borang Tambah Pengumuman -->
+            <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700 mb-8 shadow-inner">
+                <h3 class="font-bold text-gray-200 mb-4 text-sm uppercase tracking-wider">Tambah Pengumuman Baharu</h3>
                 <div class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" id="add-title" class="px-3 py-2 rounded border text-sm w-full" placeholder="Tajuk Penuh">
-                        <input type="text" id="add-date" class="px-3 py-2 rounded border text-sm w-full" placeholder="Label Tarikh">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <input type="text" id="add-title" class="px-3 py-2 rounded border border-gray-600 bg-[#110a1f] text-white text-sm w-full focus:outline-none focus:ring-2 focus:ring-gold-500" placeholder="Tajuk Penuh">
+                        <input type="text" id="add-date" class="px-3 py-2 rounded border border-gray-600 bg-[#110a1f] text-white text-sm w-full focus:outline-none focus:ring-2 focus:ring-gold-500" placeholder="Label Tarikh (Contoh: Hari Ini)">
                     </div>
-                    <select id="add-color" class="px-3 py-2 rounded border text-sm w-full">
+                    <select id="add-color" class="px-3 py-2 rounded border border-gray-600 bg-[#110a1f] text-white text-sm w-full focus:outline-none focus:ring-2 focus:ring-gold-500">
                         <option value="gold-500">Penting (Emas Terang)</option>
                         <option value="gold-400">Sederhana (Emas Pudar)</option>
                         <option value="red-500">Kecemasan (Merah)</option>
                         <option value="gray-400">Biasa (Kelabu)</option>
                     </select>
-                    <textarea id="add-content" rows="3" class="px-3 py-2 rounded border text-sm w-full" placeholder="Isi Kandungan"></textarea>
-                    <button onclick="addAnnouncement()" class="bg-gold-500 text-[#110a1f] font-bold px-4 py-2 rounded text-sm w-full">Simpan Pengumuman</button>
+                    <textarea id="add-content" rows="3" class="px-3 py-2 rounded border border-gray-600 bg-[#110a1f] text-white text-sm w-full focus:outline-none focus:ring-2 focus:ring-gold-500" placeholder="Isi Kandungan Pengumuman"></textarea>
+                    <button onclick="addAnnouncement()" class="bg-gold-500 hover:bg-gold-400 text-[#110a1f] font-bold px-4 py-2 rounded transition-colors text-sm w-full sm:w-auto">Simpan & Siarkan</button>
                 </div>
             </div>
 
-            <!-- Announcement List -->
+            <!-- Senarai Pengumuman -->
             <div>
-                <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-4 text-sm uppercase">Senarai Sedia Ada</h3>
+                <h3 class="font-bold text-gray-200 mb-4 text-sm uppercase tracking-wider">Senarai Sedia Ada</h3>
                 <div id="admin-announcement-list" class="space-y-3"></div>
             </div>
         </div>
@@ -473,12 +518,13 @@
     <!-- Toast Notifications -->
     <div id="toast-container" class="fixed bottom-4 right-4 z-[999999] flex flex-col gap-3 pointer-events-none"></div>
 
-    <button id="backToTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" class="fixed bottom-6 left-6 bg-gradient-to-r from-gold-500 to-gold-400 text-[#110a1f] p-3 rounded-full shadow-lg transform scale-0 opacity-0 transition-all z-50">
+    <button id="backToTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" class="fixed bottom-6 left-6 bg-gradient-to-r from-gold-500 to-gold-400 text-[#110a1f] p-3 rounded-full shadow-lg transform scale-0 opacity-0 transition-all z-50 hover:scale-110 hover:shadow-[0_0_20px_rgba(212,175,55,0.6)]">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
     </button>
 
     <script>
-        // GLOBAL VARIABLES
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx-OGHnf7_a5fXEaR0f2ZC28s5_xWt6m7oZ16KUDDOjUUiZRWaLSXwNgFPAeadDjJHN/exec';
+
         const defaultAnnouncements = [
             { id: 1, title: 'Pendaftaran Kini Dibuka!', date: 'Hari ini', content: 'Pendaftaran untuk semua kategori Karnival Semarak Perpaduan Bahasa 2026 kini dibuka secara rasmi. Sila lengkapkan borang di tab Pendaftaran.', color: 'gold-500' },
             { id: 2, title: 'Kemaskini Jadual Pertandingan', date: '2 Hari Lepas', content: 'Terdapat sedikit perubahan pada jadual sesi petang bagi hari Rabu (9 Sept). Sila rujuk tab Jadual untuk maklumat terkini.', color: 'gold-400' }
@@ -504,61 +550,123 @@
         ];
 
         const galleryCategories = [
-            { id: 'semua', name: 'SUASANA PERTANDINGAN', slots: 10 },
-            { id: 'bercerita-sr', name: 'BERCERITA SR', slots: 5 },
-            { id: 'bercerita-sjk', name: 'BERCERITA SJK', slots: 5 },
-            { id: 'pantun-wm-sr', name: 'PANTUN SR', slots: 5 },
-            { id: 'pantun-wm-sm', name: 'PANTUN SM', slots: 5 },
-            { id: 'storytelling', name: 'STORYTELLING', slots: 5 },
-            { id: 'spell-sr', name: 'DARE TO SPELL SR', slots: 5 },
-            { id: 'spell-sm', name: 'DARE TO SPELL SM', slots: 5 },
-            { id: 'scrabble-sr', name: 'SCRABBLE SR', slots: 5 },
-            { id: 'scrabble-sm', name: 'SCRABBLE SM', slots: 5 },
-            { id: 'poetry-recitation', name: 'POETRY RECITATION', slots: 5 },
-            { id: 'poetry', name: 'POETRY', slots: 5 }
+            { id: 'semua', name: 'SUASANA', slots: 10, album: '' },
+            { id: 'bercerita-sr', name: 'BERCERITA SR', slots: 5, album: '' },
+            { id: 'bercerita-sjk', name: 'BERCERITA SJK', slots: 5, album: '' },
+            { id: 'pantun-wm-sr', name: 'PANTUN SR', slots: 5, album: '' },
+            { id: 'pantun-wm-sm', name: 'PANTUN SM', slots: 5, album: '' },
+            { id: 'storytelling', name: 'STORYTELLING', slots: 5, album: '' },
+            { id: 'spell-sr', name: 'DARE TO SPELL SR', slots: 5, album: '' },
+            { id: 'spell-sm', name: 'DARE TO SPELL SM', slots: 5, album: '' },
+            { id: 'scrabble-sr', name: 'SCRABBLE SR', slots: 5, album: '' },
+            { id: 'scrabble-sm', name: 'SCRABBLE SM', slots: 5, album: '' },
+            { id: 'poetry-recitation', name: 'POETRY RECITATION', slots: 5, album: '' },
+            { id: 'poetry', name: 'POETRY', slots: 5, album: '' }
         ];
 
+        let isRegistrationOpen = true;
         let announcementsData = [];
         let galleryData = {};
-        let isRegistrationOpen = true;
         let currentCategoryFilter = 'semua';
         let totalSlides = 0;
         let currentSlide = 0;
         let autoPlayInterval;
         let currentStateIndex = null;
 
-        // INIT APP
+        // FUNGSI ANIMASI ZARAH CERIA KETIKA MUAT
+        function initParticles() {
+            const container = document.getElementById('theme-particles');
+            if(!container) return;
+            
+            // Abjad Rumi, Jawi dan Aksara bagi melambangkan "Bahasa"
+            const letters = ['A', 'B', 'C', 'ع', 'ب', 'ت', 'J', 'K', 'M', 'N', '!', '?'];
+            
+            for(let i=0; i<25; i++) {
+                const el = document.createElement('div');
+                const isLetter = Math.random() > 0.4; // 60% peluang abjad, 40% peluang debu emas
+                
+                if(isLetter) {
+                    el.innerText = letters[Math.floor(Math.random() * letters.length)];
+                    el.className = 'absolute text-gold-500/10 font-cinzel font-bold text-3xl md:text-5xl select-none';
+                } else {
+                    el.className = 'absolute bg-gold-500/30 rounded-full blur-[1px]';
+                    const size = Math.random() * 8 + 3;
+                    el.style.width = size + 'px';
+                    el.style.height = size + 'px';
+                }
+                
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.top = '100vh'; // Bermula dari bawah skrin
+                
+                // Variasi kelajuan dan saiz terapung
+                const duration = Math.random() * 15 + 15; // 15s hingga 30s
+                const delay = Math.random() * 20; // 0s hingga 20s
+                
+                el.style.animation = `particleUp ${duration}s linear infinite`;
+                el.style.animationDelay = `-${delay}s`; // Agar zarah sudah berada di skrin ketika dimuat
+                
+                container.appendChild(el);
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             const preloader = document.getElementById('preloader');
             if (preloader) { setTimeout(() => { preloader.style.opacity = '0'; setTimeout(() => preloader.style.display = 'none', 500); }, 500); }
             
-            // Load LocalStorage
-            isRegistrationOpen = localStorage.getItem('kspb_reg_status') !== 'closed';
-            galleryData = JSON.parse(localStorage.getItem('kspb_gallery_data')) || {};
+            initParticles(); // Jalankan animasi zarah
             
-            const storedAnnouncements = localStorage.getItem('kspb_announcements');
-            if (storedAnnouncements) { announcementsData = JSON.parse(storedAnnouncements); } 
-            else { announcementsData = [...defaultAnnouncements]; saveAnnouncements(); }
-
-            // Initial Renders
+            announcementsData = [...defaultAnnouncements];
             renderAnnouncements();
             renderStateButtons();
             renderGalleryFilters();
             renderCarousel('semua');
+            fetchDataFromCloud();
             
-            // Observers
             document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
             document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
         });
 
-        // --- STREAMING_CHUNK:Adding Helper Functions (Toast, Theme, Modals)... ---
+        // --- STREAMING_CHUNK:Writing Data Cloud Fetching... ---
+        function fetchDataFromCloud() {
+            if (!scriptURL) return;
+            const noCacheUrl = scriptURL + "?t=" + new Date().getTime();
+            
+            fetch(noCacheUrl, { method: 'GET', redirect: 'follow' })
+            .then(response => {
+                if (!response.ok) throw new Error('Rangkaian terhalang (HTTP ' + response.status + ')');
+                return response.json();
+            })
+            .then(data => {
+                let hasUpdate = false;
+                if (data.announcements) { announcementsData = data.announcements; hasUpdate = true; }
+                if (data.gallery) { galleryData = data.gallery; hasUpdate = true; }
+                if (data.regStatus) {
+                    const cloudStatus = data.regStatus === 'open';
+                    if (isRegistrationOpen !== cloudStatus) {
+                        isRegistrationOpen = cloudStatus;
+                        renderStateButtons();
+                        renderAdminRegStatus();
+                    }
+                }
+                if (hasUpdate) {
+                    renderAnnouncements();
+                    renderCarousel(currentCategoryFilter);
+                    renderAdminList(); 
+                }
+            })
+            .catch(error => console.warn('Peringatan: Gagal muat turun dari Cloud.', error));
+        }
+
+        // --- STREAMING_CHUNK:Writing UI & Helper Logics... ---
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             if(!container) return;
             const toast = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
-            toast.className = `${bgColor} text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-10 opacity-0 flex items-center gap-3 transition-all duration-300`;
-            toast.innerHTML = type === 'success' ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span>${message}</span>` : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> <span>${message}</span>`;
+            const bgColor = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+            toast.className = `${bgColor} text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-10 opacity-0 flex items-center gap-3 transition-all duration-300 pointer-events-auto`;
+            toast.innerHTML = type === 'success' 
+                ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> <span>${message}</span>` 
+                : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> <span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => toast.classList.remove('translate-y-10', 'opacity-0'), 10);
             setTimeout(() => { toast.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => toast.remove(), 300); }, 3000);
@@ -576,40 +684,6 @@
             if (menu) { menu.classList.toggle('hidden'); menu.classList.toggle('flex'); }
         }
 
-        function toggleTheme() {
-            const html = document.getElementById('html-root'); html.classList.toggle('dark');
-            const isDark = html.classList.contains('dark');
-            document.getElementById('theme-icon-sun').classList.toggle('hidden', isDark); document.getElementById('theme-icon-moon').classList.toggle('hidden', !isDark);
-            document.getElementById('theme-icon-sun-mobile').classList.toggle('hidden', isDark); document.getElementById('theme-icon-moon-mobile').classList.toggle('hidden', !isDark);
-        }
-
-        // --- STREAMING_CHUNK:Implementing Announcement Logic... ---
-        function saveAnnouncements() { localStorage.setItem('kspb_announcements', JSON.stringify(announcementsData)); }
-
-        function renderAnnouncements() {
-            const listDiv = document.getElementById('pengumuman-list');
-            if (!listDiv) return;
-            
-            if (announcementsData.length === 0) {
-                listDiv.innerHTML = `<div class="relative z-10 p-4 text-center text-gray-500 italic text-sm">Tiada pengumuman buat masa ini.</div>`;
-                return;
-            }
-
-            const sorted = [...announcementsData].sort((a, b) => b.id - a.id);
-            let htmlStr = '';
-            sorted.forEach(item => {
-                const titleColor = item.color === 'gray-400' ? 'text-gray-700 dark:text-gray-300' : (item.color === 'red-500' ? 'text-red-600 dark:text-red-400' : 'text-purple-900 dark:text-gold-400');
-                const borderClass = `border-${item.color}`;
-                htmlStr += `
-                    <div class="relative z-10 p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50 border-l-4 ${borderClass} shadow-sm">
-                        <div class="flex justify-between items-start mb-2 gap-2"><h4 class="font-bold ${titleColor}">${item.title}</h4><span class="text-xs bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded whitespace-nowrap">${item.date}</span></div>
-                        <p class="text-sm">${item.content}</p>
-                    </div>`;
-            });
-            listDiv.innerHTML = htmlStr;
-        }
-
-        // --- STREAMING_CHUNK:Implementing State Registration Flow... ---
         function renderStateButtons() {
             const container = document.getElementById('pautan-pendaftaran-negeri');
             if(!container) return;
@@ -617,18 +691,18 @@
             if (isRegistrationOpen) {
                 container.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6';
                 container.innerHTML = states.map((state, index) => `
-                    <button onclick="openPasswordModal(${index})" class="w-full bg-white dark:bg-dark-card border border-gold-300 rounded-xl p-4 flex flex-col items-center gap-3 hover:border-gold-500 shadow-sm group transform hover:-translate-y-1">
-                        <img src="https://en.wikipedia.org/wiki/Special:FilePath/${state.img}" alt="${state.name}" class="w-16 h-8 object-cover rounded border shadow-sm group-hover:scale-110 transition-transform">
-                        <span class="font-cinzel font-bold text-sm text-gray-700 dark:text-gray-200">${state.name}</span>
+                    <button onclick="openPasswordModal(${index})" class="w-full bg-[#1e1233] border border-gold-500/30 rounded-xl p-4 flex flex-col items-center gap-3 hover:border-gold-400 shadow-[0_0_15px_rgba(0,0,0,0.5)] group transform hover:-translate-y-1 transition-all">
+                        <img src="https://en.wikipedia.org/wiki/Special:FilePath/${state.img}" alt="${state.name}" class="w-16 h-8 object-cover rounded border border-gray-600 shadow-sm group-hover:scale-110 transition-transform">
+                        <span class="font-cinzel font-bold text-sm text-gray-200">${state.name}</span>
                     </button>
                 `).join('');
             } else {
                 container.className = 'flex justify-center w-full';
                 container.innerHTML = `
-                    <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-500/50 rounded-xl p-10 text-center max-w-2xl w-full shadow-lg">
+                    <div class="bg-red-900/20 border-2 border-red-500/50 rounded-xl p-10 text-center max-w-2xl w-full shadow-[0_0_30px_rgba(255,0,0,0.15)]">
                         <svg class="w-16 h-16 text-red-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                        <h3 class="font-cinzel text-2xl font-bold text-red-600 mb-2">Pendaftaran Telah Ditutup</h3>
-                        <p class="text-gray-600 dark:text-gray-300">Harap maklum bahawa tempoh pendaftaran bagi semua kategori pertandingan telah tamat.</p>
+                        <h3 class="font-cinzel text-2xl font-bold text-red-500 mb-2">Pendaftaran Telah Ditutup</h3>
+                        <p class="text-gray-300">Harap maklum bahawa sistem pendaftaran bagi semua kategori pertandingan telah ditutup secara rasmi.</p>
                     </div>`;
             }
         }
@@ -645,21 +719,76 @@
         
         function verifyPassword() {
             const input = document.getElementById('state-password-input'); const err = document.getElementById('pwd-error-msg');
-            if (input.value.trim() === states[currentStateIndex].pwd) { window.open(states[currentStateIndex].link, '_blank'); closePasswordModal(null, true); showToast(`Pautan ${states[currentStateIndex].name} dibuka.`); } 
-            else { err.classList.remove('hidden'); input.classList.add('border-red-500'); }
+            if (input.value.trim() === states[currentStateIndex].pwd) { 
+                window.open(states[currentStateIndex].link, '_blank'); 
+                closePasswordModal(null, true); 
+                showToast(`Pautan ${states[currentStateIndex].name} dibuka.`, 'success'); 
+            } else { 
+                err.classList.remove('hidden'); input.classList.add('border-red-500'); 
+            }
         }
 
-        // --- STREAMING_CHUNK:Implementing Gallery Carousel Logic... ---
+        // --- STREAMING_CHUNK:Handling Announcements System... ---
+        function saveAnnouncements(sync = true) { 
+            if (sync && scriptURL) {
+                fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ type: 'sync_pengumuman', data: JSON.stringify(announcementsData) }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).catch(e => console.error('Ralat Cloud:', e));
+            }
+        }
+
+        function renderAnnouncements() {
+            const listDiv = document.getElementById('pengumuman-list');
+            if (!listDiv) return;
+            
+            if (announcementsData.length === 0) {
+                listDiv.innerHTML = `<div class="relative z-10 p-4 text-center text-gray-500 italic text-sm">Tiada pengumuman buat masa ini.</div>`;
+                return;
+            }
+
+            const sorted = [...announcementsData].sort((a, b) => b.id - a.id);
+            let htmlStr = '';
+            sorted.forEach(item => {
+                const titleColor = item.color === 'gray-400' ? 'text-gray-300' : (item.color === 'red-500' ? 'text-red-400' : 'text-gold-400');
+                const borderClass = `border-${item.color}`;
+                htmlStr += `
+                    <div class="relative z-10 p-4 rounded-lg bg-gray-800/50 border-l-4 ${borderClass} shadow-sm transition-all hover:-translate-y-1">
+                        <div class="flex justify-between items-start mb-2 gap-2"><h4 class="font-bold ${titleColor}">${item.title}</h4><span class="text-xs bg-gray-700 px-2 py-1 rounded whitespace-nowrap text-gray-200">${item.date}</span></div>
+                        <p class="text-sm text-gray-300">${item.content}</p>
+                    </div>`;
+            });
+            listDiv.innerHTML = htmlStr;
+        }
+
+        // --- STREAMING_CHUNK:Writing Advanced Gallery Logics... ---
+        function processGalleryUrl(urlOrId) {
+            if (!urlOrId) return '';
+            if (urlOrId.startsWith('http') || urlOrId.includes('postimg.cc') || urlOrId.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
+                return urlOrId;
+            }
+            return `https://drive.google.com/uc?export=view&id=${urlOrId}`;
+        }
+        
+        function extractDriveIdOrUrl(link) {
+            if (!link) return '';
+            const match = link.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (match) return match[1];
+            return link.trim();
+        }
+
         function renderGalleryFilters() {
             const container = document.getElementById('gallery-filters');
             if(!container) return;
             container.innerHTML = galleryCategories.map((c, i) => `
-                <button onclick="filterGallery('${c.id}', this)" class="btn-filter px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border ${i===0 ? 'btn-filter-active border-gold-400' : 'border-gold-300 bg-white dark:bg-dark-card'}">${c.name}</button>
+                <button onclick="filterGallery('${c.id}', this)" class="btn-filter px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border ${i===0 ? 'btn-filter-active border-gold-400' : 'border-gold-500/30 bg-[#1e1233] text-gray-300 hover:border-gold-400'}">${c.name}</button>
             `).join('');
         }
 
         function filterGallery(category, btnElement) {
-            document.querySelectorAll('.btn-filter').forEach(btn => btn.className = 'btn-filter px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-300 bg-white dark:bg-dark-card');
+            document.querySelectorAll('.btn-filter').forEach(btn => btn.className = 'btn-filter px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border border-gold-500/30 bg-[#1e1233] text-gray-300 hover:border-gold-400');
             if(btnElement) btnElement.className = 'btn-filter px-4 py-2 rounded-full font-cinzel font-semibold text-xs md:text-sm transition-all border btn-filter-active border-gold-400';
             renderCarousel(category);
         }
@@ -674,13 +803,47 @@
             let trackHtml = '', dotsHtml = '';
 
             for (let i = 1; i <= totalSlides; i++) {
-                const imageId = galleryData[`${config.id}_${i}`];
-                const imgSrc = imageId ? `https://drive.google.com/uc?export=view&id=${imageId}` : `https://placehold.co/1200x600/1e1233/D4AF37?text=${config.name.replace(/ /g, '+')}+|+FOTO+${i}`;
+                const imageVal = galleryData[`${config.id}_${i}`];
+                const fallbackSrc = `https://placehold.co/1200x600/1e1233/D4AF37?text=${config.name.replace(/ /g, '+')}+|+FOTO+${i}`;
+                let imgSrc = fallbackSrc;
+                if (imageVal && imageVal.trim() !== '') { imgSrc = processGalleryUrl(imageVal); }
                 
-                trackHtml += `<div class="min-w-full h-full relative cursor-pointer group/slide" onclick="openGalleryModal('${config.name}', ${i}, '${imageId || ''}')"><img src="${imgSrc}" class="w-full h-full object-cover"><div class="absolute bottom-6 left-6 z-20"><span class="bg-gold-500 text-[#110a1f] text-xs font-bold px-3 py-1 rounded-full inline-block mb-2">${config.name}</span><h3 class="text-white font-cinzel font-bold text-2xl drop-shadow-md">FOTO ${i}</h3></div></div>`;
-                dotsHtml += `<button onclick="goToSlide(${i-1})" class="w-3 h-3 rounded-full bg-gold-500/30 transition-all focus:outline-none"></button>`;
+                trackHtml += `
+                    <div class="min-w-full h-full relative cursor-pointer group/slide" onclick="openGalleryModal('${config.name}', ${i}, '${imageVal || ''}')">
+                        <img src="${imgSrc}" onerror="this.onerror=null;this.src='${fallbackSrc}';" class="w-full h-full object-cover transition-transform duration-700 group-hover/slide:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#110a1f]/80 via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <span class="bg-gold-500 text-[#110a1f] text-xs font-bold px-3 py-1 rounded-full inline-block mb-2 shadow-lg">${config.name}</span>
+                            <h3 class="text-white font-cinzel font-bold text-2xl md:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">FOTO ${i}</h3>
+                        </div>
+                    </div>`;
+                dotsHtml += `<button onclick="goToSlide(${i-1})" class="w-3 h-3 rounded-full bg-gold-500/30 transition-all focus:outline-none hover:bg-gold-500/60"></button>`;
             }
             track.innerHTML = trackHtml; dots.innerHTML = dotsHtml;
+            
+            // Paparan Butang Pintar Google Photos
+            const albumContainer = document.getElementById('album-link-container');
+            if (albumContainer) {
+                const albumLink = galleryData[`${config.id}_album`] || config.album;
+                if (albumLink && albumLink.trim() !== '') {
+                    albumContainer.innerHTML = `
+                        <a href="${albumLink}" target="_blank" class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#1e1233] border border-gold-400 text-gold-400 font-cinzel font-bold text-sm transition-all shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] hover:bg-gold-500/10 group animate-pulse">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Lihat Album Penuh ${config.name}
+                        </a>
+                    `;
+                    setTimeout(() => albumContainer.classList.remove('opacity-0'), 100);
+                } else {
+                    albumContainer.innerHTML = `
+                        <div class="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gray-800/50 border border-gray-600 text-gray-500 font-cinzel font-bold text-sm cursor-not-allowed">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            Pautan Album Akan Datang
+                        </div>
+                    `;
+                    setTimeout(() => albumContainer.classList.remove('opacity-0'), 100);
+                }
+            }
+
             updateCarouselView(); resetAutoPlay();
         }
 
@@ -688,7 +851,7 @@
             const track = document.getElementById('carousel-track'); const dots = document.getElementById('carousel-dots').children;
             if(!track || !dots.length) return;
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            Array.from(dots).forEach((dot, i) => dot.className = `h-3 rounded-full transition-all focus:outline-none ${i === currentSlide ? 'w-8 bg-gold-500 shadow-md' : 'w-3 bg-gold-500/30 hover:bg-gold-500/60'}`);
+            Array.from(dots).forEach((dot, i) => dot.className = `h-3 rounded-full transition-all focus:outline-none ${i === currentSlide ? 'w-8 bg-gold-500 shadow-[0_0_10px_rgba(212,175,55,0.8)]' : 'w-3 bg-gold-500/30 hover:bg-gold-500/60'}`);
         }
         function nextSlide() { if(totalSlides<=1) return; currentSlide = (currentSlide + 1) % totalSlides; updateCarouselView(); resetAutoPlay(); }
         function prevSlide() { if(totalSlides<=1) return; currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateCarouselView(); resetAutoPlay(); }
@@ -697,22 +860,36 @@
         function stopAutoPlay() { clearInterval(autoPlayInterval); }
         function resetAutoPlay() { startAutoPlay(); }
 
-        function openGalleryModal(name, i, imgId) {
+        function openGalleryModal(name, i, imgVal) {
             const m = document.getElementById('gallery-modal'); const c = document.getElementById('gallery-modal-content'); const actImg = document.getElementById('modal-actual-image');
+            const fallbackSrc = `https://placehold.co/1200x600/1e1233/D4AF37?text=${name.replace(/ /g, '+')}+|+FOTO+${i}`;
+            
             document.getElementById('modal-badge').innerText = `FOTO ${i} : ${name}`;
-            if (imgId) { actImg.src = `https://drive.google.com/uc?export=view&id=${imgId}`; actImg.classList.remove('hidden'); document.getElementById('modal-title').classList.add('hidden'); document.getElementById('modal-subtitle').classList.add('hidden'); }
-            else { actImg.classList.add('hidden'); document.getElementById('modal-title').classList.remove('hidden'); document.getElementById('modal-subtitle').classList.remove('hidden'); document.getElementById('modal-title').innerText = name; }
+            
+            if (imgVal && imgVal.trim() !== '') { 
+                actImg.src = processGalleryUrl(imgVal);
+                actImg.onerror = function() { this.onerror=null; this.src=fallbackSrc; };
+                actImg.classList.remove('hidden'); 
+                document.getElementById('modal-title').classList.add('hidden'); 
+                document.getElementById('modal-subtitle').classList.add('hidden'); 
+            } else { 
+                actImg.classList.add('hidden'); 
+                document.getElementById('modal-title').classList.remove('hidden'); 
+                document.getElementById('modal-subtitle').classList.remove('hidden'); 
+                document.getElementById('modal-title').innerText = name; 
+            }
+            
             m.classList.remove('hidden'); stopAutoPlay(); setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10);
         }
         function closeModal(e) { if(e.target.closest('#modal-inner-box')) return; const m = document.getElementById('gallery-modal'); const c = document.getElementById('gallery-modal-content'); m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => { m.classList.add('hidden'); document.getElementById('modal-actual-image').src = ''; startAutoPlay(); }, 300); }
 
         function filterJadualHari(day, btnElement) {
-            document.querySelectorAll('.btn-jadual-hari').forEach(btn => btn.className = 'btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-300 bg-white dark:bg-dark-card');
+            document.querySelectorAll('.btn-jadual-hari').forEach(btn => btn.className = 'btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-500/30 bg-[#1e1233] text-gray-200 hover:border-gold-400');
             if(btnElement) btnElement.className = 'btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 btn-filter-active';
             ['poster', 'rabu', 'khamis'].forEach(d => { const el = document.getElementById('jadual-'+d); if(el) el.classList.toggle('hidden', d !== day && day !== 'semua' || (day==='semua' && d!=='poster')); });
         }
 
-        // --- STREAMING_CHUNK:Implementing Admin Panel Logic... ---
+        // --- STREAMING_CHUNK:Running Admin Core Logic... ---
         function openAdminLogin() {
             const m = document.getElementById('admin-login-modal'); const c = document.getElementById('admin-login-content');
             document.getElementById('admin-password-input').value = ''; document.getElementById('admin-error-msg').classList.add('hidden');
@@ -735,79 +912,130 @@
         function renderAdminRegStatus() {
             const s = document.getElementById('admin-reg-status');
             s.innerHTML = isRegistrationOpen 
-                ? `<div class="flex items-center justify-between p-4 bg-green-50 border border-green-200 rounded-lg"><div><h4 class="font-bold text-green-800">Status: Pendaftaran Dibuka</h4></div><button onclick="toggleRegistrationStatus()" class="px-5 py-2 bg-red-600 text-white rounded font-bold shadow">Tutup Pendaftaran</button></div>`
-                : `<div class="flex items-center justify-between p-4 bg-red-50 border border-red-200 rounded-lg"><div><h4 class="font-bold text-red-800">Status: Pendaftaran Ditutup</h4></div><button onclick="toggleRegistrationStatus()" class="px-5 py-2 bg-green-600 text-white rounded font-bold shadow">Buka Pendaftaran</button></div>`;
+                ? `<div class="flex flex-col sm:flex-row items-center justify-between p-4 bg-green-900/20 border border-green-800 rounded-lg gap-4"><div class="text-center sm:text-left"><h4 class="font-bold text-green-400">Status: Pendaftaran Dibuka</h4><p class="text-xs text-green-500 mt-1">Sistem menerima peserta</p></div><button onclick="toggleRegistrationStatus()" class="w-full sm:w-auto px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded font-bold shadow transition-colors">Tutup Pendaftaran</button></div>`
+                : `<div class="flex flex-col sm:flex-row items-center justify-between p-4 bg-red-900/20 border border-red-800 rounded-lg gap-4"><div class="text-center sm:text-left"><h4 class="font-bold text-red-400">Status: Pendaftaran Ditutup</h4><p class="text-xs text-red-500 mt-1">Butang negeri disembunyikan</p></div><button onclick="toggleRegistrationStatus()" class="w-full sm:w-auto px-5 py-2 bg-green-600 hover:bg-green-700 text-white rounded font-bold shadow transition-colors">Buka Pendaftaran</button></div>`;
         }
 
         function toggleRegistrationStatus() {
             isRegistrationOpen = !isRegistrationOpen;
-            localStorage.setItem('kspb_reg_status', isRegistrationOpen ? 'open' : 'closed');
+            const statusStr = isRegistrationOpen ? 'open' : 'closed';
+            
             renderAdminRegStatus(); renderStateButtons();
             
+            if (scriptURL) {
+                fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ type: 'sync_status', data: statusStr }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).catch(e => console.error(e));
+            }
+            
             if(!isRegistrationOpen) {
-                announcementsData.push({ id: new Date().getTime(), title: 'Pendaftaran Telah Ditutup', date: 'Terkini', color: 'red-500', content: 'Sistem pendaftaran bagi semua kategori telah ditutup rasmi.' });
+                const newId = new Date().getTime();
+                announcementsData.push({ id: newId, title: 'Pendaftaran Telah Ditutup', date: 'Terkini', color: 'red-500', content: 'Sistem pendaftaran bagi semua kategori pertandingan telah ditutup secara rasmi.' });
                 saveAnnouncements(); renderAnnouncements(); renderAdminList();
-                showToast('Pendaftaran berjaya DITUTUP.', 'success');
-            } else { showToast('Pendaftaran DIBUKA semula.', 'success'); }
+                showToast('Pendaftaran berjaya DITUTUP. Data awan dikemas kini.', 'success');
+            } else { 
+                showToast('Pendaftaran DIBUKA semula. Data awan dikemas kini.', 'success'); 
+            }
         }
 
-        // --- STREAMING_CHUNK:Implementing Data Saving & Google Apps Script Connection... ---
         function renderAdminList() {
             const list = document.getElementById('admin-announcement-list');
             list.innerHTML = announcementsData.length ? [...announcementsData].sort((a,b)=>b.id-a.id).map(i => `
-                <div class="flex justify-between items-center p-3 bg-white dark:bg-dark-bg border rounded gap-4"><div class="font-semibold text-sm truncate">${i.title}</div><button onclick="deleteAnnouncement(${i.id})" class="text-red-500 p-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button></div>
+                <div class="flex justify-between items-center p-3 bg-[#110a1f] border border-gray-700 rounded gap-4"><div class="font-semibold text-sm truncate text-gray-200">${i.title}</div><button onclick="deleteAnnouncement(${i.id})" class="text-red-500 hover:bg-red-900/20 p-2 rounded transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button></div>
             `).join('') : '<p class="text-sm text-gray-500">Tiada pengumuman.</p>';
         }
 
         function addAnnouncement() {
-            const t = document.getElementById('add-title').value.trim(); const d = document.getElementById('add-date').value.trim(); const co = document.getElementById('add-color').value; const con = document.getElementById('add-content').value.trim();
-            if (!t || !d || !con) return showToast('Lengkapkan semua maklumat!', 'error');
+            const title = document.getElementById('add-title').value.trim(); 
+            const date = document.getElementById('add-date').value.trim(); 
+            const color = document.getElementById('add-color').value; 
+            const content = document.getElementById('add-content').value.trim();
             
-            announcementsData.push({ id: new Date().getTime(), title: t, date: d, color: co, content: con });
+            if (!title || !date || !content) { showToast('Sila lengkapkan semua maklumat!', 'error'); return; }
+            
+            const newId = new Date().getTime();
+            announcementsData.push({ id: newId, title: title, date: date, color: color, content: content });
+            
             saveAnnouncements(); renderAnnouncements(); renderAdminList();
+            
             document.getElementById('add-title').value = ''; document.getElementById('add-date').value = ''; document.getElementById('add-content').value = '';
-            showToast('Pengumuman ditambah!', 'success');
-
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwC1qVfZZnh3KieSr2VtBgXYNh62jYGUWcunqGjZwOKkTTIyRAon_sDdQL-Z-LHErtwQw/exec';
-            try { fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ type: 'pengumuman', tajuk: t, tarikh: d, kandungan: con, warna: co }), headers: { 'Content-Type': 'text/plain;charset=utf-8' } }); } catch(e){}
+            showToast('Pengumuman disiarkan ke semua peranti (Live)!', 'success');
         }
 
         function deleteAnnouncement(id) {
-            announcementsData = announcementsData.filter(i => i.id !== id);
+            announcementsData = announcementsData.filter(item => item.id !== id);
             saveAnnouncements(); renderAnnouncements(); renderAdminList();
-            showToast('Dipadam.', 'success');
+            showToast('Dipadam dari Cloud.', 'success');
         }
 
         function initAdminGallery() {
-            document.getElementById('admin-gallery-category').innerHTML = galleryCategories.map(c => `<option value="${c.id}">${c.name} (${c.slots} Slot)</option>`).join('');
+            const select = document.getElementById('admin-gallery-category');
+            if(!select) return;
+            select.innerHTML = galleryCategories.map(c => `<option value="${c.id}">${c.name} (${c.slots} Slot)</option>`).join('');
             renderAdminGallerySlots();
         }
 
         function renderAdminGallerySlots() {
-            const cId = document.getElementById('admin-gallery-category').value; const config = galleryCategories.find(c => c.id === cId);
+            const categoryId = document.getElementById('admin-gallery-category').value;
+            const container = document.getElementById('admin-gallery-slots');
+            const albumInput = document.getElementById('admin-album-link');
+            const config = galleryCategories.find(c => c.id === categoryId);
+            if (!config || !container) return;
+
+            if (albumInput) { albumInput.value = galleryData[`${categoryId}_album`] || config.album || ''; }
+
             let html = '';
             for (let i = 1; i <= config.slots; i++) {
-                const key = `${cId}_${i}`; const val = galleryData[key] ? `https://drive.google.com/file/d/${galleryData[key]}/view` : '';
-                html += `<div><label class="block text-[10px] font-semibold text-gray-500 mb-1">FOTO ${i}</label><input type="text" id="g-input-${key}" value="${val}" class="w-full px-3 py-2 rounded border bg-white text-xs"></div>`;
+                const key = `${categoryId}_${i}`;
+                let val = galleryData[key] || '';
+                if (val && !val.startsWith('http') && !val.includes('postimg.cc') && !val.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
+                    val = `https://drive.google.com/file/d/${val}/view`;
+                }
+                html += `
+                    <div>
+                        <label class="block text-[10px] font-semibold text-gray-500 mb-1">FOTO ${i}</label>
+                        <input type="text" id="gallery-input-${key}" value="${val}" class="w-full px-3 py-2 rounded border border-gray-600 bg-gray-800 text-white text-xs focus:outline-none focus:ring-1 focus:ring-gold-500" placeholder="Tampal Pautan (Contoh: https://i.postimg.cc/...)">
+                    </div>
+                `;
             }
-            document.getElementById('admin-gallery-slots').innerHTML = html;
+            container.innerHTML = html;
         }
 
         function saveGalleryData() {
-            const cId = document.getElementById('admin-gallery-category').value; const config = galleryCategories.find(c => c.id === cId);
-            for (let i = 1; i <= config.slots; i++) {
-                const key = `${cId}_${i}`; const val = document.getElementById(`g-input-${key}`).value.trim();
-                const m = val.match(/\/d\/([a-zA-Z0-9_-]+)/); const id = m ? m[1] : val;
-                if(id) galleryData[key] = id; else delete galleryData[key];
+            const categoryId = document.getElementById('admin-gallery-category').value;
+            const config = galleryCategories.find(c => c.id === categoryId);
+            if (!config) return;
+
+            const albumInput = document.getElementById('admin-album-link');
+            if (albumInput) {
+                const albumLink = albumInput.value.trim();
+                if (albumLink) { galleryData[`${categoryId}_album`] = albumLink; config.album = albumLink; } 
+                else { delete galleryData[`${categoryId}_album`]; config.album = ''; }
             }
-            localStorage.setItem('kspb_gallery_data', JSON.stringify(galleryData));
-            showToast('Galeri disimpan!', 'success'); renderCarousel(currentCategoryFilter);
+
+            for (let i = 1; i <= config.slots; i++) {
+                const key = `${categoryId}_${i}`;
+                const inputVal = document.getElementById(`gallery-input-${key}`).value.trim();
+                const finalData = extractDriveIdOrUrl(inputVal);
+                if (finalData) { galleryData[key] = finalData; } else { delete galleryData[key]; }
+            }
             
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwC1qVfZZnh3KieSr2VtBgXYNh62jYGUWcunqGjZwOKkTTIyRAon_sDdQL-Z-LHErtwQw/exec';
-            try { fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ type: 'galeri', kategori: cId, data: JSON.stringify(galleryData) }), headers: { 'Content-Type': 'text/plain;charset=utf-8' } }); } catch(e){}
+            showToast('Galeri disimpan & disegerakkan ke awan!', 'success');
+            renderCarousel(currentCategoryFilter);
+
+            if (scriptURL) {
+                fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: JSON.stringify({ type: 'sync_galeri', data: JSON.stringify(galleryData) }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).catch(e => console.error('Ralat penyegerakan Awan (Galeri):', e));
+            }
         }
 
-        // --- STREAMING_CHUNK:Final UI Observers... ---
         const revealObserver = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
         const counterObserver = new IntersectionObserver((entries, obs) => { entries.forEach(e => { if(e.isIntersecting) { const t = +e.target.getAttribute('data-target'); let c=0; const inc = t/100; const upd = () => { c+=inc; if(c<t){ e.target.innerText=Math.ceil(c); requestAnimationFrame(upd); }else{ e.target.innerText=t; } }; upd(); obs.unobserve(e.target); }}); });
         window.addEventListener('scroll', () => {
