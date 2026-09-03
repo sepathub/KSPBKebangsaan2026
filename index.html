@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ms" class="scroll-smooth dark" id="html-root">
+<html lang="ms" class="scroll-smooth" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,6 @@
     
     <script>
         tailwind.config = {
-            darkMode: 'class', 
             theme: {
                 extend: {
                     colors: {
@@ -43,7 +42,7 @@
         
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* Animasi Baru Latar Belakang (Zarah Abjad & Debu Emas) */
+        /* Animasi Latar Belakang (Zarah Abjad & Debu Emas) */
         @keyframes particleUp {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
@@ -163,7 +162,7 @@
                             </div>
                             <div class="flex items-center justify-center lg:justify-start gap-3">
                                 <svg class="w-6 h-6 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                <span>Hotel Noble & Hotel Asia, Melaka</span>
+                                <span>Hotel Asia, Melaka</span>
                             </div>
                         </div>
                         <div class="pt-6">
@@ -176,7 +175,7 @@
                     <div class="order-1 lg:order-2 flex justify-center relative">
                         <div class="absolute inset-0 bg-gold-400/20 blur-[60px] rounded-full w-3/4 h-3/4 m-auto"></div>
                         <div class="relative w-full max-w-md aspect-[3/4] rounded-lg overflow-hidden border border-gold-300 shadow-[0_0_50px_rgba(212,175,55,0.3)] group z-10 animate-float">
-                            <img src="https://i.postimg.cc/0NhtfbK1/photo-2026-07-20-11-58-07.jpg" alt="Poster Rasmi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <img src="https://i.postimg.cc/D0BQqFBk/poster-website.png" alt="Poster Rasmi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         </div>
                     </div>
                 </div>
@@ -265,22 +264,48 @@
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-3 mb-10 reveal delay-100">
-                    <button onclick="filterJadualHari('semua', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 btn-filter-active">Poster Ringkasan</button>
+                    <button onclick="filterJadualHari('semua', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 btn-filter-active"><selection-tag>Poster Ring</selection-tag>kasan</button>
                     <button onclick="filterJadualHari('rabu', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-[#1e1233] border border-gold-500/30 text-gray-200 hover:border-gold-400">Rabu (9 Sept)</button>
                     <button onclick="filterJadualHari('khamis', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-[#1e1233] border border-gold-500/30 text-gray-200 hover:border-gold-400">Khamis (10 Sept)</button>
                 </div>
 
                 <div id="jadual-container" class="max-w-6xl mx-auto flex justify-center reveal delay-100">
-                    <div id="jadual-poster" class="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 block">
-                        <img src="https://i.postimg.cc/cHkJfL7s/jadual-pertandingan.png" alt="Jadual Penuh" class="w-full h-auto object-cover">
+                    <div id="jadual-poster" class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 block cursor-pointer transition-all hover:border-gold-400" onclick="openGuidelineModal('https://i.postimg.cc/63f24XhD/Jadual-1.png', 'POSTER RINGKASAN')">
+                        <img src="https://i.postimg.cc/63f24XhD/Jadual-1.png" alt="Jadual Penuh" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                            <svg class="w-12 h-12 text-gold-400 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                        </div>
                     </div>
-                    <div id="jadual-rabu" class="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 hidden">
-                        <img src="https://i.postimg.cc/2SCVpM57/pertandingan-rabu.png" alt="Jadual Rabu" class="w-full h-auto object-cover">
+                    <div id="jadual-rabu" class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 hidden cursor-pointer transition-all hover:border-gold-400" onclick="openGuidelineModal('https://i.postimg.cc/3JR4Nz0j/Jadual-2.png', 'JADUAL RABU')">
+                        <img src="https://i.postimg.cc/3JR4Nz0j/Jadual-2.png" alt="Jadual Rabu" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                            <svg class="w-12 h-12 text-gold-400 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                        </div>
                     </div>
-                    <div id="jadual-khamis" class="relative rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 hidden">
-                        <img src="https://i.postimg.cc/rpPmrpN4/pertandingan-khamis.png" alt="Jadual Khamis" class="w-full h-auto object-cover">
+                    <div id="jadual-khamis" class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gray-700/50 hidden cursor-pointer transition-all hover:border-gold-400" onclick="openGuidelineModal('https://i.postimg.cc/wjR1cJVN/Jadual-3.png', 'JADUAL KHAMIS')">
+                        <img src="https://i.postimg.cc/wjR1cJVN/Jadual-3.png" alt="Jadual Khamis" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                            <svg class="w-12 h-12 text-gold-400 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Ruang Gambar Lokasi Pertandingan -->
+                <div class="border-t border-gold-500/20 pt-16 mt-16 reveal delay-200">
+                    <div class="text-center mb-10">
+                        <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-gold-400 mb-3 drop-shadow-md">Lokasi Pertandingan</h3>
+                        <p class="text-gray-400 text-sm">Lokasi bilik pertandingan bagi setiap kategori.</p>
+                    </div>
+                    <div class="max-w-6xl mx-auto flex justify-center">
+                        <div class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] border border-gold-500/30 cursor-pointer w-full transition-all hover:border-gold-400" onclick="openGuidelineModal('https://i.postimg.cc/q78gWTSW/Tempat-Pertandingan.png', 'LOKASI PERTANDINGAN')">
+                            <img src="https://i.postimg.cc/q78gWTSW/Tempat-Pertandingan.png" alt="Lokasi Pertandingan" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                <svg class="w-12 h-12 text-gold-400 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </div>
@@ -342,7 +367,7 @@
                     <div id="pautan-pendaftaran-negeri"></div>
                 </div>
 
-                <!-- NEW: Garis Panduan Fotografi Section -->
+                <!-- Garis Panduan Fotografi Section -->
                 <div class="border-t border-gold-500/20 pt-16 mt-16 reveal delay-300">
                     <div class="text-center mb-10">
                         <h3 class="font-cinzel text-2xl font-bold text-gold-400 mb-3 drop-shadow-md">Garis Panduan Fotografi</h3>
@@ -350,14 +375,14 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                         <!-- Gambar Panduan 1 -->
-                        <div class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-gold-500/30 cursor-pointer" onclick="openGuidelineModal('https://i.postimg.cc/26gsB2bZ/GAMBAR-1.jpg', 'PANDUAN 1')">
+                        <div class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-gold-500/30 cursor-pointer" onclick="openGuidelineModal('https://i.postimg.cc/26gsB2bZ/GAMBAR-1.jpg', 'GARIS PANDUAN 1')">
                             <img src="https://i.postimg.cc/26gsB2bZ/GAMBAR-1.jpg" alt="Garis Panduan Fotografi 1" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
                                 <svg class="w-12 h-12 text-gold-400 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
                             </div>
                         </div>
                         <!-- Gambar Panduan 2 -->
-                        <div class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-gold-500/30 cursor-pointer" onclick="openGuidelineModal('https://i.postimg.cc/ZKzkbszL/GAMBAR-2.jpg', 'PANDUAN 2')">
+                        <div class="relative group rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] border border-gold-500/30 cursor-pointer" onclick="openGuidelineModal('https://i.postimg.cc/ZKzkbszL/GAMBAR-2.jpg', 'GARIS PANDUAN 2')">
                             <img src="https://i.postimg.cc/ZKzkbszL/GAMBAR-2.jpg" alt="Garis Panduan Fotografi 2" class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
                             <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
                                 <svg class="w-12 h-12 text-gold-400 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
@@ -365,6 +390,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
     </div>
@@ -430,25 +456,50 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Sorotan Khas YouTube Video (Smart Facade) -->
+                <div class="max-w-4xl mx-auto mt-16 pt-16 border-t border-gold-500/20 reveal delay-200">
+                    <div class="text-center mb-10">
+                        <div class="flex items-center justify-center gap-3 mb-3">
+                            <span class="h-px bg-gradient-to-r from-transparent to-red-500 w-12"></span>
+                            <span class="bg-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.5)] animate-pulse">
+                                <span class="w-2 h-2 bg-white rounded-full"></span> LIVE
+                            </span>
+                            <span class="h-px bg-gradient-to-l from-transparent to-red-500 w-12"></span>
+                        </div>
+                        <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-gold-400 mb-2 drop-shadow-md">Sorotan Khas</h3>
+                        <p class="text-gray-400 text-sm">Tonton siaran rasmi acara gilang-gemilang Karnival Semarak Perpaduan Bahasa 2026 secara terus di sini.</p>
+                    </div>
+                    
+                    <!-- YouTube Iframe Terus di Laman Web -->
+                    <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+                        <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/avYZsLFezR4?si=v6VFLq_jWTPygUMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+
             </div>
         </section>
     </div>
 
     <!-- Modal: Gallery View -->
-    <div id="gallery-modal" class="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0" onclick="closeModal(event)">
-        <div class="relative w-11/12 max-w-5xl mx-auto flex flex-col items-center justify-center transform scale-95 transition-transform" id="gallery-modal-content">
+    <div id="gallery-modal" class="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0 p-4" onclick="closeModal(event)">
+        <div class="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center transform scale-95 transition-transform max-h-screen" id="gallery-modal-content">
             <button onclick="closeModal(event)" class="absolute -top-12 right-0 text-gray-400 hover:text-gold-500 z-20"><svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-            <div id="modal-inner-box" class="w-full aspect-video bg-[#1e1233] border-2 border-gold-500/50 rounded-xl flex flex-col items-center justify-center relative overflow-hidden bg-songket-pattern cursor-default shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+            <div id="modal-inner-box" class="w-full aspect-video bg-[#1e1233] border-2 border-gold-500/50 rounded-xl flex flex-col items-center justify-center relative overflow-hidden bg-songket-pattern cursor-default shadow-[0_0_50px_rgba(0,0,0,0.8)] max-h-[85vh]">
                 <div class="absolute inset-0 bg-black/40 mix-blend-overlay z-0"></div>
                 <span class="font-cinzel text-gold-400 font-bold text-2xl md:text-5xl tracking-widest z-10 text-center px-4" id="modal-title">SUASANA</span>
                 <span class="font-sans text-white text-lg md:text-2xl mt-3 z-10 uppercase tracking-widest font-light" id="modal-subtitle">Karnival</span>
+                
+                <!-- Imej Sebenar yang akan ditunjukkan tanpa sebarang teks pertindihan (overlay) putih -->
                 <img id="modal-actual-image" src="" alt="Galeri" class="absolute inset-0 w-full h-full object-contain z-10 hidden bg-black/90 backdrop-blur-md">
+                
+                <!-- Badge Kecil di Bawah -->
                 <span class="text-gray-300 text-xs md:text-sm mt-8 z-20 font-bold bg-black/70 px-6 py-2 rounded-full border border-gold-500/30 tracking-wider absolute bottom-6 shadow-md" id="modal-badge">FOTO X</span>
             </div>
         </div>
     </div>
 
-    <!-- NEW: Modal for Guidelines -->
+    <!-- Modal for Guidelines -->
     <div id="guideline-modal" class="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-sm hidden flex items-center justify-center transition-all opacity-0 p-4" onclick="closeGuidelineModal(event)">
         <div class="relative w-full max-w-4xl mx-auto flex flex-col items-center justify-center transform scale-95 transition-transform h-full max-h-screen" id="guideline-modal-content">
             <button onclick="closeGuidelineModal(event)" class="absolute -top-10 md:-top-12 right-0 md:-right-8 text-gray-400 hover:text-gold-500 z-20 bg-black/50 md:bg-transparent rounded-full p-1"><svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
@@ -804,16 +855,20 @@
         // --- STREAMING_CHUNK:Writing Advanced Gallery Logics... ---
         function processGalleryUrl(urlOrId) {
             if (!urlOrId) return '';
+            // Jika ia adalah direct link (seperti postimg, imgur atau berakhiran .jpg/.png)
             if (urlOrId.startsWith('http') || urlOrId.includes('postimg.cc') || urlOrId.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
                 return urlOrId;
             }
+            // Jika ia hanya ID (Dari Google Drive)
             return `https://drive.google.com/uc?export=view&id=${urlOrId}`;
         }
         
         function extractDriveIdOrUrl(link) {
             if (!link) return '';
+            // Semak jika pengguna paste link penuh Google Drive
             const match = link.match(/\/d\/([a-zA-Z0-9_-]+)/);
             if (match) return match[1];
+            // Jika bukan format link GDrive, pulangkan direct link tersebut
             return link.trim();
         }
 
@@ -844,15 +899,18 @@
                 const imageVal = galleryData[`${config.id}_${i}`];
                 const fallbackSrc = `https://placehold.co/1200x600/1e1233/D4AF37?text=${config.name.replace(/ /g, '+')}+|+FOTO+${i}`;
                 let imgSrc = fallbackSrc;
-                if (imageVal && imageVal.trim() !== '') { imgSrc = processGalleryUrl(imageVal); }
+                
+                if (imageVal && imageVal.trim() !== '') { 
+                    imgSrc = processGalleryUrl(imageVal); 
+                }
                 
                 trackHtml += `
                     <div class="min-w-full h-full relative cursor-pointer group/slide" onclick="openGalleryModal('${config.name}', ${i}, '${imageVal || ''}')">
-                        <img src="${imgSrc}" onerror="this.onerror=null;this.src='${fallbackSrc}';" class="w-full h-full object-cover transition-transform duration-700 group-hover/slide:scale-105">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#110a1f]/80 via-transparent to-transparent opacity-80"></div>
-                        <div class="absolute bottom-6 left-6 z-20">
+                        <img src="${imgSrc}" onerror="this.onerror=null;this.src='${fallbackSrc}';" class="w-full h-full object-contain bg-[#110a1f] transition-transform duration-700 group-hover/slide:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#110a1f]/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        <div class="absolute bottom-6 left-6 z-20 pointer-events-none">
                             <span class="bg-gold-500 text-[#110a1f] text-xs font-bold px-3 py-1 rounded-full inline-block mb-2 shadow-lg">${config.name}</span>
-                            <h3 class="text-white font-cinzel font-bold text-2xl md:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">FOTO ${i}</h3>
+                            <h3 class="text-white/10 font-cinzel font-bold text-sm md:text-base drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">FOTO ${i}</h3>
                         </div>
                     </div>`;
                 dotsHtml += `<button onclick="goToSlide(${i-1})" class="w-3 h-3 rounded-full bg-gold-500/30 transition-all focus:outline-none hover:bg-gold-500/60"></button>`;
@@ -903,7 +961,9 @@
         function stopAutoPlay() { clearInterval(autoPlayInterval); }
 
         function openGalleryModal(name, i, rawUrl) {
-            const m = document.getElementById('gallery-modal'); const c = document.getElementById('gallery-modal-content'); const actImg = document.getElementById('modal-actual-image');
+            const m = document.getElementById('gallery-modal'); 
+            const c = document.getElementById('gallery-modal-content'); 
+            const actImg = document.getElementById('modal-actual-image');
             const fallbackSrc = `https://placehold.co/1200x600/1e1233/D4AF37?text=${name.replace(/ /g, '+')}+|+FOTO+${i}`;
             
             document.getElementById('modal-badge').innerText = `FOTO ${i} : ${name}`;
@@ -1054,6 +1114,7 @@
             for (let i = 1; i <= config.slots; i++) {
                 const key = `${categoryId}_${i}`;
                 let val = galleryData[key] || '';
+                // Hanya tukar pandangan di admin panel kepada URL penuhdrive jika ia format ID
                 if (val && !val.startsWith('http') && !val.includes('postimg.cc') && !val.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
                     val = `https://drive.google.com/file/d/${val}/view`;
                 }
