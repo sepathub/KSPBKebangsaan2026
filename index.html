@@ -38,6 +38,7 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
         .spinner { width: 50px; height: 50px; border: 4px solid rgba(212, 175, 55, 0.2); border-radius: 50%; border-top-color: #D4AF37; animation: spin 1s ease-in-out infinite; }
         
         @keyframes spin { to { transform: rotate(360deg); } }
@@ -55,6 +56,7 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
         }
+        .btn-glow { animation: float 6s ease-in-out infinite, glow-pulse 2.5s infinite; }
         .animate-float { animation: float 6s ease-in-out infinite; }
 
         /* Kesan Denyutan Cahaya Butang */
@@ -62,7 +64,6 @@
             0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
             50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.7); }
         }
-        .btn-glow { animation: glow-pulse 2.5s infinite; }
 
         #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #AA8529, #F3E5AB, #D4AF37); z-index: 10000; transition: width 0.1s ease-out; }
         ::-webkit-scrollbar { width: 8px; }
@@ -75,7 +76,7 @@
 </head>
 <body class="font-sans bg-[#110a1f] text-gray-300 antialiased selection:bg-gold-500 selection:text-purple-900 flex flex-col min-h-screen bg-songket-pattern bg-fixed">
 
-    <!-- Zarah Abjad & Debu Emas Latar Belakang (Karnival/Bahasa Theme) -->
+    <!-- Zarah Abjad & Debu Emas Latar Belakang -->
     <div id="theme-particles" class="fixed inset-0 pointer-events-none z-0 overflow-hidden mix-blend-screen opacity-60"></div>
 
     <!-- Preloader & Scroll Progress -->
@@ -87,7 +88,6 @@
     </div>
     <div id="scroll-progress"></div>
 
-    <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-[#110a1f]/95 backdrop-blur-md border-b border-gold-500/20 shadow-xl transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-24">
@@ -264,7 +264,7 @@
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-3 mb-10 reveal delay-100">
-                    <button onclick="filterJadualHari('semua', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 btn-filter-active"><selection-tag>Poster Ring</selection-tag>kasan</button>
+                    <button onclick="filterJadualHari('semua', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 btn-filter-active">Poster Ringkasan</button>
                     <button onclick="filterJadualHari('rabu', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-[#1e1233] border border-gold-500/30 text-gray-200 hover:border-gold-400">Rabu (9 Sept)</button>
                     <button onclick="filterJadualHari('khamis', this)" class="btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm bg-[#1e1233] border border-gold-500/30 text-gray-200 hover:border-gold-400">Khamis (10 Sept)</button>
                 </div>
@@ -457,32 +457,100 @@
                     </div>
                 </div>
 
-                <!-- Sorotan Khas YouTube Video (Smart Facade) -->
-                <div class="max-w-4xl mx-auto mt-16 pt-16 border-t border-gold-500/20 reveal delay-200">
+                <!-- Siaran Langsung (LIVE) Section -->
+                <div class="max-w-5xl mx-auto mt-16 pt-16 border-t border-gold-500/20 reveal delay-200">
                     <div class="text-center mb-10">
                         <div class="flex items-center justify-center gap-3 mb-3">
                             <span class="h-px bg-gradient-to-r from-transparent to-red-500 w-12"></span>
-                            <span class="bg-red-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.5)] animate-pulse">
-                                <span class="w-2 h-2 bg-white rounded-full"></span> LIVE
+                            <span class="bg-red-600 text-white text-[12px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-2 shadow-[0_0_15px_rgba(220,38,38,0.6)] animate-pulse">
+                                <span class="w-2.5 h-2.5 bg-white rounded-full"></span> LIVE
                             </span>
                             <span class="h-px bg-gradient-to-l from-transparent to-red-500 w-12"></span>
                         </div>
-                        <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-gold-400 mb-2 drop-shadow-md">Sorotan Khas</h3>
-                        <p class="text-gray-400 text-sm">Tonton siaran rasmi acara gilang-gemilang Karnival Semarak Perpaduan Bahasa 2026 secara terus di sini.</p>
-                    </div>
-                    
-                    <!-- YouTube Iframe Terus di Laman Web -->
-                    <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)] mb-8">
-                        <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/avYZsLFezR4?si=v6VFLq_jWTPygUMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <h3 class="font-cinzel text-3xl md:text-5xl font-bold text-red-500 mb-4 drop-shadow-[0_0_15px_rgba(220,38,38,0.3)]">SIARAN LANGSUNG</h3>
+                        <p class="text-gray-300 text-sm md:text-base">Saksikan acara yang sedang berlangsung secara langsung di sini.</p>
                     </div>
 
-                    <!-- 2 Tambahan Video Sorotan Bersebelahan -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-                        <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
-                             <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/TOl8fUXeCz4?si=BiSW7Akx0KAP9bRj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <!-- 2 Video Siaran Langsung (Grid) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mb-8">
+                        <!-- Video 1 -->
+                        <div class="flex flex-col gap-3 group">
+                            <div class="relative w-full overflow-hidden rounded-xl border-2 border-red-500 bg-black shadow-[0_0_30px_rgba(220,38,38,0.4)] transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:border-red-400" style="padding-top: 56.25%;">
+                                <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/eps847-tcdY?si=K3cuAXprG15aMAbU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="bg-[#1e1233] border border-red-500/30 py-3 px-4 rounded-xl shadow-lg text-center flex flex-col items-center justify-center gap-1.5 transition-colors duration-300 group-hover:border-red-500/60 mt-auto">
+                                <h4 class="font-cinzel font-bold text-sm text-gold-400 leading-snug uppercase">PERTANDINGAN STORYTELLING<br>PERINGKAT KEBANGSAAN 2026</h4>
+                                <span class="text-[11px] font-sans font-semibold tracking-widest text-red-400 bg-red-900/20 px-3 py-1 rounded-full">(9 SEPTEMBER 2026)</span>
+                            </div>
                         </div>
-                        <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
-                             <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/3WvoNus47yo?si=G4xCwwAXQYHypIpQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                        <!-- Video 2 -->
+                        <div class="flex flex-col gap-3 group">
+                            <div class="relative w-full overflow-hidden rounded-xl border-2 border-red-500 bg-black shadow-[0_0_30px_rgba(220,38,38,0.4)] transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:border-red-400" style="padding-top: 56.25%;">
+                                <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/QEwWuj-yZ8E?si=oiXqRHJlKr-n5K4H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="bg-[#1e1233] border border-red-500/30 py-3 px-4 rounded-xl shadow-lg text-center flex flex-col items-center justify-center gap-1.5 transition-colors duration-300 group-hover:border-red-500/60 mt-auto">
+                                <h4 class="font-cinzel font-bold text-sm text-gold-400 leading-snug uppercase">MAJLIS PENUTUP KARNIVAL SEMARAK BAHASA</h4>
+                                <span class="text-[11px] font-sans font-semibold tracking-widest text-red-400 bg-red-900/20 px-3 py-1 rounded-full">PERINGKAT KEBANGSAAN TAHUN 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sorotan Khas YouTube Video -->
+                <div class="max-w-4xl mx-auto mt-16 pt-16 border-t border-gold-500/20 reveal delay-200">
+                    <div class="text-center mb-10">
+                        <h3 class="font-cinzel text-2xl md:text-3xl font-bold text-gold-400 mb-2 drop-shadow-md">Sorotan Khas</h3>
+                        <p class="text-gray-400 text-sm">Tonton rakaman rasmi acara gilang-gemilang Karnival Semarak Perpaduan Bahasa 2026 di sini.</p>
+                    </div>
+                    
+                    <!-- Paparan Video Utama (LIVE Utama) -->
+                    <div class="w-full mb-10">
+                        <div class="relative w-full overflow-hidden rounded-xl border-2 border-gold-400 aspect-video bg-black shadow-[0_0_30px_rgba(212,175,55,0.4)]">
+                            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/avYZsLFezR4?si=VdnTg1WZVx81LUAU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Susunan Video Grid 2-2-1 -->
+                    <div class="flex flex-col gap-6 w-full">
+                        
+                        <!-- Baris 1: 2 Video -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                            <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/AY8dQ9GVNwA?si=oAwZm9Mn-6c3ijX5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/TOl8fUXeCz4?si=lnCUXUPCf7alfUrB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Baris 2: 2 Video -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                            <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/g5488FFg-cA?si=YKvfPAz_9FeFw0RZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <div class="relative w-full overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/3WvoNus47yo?si=2G16nWmhWn0YSy9g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                        <!-- Baris 3: 1 Video (Tengah) -->
+                        <div class="flex justify-center w-full">
+                            <div class="relative w-full md:w-1/2 overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/VBER67dram0?si=QkgB3IwnTBTcL20N" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Liputan 8 September 2026 (Rabu) -->
+                    <div class="mt-16 pt-10 border-t border-gold-500/20 w-full reveal delay-100">
+                        <div class="text-center mb-10">
+                            <h3 class="font-cinzel text-2xl font-bold text-gold-400 drop-shadow-md">Liputan 8 September 2026 (Rabu)</h3>
+                        </div>
+                        <div class="flex justify-center w-full">
+                            <div class="relative w-full md:w-1/2 overflow-hidden rounded-xl border border-gold-500/30 aspect-video bg-black shadow-[0_10px_40px_rgba(0,0,0,0.8)]">
+                                <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/ji9iQVn3Qh8?si=O4n4NxmOfIrhObC_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -500,10 +568,8 @@
                 <span class="font-cinzel text-gold-400 font-bold text-2xl md:text-5xl tracking-widest z-10 text-center px-4" id="modal-title">SUASANA</span>
                 <span class="font-sans text-white text-lg md:text-2xl mt-3 z-10 uppercase tracking-widest font-light" id="modal-subtitle">Karnival</span>
                 
-                <!-- Imej Sebenar yang akan ditunjukkan tanpa sebarang teks pertindihan (overlay) putih -->
                 <img id="modal-actual-image" src="" alt="Galeri" class="absolute inset-0 w-full h-full object-contain z-10 hidden bg-black/90 backdrop-blur-md">
                 
-                <!-- Badge Kecil di Bawah -->
                 <span class="text-gray-300 text-xs md:text-sm mt-8 z-20 font-bold bg-black/70 px-6 py-2 rounded-full border border-gold-500/30 tracking-wider absolute bottom-6 shadow-md" id="modal-badge">FOTO X</span>
             </div>
         </div>
@@ -619,6 +685,9 @@
     </button>
 
     <script>
+        // Gunakan mod ketat (strict mode) untuk kestabilan skrip
+        'use strict';
+
         const scriptURL = 'https://script.google.com/macros/s/AKfycbx-OGHnf7_a5fXEaR0f2ZC28s5_xWt6m7oZ16KUDDOjUUiZRWaLSXwNgFPAeadDjJHN/exec';
 
         const defaultAnnouncements = [
@@ -669,17 +738,15 @@
         let autoPlayInterval;
         let currentStateIndex = null;
 
-        // FUNGSI ANIMASI ZARAH CERIA KETIKA MUAT
         function initParticles() {
             const container = document.getElementById('theme-particles');
             if(!container) return;
             
-            // Abjad Rumi, Jawi dan Aksara bagi melambangkan "Bahasa"
             const letters = ['A', 'B', 'C', 'ع', 'ب', 'ت', 'J', 'K', 'M', 'N', '!', '?'];
             
-            for(let i=0; i<25; i++) {
+            for(let i = 0; i < 25; i++) {
                 const el = document.createElement('div');
-                const isLetter = Math.random() > 0.4; // 60% peluang abjad, 40% peluang debu emas
+                const isLetter = Math.random() > 0.4; 
                 
                 if(isLetter) {
                     el.innerText = letters[Math.floor(Math.random() * letters.length)];
@@ -692,68 +759,18 @@
                 }
                 
                 el.style.left = Math.random() * 100 + 'vw';
-                el.style.top = '100vh'; // Bermula dari bawah skrin
+                el.style.top = '100vh';
                 
-                // Variasi kelajuan dan saiz terapung
-                const duration = Math.random() * 15 + 15; // 15s hingga 30s
-                const delay = Math.random() * 20; // 0s hingga 20s
+                const duration = Math.random() * 15 + 15; 
+                const delay = Math.random() * 20; 
                 
                 el.style.animation = `particleUp ${duration}s linear infinite`;
-                el.style.animationDelay = `-${delay}s`; // Agar zarah sudah berada di skrin ketika dimuat
+                el.style.animationDelay = `-${delay}s`; 
                 
                 container.appendChild(el);
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const preloader = document.getElementById('preloader');
-            if (preloader) { setTimeout(() => { preloader.style.opacity = '0'; setTimeout(() => preloader.style.display = 'none', 500); }, 500); }
-            
-            initParticles(); // Jalankan animasi zarah
-            
-            announcementsData = [...defaultAnnouncements];
-            renderAnnouncements();
-            renderStateButtons();
-            renderGalleryFilters();
-            renderCarousel('semua');
-            fetchDataFromCloud();
-            
-            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-            document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
-        });
-
-        // --- STREAMING_CHUNK:Writing Data Cloud Fetching... ---
-        function fetchDataFromCloud() {
-            if (!scriptURL) return;
-            const noCacheUrl = scriptURL + "?t=" + new Date().getTime();
-            
-            fetch(noCacheUrl, { method: 'GET', redirect: 'follow' })
-            .then(response => {
-                if (!response.ok) throw new Error('Rangkaian terhalang (HTTP ' + response.status + ')');
-                return response.json();
-            })
-            .then(data => {
-                let hasUpdate = false;
-                if (data.announcements) { announcementsData = data.announcements; hasUpdate = true; }
-                if (data.gallery) { galleryData = data.gallery; hasUpdate = true; }
-                if (data.regStatus) {
-                    const cloudStatus = data.regStatus === 'open';
-                    if (isRegistrationOpen !== cloudStatus) {
-                        isRegistrationOpen = cloudStatus;
-                        renderStateButtons();
-                        renderAdminRegStatus();
-                    }
-                }
-                if (hasUpdate) {
-                    renderAnnouncements();
-                    renderCarousel(currentCategoryFilter);
-                    renderAdminList(); 
-                }
-            })
-            .catch(error => console.warn('Peringatan: Gagal muat turun dari Cloud.', error));
-        }
-
-        // --- STREAMING_CHUNK:Writing UI & Helper Logics... ---
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             if(!container) return;
@@ -771,13 +788,47 @@
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => { tab.classList.add('hidden'); tab.classList.remove('block'); });
             const selected = document.getElementById('tab-' + tabId);
-            if(selected) { selected.classList.remove('hidden'); selected.classList.add('block'); setTimeout(() => selected.querySelectorAll('.reveal').forEach(el => el.classList.add('active')), 50); }
+            if(selected) { 
+                selected.classList.remove('hidden'); 
+                selected.classList.add('block'); 
+                setTimeout(() => selected.querySelectorAll('.reveal').forEach(el => el.classList.add('active')), 50); 
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             if (menu) { menu.classList.toggle('hidden'); menu.classList.toggle('flex'); }
+        }
+
+        function fetchDataFromCloud() {
+            if (!scriptURL) return;
+            const noCacheUrl = scriptURL + "?t=" + new Date().getTime();
+            
+            fetch(noCacheUrl, { method: 'GET', redirect: 'follow' })
+            .then(response => {
+                if (!response.ok) throw new Error('Rangkaian terhalang (HTTP ' + response.status + ')');
+                return response.json();
+            })
+            .then(data => {
+                let hasUpdate = false;
+                if (data.announcements && Array.isArray(data.announcements)) { announcementsData = data.announcements; hasUpdate = true; }
+                if (data.gallery) { galleryData = data.gallery; hasUpdate = true; }
+                if (data.regStatus) {
+                    const cloudStatus = data.regStatus === 'open';
+                    if (isRegistrationOpen !== cloudStatus) {
+                        isRegistrationOpen = cloudStatus;
+                        renderStateButtons();
+                        renderAdminRegStatus();
+                    }
+                }
+                if (hasUpdate) {
+                    renderAnnouncements();
+                    renderCarousel(currentCategoryFilter);
+                    renderAdminList(); 
+                }
+            })
+            .catch(error => console.warn('Peringatan: Gagal muat turun dari Cloud (Mungkin belum disiapkan sepenuhnya).', error));
         }
 
         function renderStateButtons() {
@@ -807,11 +858,22 @@
             currentStateIndex = index;
             const m = document.getElementById('password-modal'); const c = document.getElementById('password-modal-content');
             document.getElementById('pwd-state-name').innerText = states[index].name.toUpperCase();
-            document.getElementById('state-password-input').value = ''; document.getElementById('pwd-error-msg').classList.add('hidden');
-            m.classList.remove('hidden'); setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); document.getElementById('state-password-input').focus(); }, 10);
-            document.getElementById('state-password-input').onkeypress = function(e) { if (e.key === 'Enter') verifyPassword(); };
+            const input = document.getElementById('state-password-input');
+            input.value = ''; 
+            input.classList.remove('border-red-500');
+            document.getElementById('pwd-error-msg').classList.add('hidden');
+            m.classList.remove('hidden'); 
+            
+            input.onkeypress = function(e) { if (e.key === 'Enter') verifyPassword(); };
+            
+            setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); input.focus(); }, 10);
         }
-        function closePasswordModal(e, force) { if (!force && e.target.closest('#password-modal-content')) return; const m = document.getElementById('password-modal'); const c = document.getElementById('password-modal-content'); m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => m.classList.add('hidden'), 300); }
+        
+        function closePasswordModal(e, force) { 
+            if (!force && e.target.closest('#password-modal-content')) return; 
+            const m = document.getElementById('password-modal'); const c = document.getElementById('password-modal-content'); 
+            m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => m.classList.add('hidden'), 300); 
+        }
         
         function verifyPassword() {
             const input = document.getElementById('state-password-input'); const err = document.getElementById('pwd-error-msg');
@@ -824,7 +886,6 @@
             }
         }
 
-        // --- STREAMING_CHUNK:Handling Announcements System... ---
         function saveAnnouncements(sync = true) { 
             if (sync && scriptURL) {
                 fetch(scriptURL, {
@@ -845,6 +906,7 @@
                 return;
             }
 
+            // Gunakan salinan tatasusunan (array copy) supaya tak ganggu data asal bila sort
             const sorted = [...announcementsData].sort((a, b) => b.id - a.id);
             let htmlStr = '';
             sorted.forEach(item => {
@@ -859,23 +921,18 @@
             listDiv.innerHTML = htmlStr;
         }
 
-        // --- STREAMING_CHUNK:Writing Advanced Gallery Logics... ---
         function processGalleryUrl(urlOrId) {
             if (!urlOrId) return '';
-            // Jika ia adalah direct link (seperti postimg, imgur atau berakhiran .jpg/.png)
             if (urlOrId.startsWith('http') || urlOrId.includes('postimg.cc') || urlOrId.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
                 return urlOrId;
             }
-            // Jika ia hanya ID (Dari Google Drive)
             return `https://drive.google.com/uc?export=view&id=${urlOrId}`;
         }
         
         function extractDriveIdOrUrl(link) {
             if (!link) return '';
-            // Semak jika pengguna paste link penuh Google Drive
             const match = link.match(/\/d\/([a-zA-Z0-9_-]+)/);
             if (match) return match[1];
-            // Jika bukan format link GDrive, pulangkan direct link tersebut
             return link.trim();
         }
 
@@ -924,7 +981,6 @@
             }
             track.innerHTML = trackHtml; dots.innerHTML = dotsHtml;
             
-            // Paparan Butang Pintar Google Photos
             const albumContainer = document.getElementById('album-link-container');
             if (albumContainer) {
                 const albumLink = galleryData[`${config.id}_album`] || config.album;
@@ -990,45 +1046,66 @@
             
             m.classList.remove('hidden'); stopAutoPlay(); setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10);
         }
-        function closeModal(e) { if(e.target.closest('#modal-inner-box')) return; const m = document.getElementById('gallery-modal'); const c = document.getElementById('gallery-modal-content'); m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => { m.classList.add('hidden'); document.getElementById('modal-actual-image').src = ''; startAutoPlay(); }, 300); }
+        
+        function closeModal(e) { 
+            if(e.target.closest('#modal-inner-box')) return; 
+            const m = document.getElementById('gallery-modal'); 
+            const c = document.getElementById('gallery-modal-content'); 
+            m.classList.add('opacity-0'); c.classList.add('scale-95'); 
+            setTimeout(() => { m.classList.add('hidden'); document.getElementById('modal-actual-image').src = ''; startAutoPlay(); }, 300); 
+        }
 
         function openGuidelineModal(imgSrc, title) {
             const m = document.getElementById('guideline-modal'); 
             const c = document.getElementById('guideline-modal-content'); 
             const actImg = document.getElementById('guideline-actual-image');
-            
             actImg.src = imgSrc;
-            
             m.classList.remove('hidden'); 
             setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10);
         }
         
         function closeGuidelineModal(e) { 
             if(e && e.target.closest('#guideline-inner-box')) return; 
-            const m = document.getElementById('guideline-modal'); 
-            const c = document.getElementById('guideline-modal-content'); 
-            m.classList.add('opacity-0'); 
-            c.classList.add('scale-95'); 
+            const m = document.getElementById('guideline-modal'); const c = document.getElementById('guideline-modal-content'); 
+            m.classList.add('opacity-0'); c.classList.add('scale-95'); 
             setTimeout(() => { m.classList.add('hidden'); document.getElementById('guideline-actual-image').src = ''; }, 300); 
         }
 
         function filterJadualHari(day, btnElement) {
             document.querySelectorAll('.btn-jadual-hari').forEach(btn => btn.className = 'btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-500/30 bg-[#1e1233] text-gray-200 hover:border-gold-400');
             if(btnElement) btnElement.className = 'btn-jadual-hari px-6 py-2.5 rounded-full font-cinzel font-semibold text-sm transition-all border border-gold-400 btn-filter-active';
-            ['poster', 'rabu', 'khamis'].forEach(d => { const el = document.getElementById('jadual-'+d); if(el) el.classList.toggle('hidden', d !== day && day !== 'semua' || (day==='semua' && d!=='poster')); });
+            ['poster', 'rabu', 'khamis'].forEach(d => { 
+                const el = document.getElementById('jadual-'+d); 
+                if(el) {
+                    const shouldShow = (day === 'semua' && d === 'poster') || (day !== 'semua' && d === day);
+                    el.classList.toggle('hidden', !shouldShow);
+                }
+            });
         }
 
-        // --- STREAMING_CHUNK:Running Admin Core Logic... ---
         function openAdminLogin() {
             const m = document.getElementById('admin-login-modal'); const c = document.getElementById('admin-login-content');
-            document.getElementById('admin-password-input').value = ''; document.getElementById('admin-error-msg').classList.add('hidden');
-            m.classList.remove('hidden'); setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); document.getElementById('admin-password-input').focus(); }, 10);
-            document.getElementById('admin-password-input').onkeypress = function(e) { if (e.key === 'Enter') verifyAdmin(); };
+            const input = document.getElementById('admin-password-input');
+            input.value = ''; 
+            document.getElementById('admin-error-msg').classList.add('hidden');
+            m.classList.remove('hidden'); 
+            input.onkeypress = function(e) { if (e.key === 'Enter') verifyAdmin(); };
+            setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); input.focus(); }, 10);
         }
-        function closeAdminLogin(e, force) { if (!force && e.target.closest('#admin-login-content')) return; const m = document.getElementById('admin-login-modal'); const c = document.getElementById('admin-login-content'); m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => m.classList.add('hidden'), 300); }
+        
+        function closeAdminLogin(e, force) { 
+            if (!force && e.target.closest('#admin-login-content')) return; 
+            const m = document.getElementById('admin-login-modal'); const c = document.getElementById('admin-login-content'); 
+            m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => m.classList.add('hidden'), 300); 
+        }
+        
         function verifyAdmin() {
-            if (document.getElementById('admin-password-input').value.trim() === 'admin2026') { closeAdminLogin(null, true); setTimeout(openAdminPanel, 300); } 
-            else { document.getElementById('admin-error-msg').classList.remove('hidden'); }
+            if (document.getElementById('admin-password-input').value.trim() === 'admin2026') { 
+                closeAdminLogin(null, true); 
+                setTimeout(openAdminPanel, 300); 
+            } else { 
+                document.getElementById('admin-error-msg').classList.remove('hidden'); 
+            }
         }
 
         function openAdminPanel() {
@@ -1036,7 +1113,12 @@
             renderAdminRegStatus(); renderAdminList(); initAdminGallery();
             m.classList.remove('hidden'); setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10);
         }
-        function closeAdminPanel(e, force) { if (!force && e.target.closest('#admin-panel-content')) return; const m = document.getElementById('admin-panel-modal'); const c = document.getElementById('admin-panel-content'); m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => m.classList.add('hidden'), 300); }
+        
+        function closeAdminPanel(e, force) { 
+            if (!force && e.target.closest('#admin-panel-content')) return; 
+            const m = document.getElementById('admin-panel-modal'); const c = document.getElementById('admin-panel-content'); 
+            m.classList.add('opacity-0'); c.classList.add('scale-95'); setTimeout(() => m.classList.add('hidden'), 300); 
+        }
 
         function renderAdminRegStatus() {
             const s = document.getElementById('admin-reg-status');
@@ -1120,7 +1202,7 @@
             for (let i = 1; i <= config.slots; i++) {
                 const key = `${categoryId}_${i}`;
                 let val = galleryData[key] || '';
-                // Hanya tukar pandangan di admin panel kepada URL penuhdrive jika ia format ID
+                
                 if (val && !val.startsWith('http') && !val.includes('postimg.cc') && !val.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
                     val = `https://drive.google.com/file/d/${val}/view`;
                 }
@@ -1167,12 +1249,54 @@
         }
 
         const revealObserver = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); }); }, { threshold: 0.1 });
-        const counterObserver = new IntersectionObserver((entries, obs) => { entries.forEach(e => { if(e.isIntersecting) { const t = +e.target.getAttribute('data-target'); let c=0; const inc = t/100; const upd = () => { c+=inc; if(c<t){ e.target.innerText=Math.ceil(c); requestAnimationFrame(upd); }else{ e.target.innerText=t; } }; upd(); obs.unobserve(e.target); }}); });
+        
+        const counterObserver = new IntersectionObserver((entries, obs) => { 
+            entries.forEach(e => { 
+                if(e.isIntersecting) { 
+                    const t = +e.target.getAttribute('data-target'); 
+                    let c = 0; 
+                    const inc = t / 100; 
+                    const upd = () => { 
+                        c += inc; 
+                        if(c < t) { e.target.innerText = Math.ceil(c); requestAnimationFrame(upd); }
+                        else { e.target.innerText = t; } 
+                    }; 
+                    upd(); 
+                    obs.unobserve(e.target); 
+                }
+            }); 
+        });
+
         window.addEventListener('scroll', () => {
-            const wScroll = document.body.scrollTop || document.documentElement.scrollTop; const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById("scroll-progress").style.width = (wScroll/h*100) + "%";
+            const wScroll = document.body.scrollTop || document.documentElement.scrollTop; 
+            const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("scroll-progress").style.width = (wScroll / h * 100) + "%";
+            
             const b = document.getElementById('backToTopBtn');
-            if(wScroll>400){ b.classList.remove('scale-0','opacity-0'); } else { b.classList.add('scale-0','opacity-0'); }
+            if(wScroll > 400) { b.classList.remove('scale-0','opacity-0'); } 
+            else { b.classList.add('scale-0','opacity-0'); }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) { 
+                setTimeout(() => { 
+                    preloader.style.opacity = '0'; 
+                    setTimeout(() => preloader.style.display = 'none', 500); 
+                }, 500); 
+            }
+            
+            initParticles();
+            
+            announcementsData = [...defaultAnnouncements];
+            renderAnnouncements();
+            renderStateButtons();
+            renderGalleryFilters();
+            renderCarousel('semua');
+            fetchDataFromCloud();
+            
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
         });
     </script>
 </body>
